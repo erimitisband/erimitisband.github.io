@@ -8,63 +8,49 @@
 <link href="https://fonts.googleapis.com" rel="stylesheet">
 <style>
   :root{
-    --bg:#02020a;--steel:#5B9FD4;--steel-dim:rgba(91,159,212,0.15);
-    --white:#f0ede8;--gold:#B8952A;--gold-dim:#96781E;--silver:#B8B8B4;
-    --font-d:'Cinzel',Georgia,serif;--font-b:'Crimson Text',Georgia,serif;
+    --bg:#02020a;--steel:#5B9FD4;--white:#f0ede8;--gold-dim:#96781E;
+    --font-d:'Cinzel',serif;--font-b:'Crimson Text',serif;
   }
-  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-  body{background:var(--bg);color:var(--white);font-family:var(--font-b);min-height:100vh;overflow-x:hidden;display:flex;flex-direction:column;}
-  nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.6rem 3.5rem;display:flex;justify-content:center;align-items:center;background:linear-gradient(180deg,rgba(2,2,10,0.97) 0%,transparent 100%);}
-  .nav-links{list-style:none;display:flex;gap:2.8rem;}
-  .nav-links a{font-family:var(--font-d);font-size:0.56rem;letter-spacing:3px;color:var(--gold-dim);text-decoration:none;text-transform:uppercase;position:relative;padding-bottom:4px;transition:color 0.3s;}
-  .nav-links a:hover{color:var(--white);}
-  .nav-links a.active{color:var(--steel);}
-  main{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:7rem 2rem 4rem;text-align:center;overflow:hidden;}
-  .main-bg{position:fixed;inset:0;background:url('https://erimitisband.github.io') center 30% / 55% no-repeat;opacity:0.12;filter:blur(0.5px) brightness(1.3);z-index:0;}
-  .content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;max-width:600px;width:100%;}
-  .eyebrow{font-family:var(--font-d);font-size:0.52rem;letter-spacing:7px;color:var(--steel);text-transform:uppercase;margin-bottom:3rem;}
-  .waveform-wrap{position:relative;display:flex;align-items:center;justify-content:center;width:100%;max-width:500px;height:120px;margin-bottom:0.8rem;cursor:pointer;}
+  body{background:var(--bg);color:var(--white);font-family:var(--font-b);min-height:100vh;margin:0;display:flex;flex-direction:column;}
+  nav{position:fixed;top:0;width:100%;z-index:200;padding:1.6rem;display:flex;justify-content:center;background:rgba(2,2,10,0.97);}
+  .nav-links{list-style:none;display:flex;gap:2.8rem;padding:0;}
+  .nav-links a{font-family:var(--font-d);font-size:0.56rem;letter-spacing:3px;color:var(--gold-dim);text-decoration:none;text-transform:uppercase;}
+  main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:7rem 2rem;text-align:center;}
+  .waveform-wrap{position:relative;width:100%;max-width:500px;height:120px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
   #waveCanvas{position:absolute;inset:0;width:100%;height:100%;border-bottom:1px solid rgba(91,159,212,0.12);}
-  .play-btn{position:relative;z-index:2;width:56px;height:56px;border-radius:50%;border:1px solid rgba(91,159,212,0.35);background:rgba(91,159,212,0.06);display:flex;align-items:center;justify-content:center;transition:all 0.3s;backdrop-filter:blur(4px);}
+  .play-btn{z-index:2;width:56px;height:56px;border-radius:50%;border:1px solid rgba(91,159,212,0.35);background:rgba(91,159,212,0.06);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
   .play-btn svg{width:18px;height:18px;fill:var(--steel);margin-left:3px;}
-  .audio-label{font-family:var(--font-d);font-size:0.46rem;letter-spacing:4px;color:rgba(91,159,212,0.45);text-transform:uppercase;margin-bottom:2.5rem;}
-  .headline{font-family:var(--font-b);font-style:italic;font-size:clamp(1.4rem,3.5vw,2.2rem);color:var(--white);margin-bottom:0.8rem;}
-  .subline{font-family:var(--font-b);font-size:clamp(0.95rem,2vw,1.1rem);color:var(--silver);line-height:2;margin-bottom:1rem;}
+  .audio-label{font-family:var(--font-d);font-size:0.46rem;letter-spacing:4px;color:rgba(91,159,212,0.45);text-transform:uppercase;margin-top:2.5rem;}
 </style>
 </head>
 <body>
 
-<!-- THE AUDIO ENGINE - Using your Fixed Dropbox Link -->
-<audio id="myAudio">
+<!-- THE FIXED AUDIO ENGINE -->
+<audio id="myAudio" preload="auto">
+  <!-- 1. The 'raw=1' version (Best for Safari/Mac) -->
   <source src="https://www.dropbox.com" type="audio/mp4">
-  Your browser does not support the audio element.
+  <!-- 2. The 'dl=1' version (Fallback) -->
+  <source src="https://www.dropbox.com" type="audio/mp4">
 </audio>
 
 <nav>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About</a></li>
-    <li><a href="music.html" class="active">Music</a></li>
+    <li><a href="music.html" style="color:var(--steel)">Music</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
 </nav>
 
 <main>
-  <div class="main-bg"></div>
   <div class="content">
-    <p class="eyebrow">Music</p>
-    
     <div class="waveform-wrap" onclick="toggleAudio()">
       <canvas id="waveCanvas"></canvas>
       <div class="play-btn">
         <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
       </div>
     </div>
-    
     <p class="audio-label" id="audioLabel">Click to Play Preview</p>
-    <div style="width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--steel),transparent);margin:0 auto 1.8rem;"></div>
-    <p class="headline">New Release Coming Soon</p>
-    <p class="subline">Experimental sounds from the depths of the void.</p>
   </div>
 </main>
 
@@ -75,9 +61,10 @@
 
   function toggleAudio() {
     if (audio.paused) {
-      audio.play().catch(e => {
-          console.error("Playback error:", e);
-          alert("Audio is loading or link is restricted. Please wait a moment.");
+      // Force reload if first attempt fails
+      audio.play().catch(() => {
+          audio.load();
+          audio.play();
       });
       audioLabel.innerText = "Now Playing";
       playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
@@ -88,21 +75,18 @@
     }
   }
 
-  // Draw Static Waveform
+  // Waveform Graphic
   const canvas = document.getElementById('waveCanvas');
   const ctx = canvas.getContext('2d');
-  canvas.width = 500;
-  canvas.height = 120;
-  ctx.strokeStyle = '#5B9FD4';
-  ctx.lineWidth = 1;
+  canvas.width = 500; canvas.height = 120;
+  ctx.strokeStyle = '#5B9FD4'; ctx.lineWidth = 1;
   ctx.beginPath();
   for (let i = 0; i < canvas.width; i += 8) {
     let h = Math.random() * 30 + 10;
-    ctx.moveTo(i, 60 - h/2);
-    ctx.lineTo(i, 60 + h/2);
+    ctx.moveTo(i, 60 - h/2); ctx.lineTo(i, 60 + h/2);
   }
   ctx.stroke();
 </script>
-
 </body>
 </html>
+
