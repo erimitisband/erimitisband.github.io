@@ -14,18 +14,13 @@
   }
   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
   body{background:var(--bg);color:var(--white);font-family:var(--font-b);min-height:100vh;overflow-x:hidden;display:flex;flex-direction:column;}
-  #stars{position:fixed;inset:0;z-index:0;pointer-events:none;}
   nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.6rem 3.5rem;display:flex;justify-content:center;align-items:center;background:linear-gradient(180deg,rgba(2,2,10,0.97) 0%,transparent 100%);}
   .nav-links{list-style:none;display:flex;gap:2.8rem;}
   .nav-links a{font-family:var(--font-d);font-size:0.56rem;letter-spacing:3px;color:var(--gold-dim);text-decoration:none;text-transform:uppercase;position:relative;padding-bottom:4px;transition:color 0.3s;}
-  .nav-links a::after{content:'';position:absolute;bottom:0;left:50%;width:0;height:1px;background:var(--steel);transition:all 0.4s;transform:translateX(-50%);}
   .nav-links a:hover{color:var(--white);}
-  .nav-links a:hover::after,.nav-links a.active::after{width:100%;}
   .nav-links a.active{color:var(--steel);}
   main{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:7rem 2rem 4rem;text-align:center;overflow:hidden;}
-  .main-bg{position:fixed;inset:0;background:url('https://erimitisband.github.io') center 30% / 55% no-repeat;opacity:0.12;filter:blur(0.5px) brightness(1.3);animation:drift 25s ease-in-out infinite alternate;z-index:0;}
-  .main-vignette{position:fixed;inset:0;z-index:1;background:radial-gradient(ellipse 80% 80% at 50% 40%,transparent 25%,rgba(2,2,10,0.7) 65%,rgba(2,2,10,0.98) 100%);pointer-events:none;}
-  @keyframes drift{from{transform:scale(1);}to{transform:scale(1.05) translateY(-12px);}}
+  .main-bg{position:fixed;inset:0;background:url('https://erimitisband.github.io') center 30% / 55% no-repeat;opacity:0.12;filter:blur(0.5px) brightness(1.3);z-index:0;}
   .content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;max-width:600px;width:100%;}
   .eyebrow{font-family:var(--font-d);font-size:0.52rem;letter-spacing:7px;color:var(--steel);text-transform:uppercase;margin-bottom:3rem;}
   .waveform-wrap{position:relative;display:flex;align-items:center;justify-content:center;width:100%;max-width:500px;height:120px;margin-bottom:0.8rem;cursor:pointer;}
@@ -33,17 +28,16 @@
   .play-btn{position:relative;z-index:2;width:56px;height:56px;border-radius:50%;border:1px solid rgba(91,159,212,0.35);background:rgba(91,159,212,0.06);display:flex;align-items:center;justify-content:center;transition:all 0.3s;backdrop-filter:blur(4px);}
   .play-btn svg{width:18px;height:18px;fill:var(--steel);margin-left:3px;}
   .audio-label{font-family:var(--font-d);font-size:0.46rem;letter-spacing:4px;color:rgba(91,159,212,0.45);text-transform:uppercase;margin-bottom:2.5rem;}
-  .h-rule{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--steel),transparent);margin:0 auto 1.8rem;}
-  .headline{font-family:var(--font-b);font-style:italic;font-size:clamp(1.4rem,3.5vw,2.2rem);color:var(--white);margin-bottom:0.8rem;line-height:1.5;}
-  .subline{font-family:var(--font-b);font-size:clamp(0.95rem,2vw,1.1rem);color:var(--silver);line-height:2;margin-bottom:1rem;max-width:460px;}
+  .headline{font-family:var(--font-b);font-style:italic;font-size:clamp(1.4rem,3.5vw,2.2rem);color:var(--white);margin-bottom:0.8rem;}
+  .subline{font-family:var(--font-b);font-size:clamp(0.95rem,2vw,1.1rem);color:var(--silver);line-height:2;margin-bottom:1rem;}
 </style>
 </head>
 <body>
 
-<!-- THE AUDIO ENGINE - Using your specific file name -->
+<!-- THE AUDIO ENGINE - Using your Fixed Dropbox Link -->
 <audio id="myAudio">
-  <source src="preview.mp3mp4a" type="audio/mp4">
-  <source src="preview.mp3mp4a" type="audio/mpeg">
+  <source src="https://www.dropbox.com" type="audio/mp4">
+  Your browser does not support the audio element.
 </audio>
 
 <nav>
@@ -57,7 +51,6 @@
 
 <main>
   <div class="main-bg"></div>
-  <div class="main-vignette"></div>
   <div class="content">
     <p class="eyebrow">Music</p>
     
@@ -69,7 +62,7 @@
     </div>
     
     <p class="audio-label" id="audioLabel">Click to Play Preview</p>
-    <div class="h-rule"></div>
+    <div style="width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--steel),transparent);margin:0 auto 1.8rem;"></div>
     <p class="headline">New Release Coming Soon</p>
     <p class="subline">Experimental sounds from the depths of the void.</p>
   </div>
@@ -82,7 +75,10 @@
 
   function toggleAudio() {
     if (audio.paused) {
-      audio.play().catch(e => console.error("Error playing audio:", e));
+      audio.play().catch(e => {
+          console.error("Playback error:", e);
+          alert("Audio is loading or link is restricted. Please wait a moment.");
+      });
       audioLabel.innerText = "Now Playing";
       playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
     } else {
@@ -92,7 +88,7 @@
     }
   }
 
-  // Basic Waveform Graphic
+  // Draw Static Waveform
   const canvas = document.getElementById('waveCanvas');
   const ctx = canvas.getContext('2d');
   canvas.width = 500;
