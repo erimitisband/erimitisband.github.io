@@ -8,8 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg:#02020a; --steel:#8CB4D6; --steel-dim:rgba(140,180,214,0.1);
-    --white:#f0ede8; --gray:#6e6e68;
+    --bg:#02020a; --steel:#5B9FD4; --steel-dim:rgba(91,159,212,0.15);
+    --white:#f0ede8; --gray:#B8952A;
     --font-d:'Cinzel',Georgia,serif; --font-b:'Crimson Text',Georgia,serif;
   }
   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -44,7 +44,7 @@
   }
   .page-hero-bg {
     position:absolute; inset:0;
-  background:url('https://erimitisband.github.io/logo.jpg') center 20% / 50% no-repeat;
+    background:url('logo.jpg') center 20% / 50% no-repeat;
     opacity:0.04; filter:blur(3px);
     animation:drift 25s ease-in-out infinite alternate;
   }
@@ -68,14 +68,14 @@
 
   .quote-block{
     margin:3rem 0;
-    border-left:1px solid rgba(140,180,214,0.25);
+    border-left:1px solid rgba(91,159,212,0.35);
     padding:1rem 0 1rem 2rem;
     opacity:0;animation:fadeUp 1.2s ease 1.3s forwards;
   }
   .quote-block p{
     font-family:var(--font-b);font-style:italic;
     font-size:clamp(1.1rem,2.5vw,1.35rem);
-    color:#4a4a44;line-height:1.9;
+    color:#B8B8B4;line-height:1.9;
   }
 
   /* Page links */
@@ -155,18 +155,13 @@
     <p>Erimitis is a Melbourne music project built for those who still believe music should mean something.</p>
   </div>
   <div class="text-block d2">
-    <p>Drawing from every decade since the 1960s, embracing the atmosphere of Floyd, the riff and thunder of Zeppelin, the melody and soul of The Beatles, the storytelling of Dire Straits, the iron will of Maiden, the darkness of Sabbath, the electric soul of Hendrix, the blues of Clapton and the voltage of AC/DC — Erimitis is not a tribute to the past. It is something that belongs to now.
+    <p>Drawing from every decade since the 1960s — the atmosphere of Floyd, the riff and thunder of Zeppelin, the melody and soul of The Beatles, the storytelling of Dire Straits, the iron will of Maiden, the darkness of Sabbath, the electric soul of Hendrix, the blues of Clapton, the swagger of The Rolling Stones, the voltage of AC/DC — Erimitis is not a tribute to the past. It is something that belongs to now.</p>
   </div>
 
   <div class="quote-block">
     <p>"Raw power, emotional depth, and guitar-driven storytelling woven into something that belongs to now."</p>
   </div>
 
-  <div class="text-block d3">
-    <p>The foundation is in place. The vision is clear. 
-  </div>
-
-  
 </main>
 
 <footer>
@@ -183,7 +178,7 @@
   function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
   resize();window.addEventListener('resize',resize);
   const stars=Array.from({length:200},()=>({x:Math.random(),y:Math.random(),r:Math.random()*1.3+0.15,a:Math.random()*0.65+0.1,speed:Math.random()*0.003+0.0006,phase:Math.random()*Math.PI*2}));
-  function draw(t){ctx.clearRect(0,0,canvas.width,canvas.height);stars.forEach(s=>{const alpha=s.a*(0.25+0.75*Math.sin(t*s.speed+s.phase));ctx.beginPath();ctx.arc(s.x*canvas.width,s.y*canvas.height,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(140,180,214,${alpha})`;ctx.fill();});requestAnimationFrame(draw);}
+  function draw(t){ctx.clearRect(0,0,canvas.width,canvas.height);stars.forEach(s=>{const alpha=s.a*(0.25+0.75*Math.sin(t*s.speed+s.phase));ctx.beginPath();ctx.arc(s.x*canvas.width,s.y*canvas.height,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(91,159,212,${alpha})`;ctx.fill();});requestAnimationFrame(draw);}
   requestAnimationFrame(draw);
   function openMobile(){document.getElementById('mobileMenu').classList.add('open');document.body.style.overflow='hidden';}
   function closeMobile(){document.getElementById('mobileMenu').classList.remove('open');document.body.style.overflow='';}
