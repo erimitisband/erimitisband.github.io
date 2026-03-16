@@ -1,84 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music | Erimitis</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Crimson+Text&display=swap" rel="stylesheet">
-    <style>
-        :root { --bg: #02020a; --steel: #5B9FD4; --gray: #B8952A; --white: #f0ede8; --glass: rgba(255, 255, 255, 0.03); }
-        
-        /* Fade In Animation */
-        @keyframes fadeInPage { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; overflow-x: hidden; animation: fadeInPage 1.2s ease-out; }
-
-        /* Background Effects */
-        .hero-bg { position: fixed; top: 0; left: 0; width: 115%; height: 115%; background: url('logo.jpg') center/cover no-repeat; opacity: 0.12; z-index: -2; animation: drift 40s infinite alternate linear; }
-        @keyframes drift { from { transform: translate(0, 0); } to { transform: translate(-3%, -3%); } }
-        .vignette { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.9) 100%); z-index: -1; pointer-events: none; }
-        #starCanvas { position: fixed; top: 0; left: 0; z-index: -1; }
-
-        /* Navigation */
-        nav { text-align: center; padding: 50px 0; }
-        nav a { font-family: 'Cinzel', serif; color: var(--gray); text-decoration: none; margin: 0 25px; font-size: 1.1rem; transition: 0.4s; position: relative; letter-spacing: 2px; }
-        nav a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -8px; left: 50%; background: var(--steel); transition: 0.4s; transform: translateX(-50%); }
-        nav a:hover, nav a.active { color: var(--steel); text-shadow: 0 0 15px rgba(91, 159, 212, 0.5); }
-        nav a:hover::after, nav a.active::after { width: 100%; }
-
-        .mobile-nav { display: none; flex-direction: column; width: 100%; }
-        .nav-card { width: 100%; padding: 45px 0; text-align: center; border-bottom: 1px solid rgba(91, 159, 212, 0.1); color: var(--steel); font-family: 'Cinzel', serif; text-decoration: none; font-size: 1.4rem; background: var(--glass); }
-
-        /* Glassmorphism Player */
-        .container { 
-            max-width: 800px; margin: 20px auto; text-align: center; padding: 40px; 
-            background: var(--glass); border: 1px solid rgba(255,255,255,0.05);
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 4px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        }
-        
-        h1 { font-family: 'Cinzel', serif; font-size: clamp(2rem, 8vw, 3rem); letter-spacing: 0.8rem; margin-bottom: 2rem; color: var(--white); }
-        #waveform { width: 100%; height: 180px; margin-bottom: 30px; filter: drop-shadow(0 0 10px rgba(91, 159, 212, 0.3)); }
-        
-        .controls { display: flex; flex-direction: column; align-items: center; gap: 25px; }
-        .btns { display: flex; gap: 20px; }
-        
-        button { 
-            background: transparent; border: 1px solid var(--gray); color: var(--gray); 
-            padding: 12px 40px; font-family: 'Cinzel', serif; cursor: pointer; transition: 0.4s; 
-            letter-spacing: 2px; font-size: 0.9rem;
-        }
-        button:hover { border-color: var(--steel); color: var(--steel); box-shadow: 0 0 20px rgba(91, 159, 212, 0.2); }
-        
-        /* Pro Range Sliders */
-        .slider-row { width: 100%; display: flex; align-items: center; gap: 20px; justify-content: center; max-width: 600px; }
-        input[type=range] { 
-            -webkit-appearance: none; flex-grow: 1; height: 2px; background: rgba(184, 149, 42, 0.2); outline: none; transition: 0.3s;
-        }
-        input[type=range]::-webkit-slider-thumb { 
-            -webkit-appearance: none; width: 12px; height: 12px; background: var(--steel); border-radius: 50%; cursor: pointer; box-shadow: 0 0 10px var(--steel);
-        }
-
-        #time { font-family: 'Crimson Text', serif; color: var(--steel); font-size: 1rem; min-width: 90px; }
-        .label-tag { font-family: 'Cinzel', serif; font-size: 0.6rem; color: var(--gray); letter-spacing: 2px; }
-
-        @media (max-width: 768px) {
-            nav { display: none; }
-            .mobile-nav { display: flex; }
-            .container { width: 90%; padding: 20px; border-radius: 0; border-left: none; border-right: none; }
-        }
-    </style>
-</head>
 <body>
     <div class="hero-bg"></div>
-    <div class="vignette"></div>
     <canvas id="starCanvas"></canvas>
 
+    <h1>ERIMITIS</h1>
+
+    <div class="content-wrap">
+        <canvas id="waveform" style="width:100%; height:120px;"></canvas>
+        <div style="margin-top:20px;">
+            <button id="playBtn" style="background:transparent; border:1px solid var(--gray); color:var(--gray); padding:10px 30px; font-family:Cinzel; cursor:pointer;">PLAY PREVIEW</button>
+            <br><br>
+            <input type="range" id="volume" min="0" max="1" step="0.01" value="0.8" style="width:200px; accent-color:var(--steel);">
+            <div class="gold-leaf" style="margin-top:40px; font-size:1.2rem;">MUSIC COMING SOON</div>
+        </div>
+    </div>
+
     <div class="mobile-nav">
-        <a href="index.html" class="nav-card">HOME</a>
-        <a href="about.html" class="nav-card">ABOUT</a>
-        <a href="music.html" class="nav-card">MUSIC</a>
-        <a href="contact.html" class="nav-card">CONTACT</a>
+        <a href="index.html" class="nav-block">HOME</a>
+        <a href="about.html" class="nav-block">ABOUT</a>
+        <a href="music.html" class="nav-block" style="color:var(--steel)">MUSIC</a>
+        <a href="contact.html" class="nav-block">CONTACT</a>
     </div>
 
     <nav>
@@ -88,100 +28,28 @@
         <a href="contact.html">CONTACT</a>
     </nav>
 
-    <div class="container">
-        <h1>PREVIEW</h1>
-        <canvas id="waveform"></canvas>
-        <div class="controls">
-            <div class="btns">
-                <button id="playBtn">PLAY</button>
-                <button id="muteBtn">MUTE</button>
-            </div>
-            <div class="slider-row">
-                <span class="label-tag">SEEK</span>
-                <input type="range" id="seek" value="0">
-                <div id="time">0:00 / 0:00</div>
-            </div>
-            <div class="slider-row">
-                <span class="label-tag">VOLUME</span>
-                <input type="range" id="volume" min="0" max="1" step="0.01" value="0.8">
-            </div>
-        </div>
-    </div>
-
     <audio id="track" src="https://erimitisband.github.io/preview.mp3" crossorigin="anonymous"></audio>
 
     <script>
-        const sCanvas = document.getElementById('starCanvas');
-        const sCtx = sCanvas.getContext('2d');
-        let stars = [];
-        function resize() { sCanvas.width = window.innerWidth; sCanvas.height = window.innerHeight; }
-        window.onresize = resize; resize();
-        for(let i=0; i<150; i++) stars.push({ x: Math.random()*sCanvas.width, y: Math.random()*sCanvas.height, r: Math.random()*1.2, o: Math.random() });
-        function drawStars() {
-            sCtx.clearRect(0,0,sCanvas.width, sCanvas.height);
-            stars.forEach(s => {
-                sCtx.fillStyle = `rgba(140, 180, 214, ${s.o})`;
-                sCtx.beginPath(); sCtx.arc(s.x, s.y, s.r, 0, Math.PI*2); sCtx.fill();
-            });
-            requestAnimationFrame(drawStars);
-        }
-        drawStars();
-
-        const audio = document.getElementById('track');
-        const wCanvas = document.getElementById('waveform');
-        const wCtx = wCanvas.getContext('2d');
-        const playBtn = document.getElementById('playBtn');
-        const muteBtn = document.getElementById('muteBtn');
-        const seek = document.getElementById('seek');
-        const volSlider = document.getElementById('volume');
-        const timeDisp = document.getElementById('time');
-        let audioCtx, analyser, source, data;
-
+        /* [Include Star Script from Index] */
+        const audio = document.getElementById('track'); const wCanvas = document.getElementById('waveform'); const wCtx = wCanvas.getContext('2d');
+        const playBtn = document.getElementById('playBtn'); let audioCtx, analyser, source, data;
         playBtn.onclick = () => {
             if (!audioCtx) {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                analyser = audioCtx.createAnalyser();
-                source = audioCtx.createMediaElementSource(audio);
-                source.connect(analyser);
-                analyser.connect(audioCtx.destination);
-                analyser.fftSize = 128;
-                data = new Uint8Array(analyser.frequencyBinCount);
+                analyser = audioCtx.createAnalyser(); source = audioCtx.createMediaElementSource(audio);
+                source.connect(analyser); analyser.connect(audioCtx.destination);
+                analyser.fftSize = 64; data = new Uint8Array(analyser.frequencyBinCount);
             }
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            if (audio.paused) { audio.play(); playBtn.innerText = "PAUSE"; render(); } 
-            else { audio.pause(); playBtn.innerText = "PLAY"; }
+            if (audio.paused) { audio.play(); playBtn.innerText = "PAUSE"; renderWave(); } 
+            else { audio.pause(); playBtn.innerText = "PLAY PREVIEW"; }
         };
-
-        muteBtn.onclick = () => { audio.muted = !audio.muted; muteBtn.innerText = audio.muted ? "UNMUTE" : "MUTE"; };
-        volSlider.oninput = () => audio.volume = volSlider.value;
-
-        function render() {
-            if (audio.paused) return;
-            requestAnimationFrame(render);
-            analyser.getByteFrequencyData(data);
-            wCanvas.width = wCanvas.offsetWidth;
-            wCanvas.height = wCanvas.offsetHeight;
-            wCtx.clearRect(0,0,wCanvas.width, wCanvas.height);
-            
-            const gradient = wCtx.createLinearGradient(0, 0, 0, wCanvas.height);
-            gradient.addColorStop(0, '#5B9FD4');
-            gradient.addColorStop(1, 'rgba(91, 159, 212, 0.1)');
-            wCtx.fillStyle = gradient;
-
-            const barWidth = (wCanvas.width / data.length) * 2;
-            data.forEach((v, i) => {
-                const h = (v/255) * wCanvas.height;
-                wCtx.fillRect(i * (barWidth + 4), wCanvas.height - h, barWidth, h);
-            });
+        function renderWave() {
+            if (audio.paused) return; requestAnimationFrame(renderWave);
+            analyser.getByteFrequencyData(data); wCanvas.width = wCanvas.offsetWidth; wCanvas.height = wCanvas.offsetHeight;
+            wCtx.clearRect(0,0,wCanvas.width, wCanvas.height); wCtx.fillStyle = "#5B9FD4";
+            const barWidth = (wCanvas.width / data.length);
+            data.forEach((v, i) => { const h = (v/255) * wCanvas.height; wCtx.fillRect(i * barWidth, wCanvas.height - h, barWidth - 2, h); });
         }
-
-        audio.ontimeupdate = () => {
-            seek.value = (audio.currentTime / audio.duration) * 100 || 0;
-            let cur = Math.floor(audio.currentTime);
-            let dur = Math.floor(audio.duration || 0);
-            timeDisp.innerText = `${Math.floor(cur/60)}:${(cur%60).toString().padStart(2,'0')} / ${Math.floor(dur/60)}:${(dur%60).toString().padStart(2,'0')}`;
-        };
-        seek.oninput = () => audio.currentTime = (seek.value/100) * audio.duration;
     </script>
 </body>
-</html>
