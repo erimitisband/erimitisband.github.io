@@ -7,32 +7,39 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Crimson+Text&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #02020a; --steel: #5B9FD4; --gray: #B8952A; --white: #f0ede8; }
-        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; width: 100%; }
+        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; width: 100%; min-height: 100vh; overflow-x: hidden; }
 
+        /* Background & Stars */
         .hero-bg { position: fixed; top: 0; left: 0; width: 115%; height: 115%; background: url('logo.jpg') center/cover no-repeat; opacity: 0.15; z-index: -2; animation: drift 20s infinite alternate linear; }
         @keyframes drift { from { transform: translate(0, 0); } to { transform: translate(-3%, -3%); } }
         #starCanvas { position: fixed; top: 0; left: 0; z-index: -1; }
 
+        /* Navigation - RESTORED DESKTOP */
         nav { text-align: center; padding: 40px 0; display: block; }
-        nav a { font-family: 'Cinzel', serif; color: var(--gray); text-decoration: none; margin: 0 2vw; font-size: 1.2rem; transition: 0.3s; }
+        nav a { font-family: 'Cinzel', serif; color: var(--gray); text-decoration: none; margin: 0 20px; font-size: 1.2rem; transition: 0.3s; }
         nav a:hover, nav a.active { color: var(--steel); }
 
+        /* Mobile Nav (≤768px) - 4 STACKED CARDS */
         .mobile-nav { display: none; flex-direction: column; width: 100%; }
-        .nav-card { width: 100%; padding: 5vh 0; text-align: center; border-bottom: 1px solid rgba(91, 159, 212, 0.1); color: var(--steel); font-family: 'Cinzel', serif; text-decoration: none; font-size: 5vw; }
+        .nav-card { width: 100%; padding: 40px 0; text-align: center; border-bottom: 1px solid rgba(91, 159, 212, 0.1); color: var(--steel); font-family: 'Cinzel', serif; text-decoration: none; font-size: 1.5rem; }
 
-        .contact-box { max-width: 600px; margin: 0 auto; padding: 5vh 5vw; }
-        h1 { text-align: center; font-family: 'Cinzel', serif; font-size: clamp(2rem, 8vw, 4rem); margin-bottom: 3rem; }
+        /* Contact Box */
+        .contact-box { max-width: 600px; margin: 60px auto; padding: 0 20px; }
+        h1 { text-align: center; font-family: 'Cinzel', serif; font-size: 3.5rem; letter-spacing: 0.5rem; margin-bottom: 3rem; }
         
         .row { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(184, 149, 42, 0.3); padding: 25px 0; transition: 0.3s; text-decoration: none; }
         .row:hover { border-bottom-color: var(--steel); }
         
-        .label { font-family: 'Cinzel', serif; color: var(--gray); font-size: clamp(0.9rem, 3vw, 1.2rem); letter-spacing: 2px; transition: 0.3s; }
-        .val { color: var(--white); font-style: italic; font-size: clamp(0.9rem, 3.5vw, 1.3rem); }
+        .label { font-family: 'Cinzel', serif; color: var(--gray); font-size: 1.1rem; letter-spacing: 2px; transition: 0.3s; }
+        .val { color: var(--white); font-style: italic; font-size: 1.2rem; }
         .row:hover .label { color: var(--steel); }
 
         @media (max-width: 768px) {
             nav { display: none; }
             .mobile-nav { display: flex; }
+            h1 { font-size: 2.5rem; }
+            .row { flex-direction: column; gap: 10px; text-align: center; }
+            .val { font-size: 1rem; }
         }
     </style>
 </head>
@@ -44,7 +51,7 @@
         <a href="index.html" class="nav-card">HOME</a>
         <a href="about.html" class="nav-card">ABOUT</a>
         <a href="music.html" class="nav-card">MUSIC</a>
-        <a href="contact.html" class="nav-card" style="background: rgba(91,159,212,0.05)">CONTACT</a>
+        <a href="contact.html" class="nav-card">CONTACT</a>
     </div>
 
     <nav>
