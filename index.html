@@ -209,24 +209,51 @@
   @keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
   @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
+  /* Mobile nav cards */
+  .mobile-nav-cards {
+    display:none;
+    width:100%;
+    margin-top:2.5rem;
+    opacity:0; animation:fadeUp 1.4s ease 1.5s forwards;
+  }
+  .mobile-nav-cards a {
+    display:flex; flex-direction:column; align-items:center;
+    justify-content:center; gap:0.35rem;
+    padding:1.2rem 1rem;
+    border:1px solid #0d0d16;
+    background:rgba(255,255,255,0.012);
+    text-decoration:none; width:100%; margin-bottom:2px;
+    position:relative; overflow:hidden;
+    transition:border-color 0.4s;
+  }
+  .mobile-nav-cards a::before {
+    content:''; position:absolute; inset:0;
+    background:linear-gradient(135deg, var(--steel-dim), transparent 60%);
+    opacity:0; transition:opacity 0.4s;
+  }
+  .mobile-nav-cards a:hover { border-color:rgba(140,180,214,0.22); }
+  .mobile-nav-cards a:hover::before { opacity:1; }
+  .mnc-label {
+    font-family:var(--font-d); font-size:0.55rem; letter-spacing:4px;
+    color:var(--steel); text-transform:uppercase; position:relative; z-index:1;
+  }
+  .mnc-sub {
+    font-family:var(--font-b); font-style:italic; font-size:0.82rem;
+    color:var(--gray); position:relative; z-index:1;
+  }
+
   /* ── MOBILE ── */
   @media (max-width:768px) {
-    nav { padding:1.3rem 1.5rem; }
+    nav { padding:1.3rem 1.5rem; justify-content:center; }
     .nav-links { display:none; }
-    .hamburger { display:flex; }
+    .hamburger { display:none; }
+    .mobile-nav-cards { display:block; }
 
     .hero { padding:6rem 1.5rem 4rem; }
     .hero-bg { background-size:120%; background-position:center 20%; }
 
     h1 { font-size:clamp(2.8rem, 18vw, 5rem); letter-spacing:0.15em; }
-    .tagline { font-size:1rem; }
-
-    .nav-cards {
-      grid-template-columns:1fr;
-      max-width:280px;
-      gap:2px;
-    }
-    .nav-card { padding:1.2rem 1rem; }
+    .tagline { font-size:1rem; margin-bottom:0; }
 
     .v-rule { height:35px; }
   }
@@ -256,9 +283,6 @@
     <li><a href="music.html">Music</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
-  <div class="hamburger" onclick="openMobile()">
-    <span></span><span></span><span></span>
-  </div>
 </nav>
 
 <div class="hero">
@@ -270,6 +294,20 @@
     <div class="v-rule"></div>
     <p class="tagline">Drawing from every decade of music since the 1960s — raw power, emotional depth, and guitar-driven storytelling woven into something that belongs to now.</p>
 
+    <div class="mobile-nav-cards">
+      <a href="about.html">
+        <span class="mnc-label">About</span>
+        <span class="mnc-sub">The Story</span>
+      </a>
+      <a href="music.html">
+        <span class="mnc-label">Music</span>
+        <span class="mnc-sub">Coming Soon</span>
+      </a>
+      <a href="contact.html">
+        <span class="mnc-label">Contact</span>
+        <span class="mnc-sub">Get In Touch</span>
+      </a>
+    </div>
 
   </div>
 </div>
