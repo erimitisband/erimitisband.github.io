@@ -9,36 +9,38 @@
         :root { --bg: #02020a; --steel: #5B9FD4; --gray: #B8952A; --white: #f0ede8; }
         body, html { margin: 0; padding: 0; background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; overflow-x: hidden; }
 
-        /* Hero Background with Drift & Stars */
-        .hero-bg { position: fixed; top: 0; left: 0; width: 115%; height: 115%; background: url('logo.jpg') center/cover no-repeat; opacity: 0.15; z-index: -2; animation: drift 20s infinite alternate linear; }
+        /* Background Effects */
+        .hero-bg { position: fixed; top: 0; left: 0; width: 115%; height: 115%; background: url('logo.jpg') center/cover no-repeat; opacity: 0.15; z-index: -2; animation: drift 30s infinite alternate linear; }
         @keyframes drift { from { transform: translate(0, 0); } to { transform: translate(-3%, -3%); } }
         .vignette { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 30%, rgba(0,0,0,0.9) 100%); z-index: -1; pointer-events: none; }
         #starCanvas { position: fixed; top: 0; left: 0; z-index: -1; }
 
-        /* Navigation - RESTORED DESKTOP LAYOUT */
+        /* Navigation - Desktop */
         nav { text-align: center; padding: 40px 0; display: block; }
         nav a { font-family: 'Cinzel', serif; color: var(--gray); text-decoration: none; margin: 0 20px; font-size: 1.2rem; transition: 0.3s; position: relative; }
+        nav a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -5px; left: 50%; background: var(--steel); transition: 0.3s; transform: translateX(-50%); }
         nav a:hover, nav a.active { color: var(--steel); }
+        nav a:hover::after, nav a.active::after { width: 100%; }
 
-        /* Mobile/Tablet Nav (≤768px) - 4 STACKED CARDS */
+        /* Navigation - Mobile Cards */
         .mobile-nav { display: none; flex-direction: column; width: 100%; }
         .nav-card { width: 100%; padding: 40px 0; text-align: center; border-bottom: 1px solid rgba(91, 159, 212, 0.1); color: var(--steel); font-family: 'Cinzel', serif; text-decoration: none; font-size: 1.5rem; }
 
-        /* Player UI */
+        /* Music Player */
         .container { max-width: 800px; margin: 0 auto; text-align: center; padding: 20px; }
-        h1 { font-family: 'Cinzel', serif; font-size: 3rem; letter-spacing: 0.5rem; margin-bottom: 2rem; }
+        h1 { font-family: 'Cinzel', serif; font-size: clamp(2rem, 8vw, 3.5rem); letter-spacing: 0.5rem; margin-bottom: 2rem; }
         #waveform { width: 100%; height: 200px; background: rgba(255,255,255,0.02); margin-bottom: 20px; }
         .controls { display: flex; flex-direction: column; align-items: center; gap: 20px; }
-        .main-btns { display: flex; gap: 15px; }
+        .btns { display: flex; gap: 15px; }
         button { background: transparent; border: 1px solid var(--gray); color: var(--gray); padding: 10px 30px; font-family: 'Cinzel', serif; cursor: pointer; transition: 0.3s; }
         button:hover { border-color: var(--steel); color: var(--steel); }
-        .slider-group { width: 100%; display: flex; align-items: center; gap: 15px; justify-content: center; }
-        input[type=range] { width: 60%; accent-color: var(--steel); cursor: pointer; }
+        .slider-row { width: 100%; display: flex; align-items: center; gap: 15px; justify-content: center; max-width: 500px; }
+        input[type=range] { flex-grow: 1; accent-color: var(--steel); cursor: pointer; }
+        #time { font-family: 'Crimson Text', serif; color: var(--steel); min-width: 100px; }
 
         @media (max-width: 768px) {
             nav { display: none; }
             .mobile-nav { display: flex; }
-            h1 { font-size: 2rem; }
         }
     </style>
 </head>
@@ -65,16 +67,16 @@
         <h1>PREVIEW</h1>
         <canvas id="waveform"></canvas>
         <div class="controls">
-            <div class="main-btns">
+            <div class="btns">
                 <button id="playBtn">PLAY</button>
                 <button id="muteBtn">MUTE</button>
             </div>
-            <div class="slider-group">
+            <div class="slider-row">
                 <input type="range" id="seek" value="0">
                 <div id="time">0:00 / 0:00</div>
             </div>
-            <div class="slider-group">
-                <span style="font-family: Cinzel; color: var(--gray); font-size: 0.7rem;">VOL</span>
+            <div class="slider-row">
+                <span style="font-family:Cinzel; font-size:0.7rem; color:var(--gray)">VOLUME</span>
                 <input type="range" id="volume" min="0" max="1" step="0.01" value="0.8">
             </div>
         </div>
@@ -83,6 +85,7 @@
     <audio id="track" src="https://erimitisband.github.io/preview.mp3" crossorigin="anonymous"></audio>
 
     <script>
+        // Stars
         const sCanvas = document.getElementById('starCanvas');
         const sCtx = sCanvas.getContext('2d');
         let stars = [];
@@ -97,14 +100,15 @@
         }
         drawStars();
 
+        // Audio
         const audio = document.getElementById('track');
         const wCanvas = document.getElementById('waveform');
         const wCtx = wCanvas.getContext('2d');
         const playBtn = document.getElementById('playBtn');
         const muteBtn = document.getElementById('muteBtn');
         const seek = document.getElementById('seek');
-        const volume = document.getElementById('volume');
-        const timeDisplay = document.getElementById('time');
+        const volSlider = document.getElementById('volume');
+        const timeDisp = document.getElementById('time');
         let audioCtx, analyser, source, data;
 
         playBtn.onclick = () => {
@@ -118,32 +122,33 @@
                 data = new Uint8Array(analyser.frequencyBinCount);
             }
             if (audioCtx.state === 'suspended') audioCtx.resume();
-            if (audio.paused) { audio.play(); playBtn.innerText = "PAUSE"; renderWave(); } 
+            if (audio.paused) { audio.play(); playBtn.innerText = "PAUSE"; render(); } 
             else { audio.pause(); playBtn.innerText = "PLAY"; }
         };
 
         muteBtn.onclick = () => { audio.muted = !audio.muted; muteBtn.innerText = audio.muted ? "UNMUTE" : "MUTE"; };
-        volume.oninput = () => { audio.volume = volume.value; };
+        volSlider.oninput = () => audio.volume = volSlider.value;
 
-        function renderWave() {
+        function render() {
             if (audio.paused) return;
-            requestAnimationFrame(renderWave);
+            requestAnimationFrame(render);
             analyser.getByteFrequencyData(data);
             wCanvas.width = wCanvas.offsetWidth;
             wCanvas.height = wCanvas.offsetHeight;
-            wCtx.clearRect(0, 0, wCanvas.width, wCanvas.height);
-            wCtx.fillStyle = "#5B9FD4"; 
+            wCtx.clearRect(0,0,wCanvas.width, wCanvas.height);
+            wCtx.fillStyle = "#5B9FD4";
             const barWidth = (wCanvas.width / data.length) * 2;
             data.forEach((v, i) => {
-                const h = (v / 255) * wCanvas.height;
+                const h = (v/255) * wCanvas.height;
                 wCtx.fillRect(i * (barWidth + 2), wCanvas.height - h, barWidth, h);
             });
         }
+
         audio.ontimeupdate = () => {
             seek.value = (audio.currentTime / audio.duration) * 100 || 0;
             let cur = Math.floor(audio.currentTime);
             let dur = Math.floor(audio.duration || 0);
-            timeDisplay.innerText = `${Math.floor(cur/60)}:${(cur%60).toString().padStart(2,'0')} / ${Math.floor(dur/60)}:${(dur%60).toString().padStart(2,'0')}`;
+            timeDisp.innerText = `${Math.floor(cur/60)}:${(cur%60).toString().padStart(2,'0')} / ${Math.floor(dur/60)}:${(dur%60).toString().padStart(2,'0')}`;
         };
         seek.oninput = () => audio.currentTime = (seek.value/100) * audio.duration;
     </script>
