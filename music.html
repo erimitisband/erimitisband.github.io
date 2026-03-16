@@ -22,64 +22,29 @@
   .nav-links a:hover{color:var(--white);}
   .nav-links a:hover::after,.nav-links a.active::after{width:100%;}
   .nav-links a.active{color:var(--steel);}
-  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;}
-  .hamburger span{display:block;width:22px;height:1px;background:var(--gold-dim);transition:all 0.3s;}
-  .mobile-menu{display:none;position:fixed;inset:0;z-index:300;background:rgba(2,2,10,0.98);flex-direction:column;align-items:center;justify-content:center;gap:3rem;backdrop-filter:blur(8px);}
-  .mobile-menu.open{display:flex;}
-  .mobile-menu a{font-family:var(--font-d);font-size:1.1rem;letter-spacing:7px;color:var(--gold-dim);text-decoration:none;text-transform:uppercase;transition:color 0.3s;}
-  .mobile-menu a:hover{color:var(--steel);}
-  .mobile-close{position:absolute;top:1.8rem;right:2rem;font-family:var(--font-d);font-size:0.55rem;letter-spacing:3px;color:var(--gold-dim);cursor:pointer;text-transform:uppercase;background:none;border:none;transition:color 0.3s;}
-  .mobile-close:hover{color:var(--white);}
   main{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:7rem 2rem 4rem;text-align:center;overflow:hidden;}
-  .main-bg{position:fixed;inset:0;background:url('https://erimitisband.github.io') center 30% / 55% no-repeat;opacity:0.12;filter:blur(0.5px) brightness(1.3);animation:drift 25s ease-in-out infinite alternate;z-index:0;will-change:transform;}
+  .main-bg{position:fixed;inset:0;background:url('https://erimitisband.github.io') center 30% / 55% no-repeat;opacity:0.12;filter:blur(0.5px) brightness(1.3);animation:drift 25s ease-in-out infinite alternate;z-index:0;}
   .main-vignette{position:fixed;inset:0;z-index:1;background:radial-gradient(ellipse 80% 80% at 50% 40%,transparent 25%,rgba(2,2,10,0.7) 65%,rgba(2,2,10,0.98) 100%);pointer-events:none;}
   @keyframes drift{from{transform:scale(1);}to{transform:scale(1.05) translateY(-12px);}}
   .content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;max-width:600px;width:100%;}
-  .eyebrow{font-family:var(--font-d);font-size:0.52rem;letter-spacing:7px;color:var(--steel);text-transform:uppercase;margin-bottom:3rem;opacity:0;animation:fadeUp 1.2s ease 0.2s forwards;}
-
-  /* Waveform & Play Button */
-  .waveform-wrap{position:relative;display:flex;align-items:center;justify-content:center;width:100%;max-width:500px;height:120px;margin-bottom:0.8rem;opacity:0;animation:fadeIn 1.6s ease 0.4s forwards;cursor:pointer;}
+  .eyebrow{font-family:var(--font-d);font-size:0.52rem;letter-spacing:7px;color:var(--steel);text-transform:uppercase;margin-bottom:3rem;}
+  .waveform-wrap{position:relative;display:flex;align-items:center;justify-content:center;width:100%;max-width:500px;height:120px;margin-bottom:0.8rem;cursor:pointer;}
   #waveCanvas{position:absolute;inset:0;width:100%;height:100%;border-bottom:1px solid rgba(91,159,212,0.12);}
-  
-  /* Pulse animation when playing */
-  .waveform-wrap.playing #waveCanvas { animation: pulse 1.5s infinite ease-in-out; }
-  @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
-
-  .play-btn{position:relative;z-index:2;width:56px;height:56px;border-radius:50%;border:1px solid rgba(91,159,212,0.35);background:rgba(91,159,212,0.06);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s;backdrop-filter:blur(4px);}
-  .play-btn:hover{border-color:rgba(91,159,212,0.75);background:rgba(91,159,212,0.12);}
+  .play-btn{position:relative;z-index:2;width:56px;height:56px;border-radius:50%;border:1px solid rgba(91,159,212,0.35);background:rgba(91,159,212,0.06);display:flex;align-items:center;justify-content:center;transition:all 0.3s;backdrop-filter:blur(4px);}
   .play-btn svg{width:18px;height:18px;fill:var(--steel);margin-left:3px;}
-  .audio-label{font-family:var(--font-d);font-size:0.46rem;letter-spacing:4px;color:rgba(91,159,212,0.45);text-transform:uppercase;margin-bottom:2.5rem;opacity:0;animation:fadeUp 1.2s ease 0.6s forwards;}
-
-  .h-rule{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--steel),transparent);margin:0 auto 1.8rem;opacity:0;animation:fadeIn 1.2s ease 0.8s forwards;}
-  .headline{font-family:var(--font-b);font-style:italic;font-size:clamp(1.4rem,3.5vw,2.2rem);color:var(--white);margin-bottom:0.8rem;opacity:0;animation:fadeUp 1.2s ease 1s forwards;line-height:1.5;}
-  .subline{font-family:var(--font-b);font-size:clamp(0.95rem,2vw,1.1rem);color:var(--silver);line-height:2;margin-bottom:1rem;max-width:460px;opacity:0;animation:fadeUp 1.2s ease 1.2s forwards;}
-  .subline-small{font-family:var(--font-d);font-size:0.52rem;letter-spacing:4px;color:var(--gold-dim);text-transform:uppercase;margin-bottom:2.5rem;opacity:0;animation:fadeUp 1.2s ease 1.4s forwards;}
-  
-  footer{position:relative;z-index:2;padding:2rem 1.5rem;text-align:center;border-top:1px solid #080810;}
-  @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-  @media(max-width:768px){nav{padding:1.3rem 1.5rem;justify-content:center;}.nav-links{display:none;}.hamburger{display:flex;}}
+  .audio-label{font-family:var(--font-d);font-size:0.46rem;letter-spacing:4px;color:rgba(91,159,212,0.45);text-transform:uppercase;margin-bottom:2.5rem;}
+  .h-rule{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--steel),transparent);margin:0 auto 1.8rem;}
+  .headline{font-family:var(--font-b);font-style:italic;font-size:clamp(1.4rem,3.5vw,2.2rem);color:var(--white);margin-bottom:0.8rem;line-height:1.5;}
+  .subline{font-family:var(--font-b);font-size:clamp(0.95rem,2vw,1.1rem);color:var(--silver);line-height:2;margin-bottom:1rem;max-width:460px;}
 </style>
 </head>
 <body>
 
-<!-- 1. HIDDEN AUDIO TAG -->
+<!-- THE AUDIO ENGINE - Using your specific file name -->
 <audio id="myAudio">
   <source src="preview.mp3mp4a" type="audio/mp4">
   <source src="preview.mp3mp4a" type="audio/mpeg">
 </audio>
-
- <source src="preview.mp3mp4a" type="audio/mp4">
-
-</audio>
-
-<div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-close" onclick="closeMobile()">✕ Close</button>
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="music.html">Music</a>
-  <a href="contact.html">Contact</a>
-</div>
 
 <nav>
   <ul class="nav-links">
@@ -96,8 +61,7 @@
   <div class="content">
     <p class="eyebrow">Music</p>
     
-    <!-- 2. WRAPPER FOR PLAYING -->
-    <div class="waveform-wrap" id="waveWrapper" onclick="toggleAudio()">
+    <div class="waveform-wrap" onclick="toggleAudio()">
       <canvas id="waveCanvas"></canvas>
       <div class="play-btn">
         <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -112,46 +76,36 @@
 </main>
 
 <script>
-  // Elements
   const audio = document.getElementById('myAudio');
   const playIcon = document.getElementById('playIcon');
-  const waveWrapper = document.getElementById('waveWrapper');
   const audioLabel = document.getElementById('audioLabel');
 
-  // Play/Pause Function
   function toggleAudio() {
     if (audio.paused) {
-      audio.play();
-      waveWrapper.classList.add('playing');
+      audio.play().catch(e => console.error("Error playing audio:", e));
       audioLabel.innerText = "Now Playing";
-      // Change to Pause Icon
       playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
     } else {
       audio.pause();
-      waveWrapper.classList.remove('playing');
       audioLabel.innerText = "Paused";
-      // Change back to Play Icon
       playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
     }
   }
 
-  // Draw Static Waveform on Canvas
+  // Basic Waveform Graphic
   const canvas = document.getElementById('waveCanvas');
   const ctx = canvas.getContext('2d');
-  function drawWave() {
-    ctx.strokeStyle = '#5B9FD4';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    for (let i = 0; i < canvas.width; i += 5) {
-      let h = Math.random() * 40 + 10;
-      ctx.moveTo(i, 60 - h/2);
-      ctx.lineTo(i, 60 + h/2);
-    }
-    ctx.stroke();
-  }
   canvas.width = 500;
   canvas.height = 120;
-  drawWave();
+  ctx.strokeStyle = '#5B9FD4';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  for (let i = 0; i < canvas.width; i += 8) {
+    let h = Math.random() * 30 + 10;
+    ctx.moveTo(i, 60 - h/2);
+    ctx.lineTo(i, 60 + h/2);
+  }
+  ctx.stroke();
 </script>
 
 </body>
