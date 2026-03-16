@@ -3,22 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | ERIMITIS</title>
-    
+    <title>ERIMITIS | Official</title>
     <style>
-        /* --- BASE STYLES & CINEMATIC VIBE --- */
         :root {
-            --bg-color: #070707;
+            --bg-color: #050505;
             --text-color: #e0e0e0;
-            --accent-color: #5a5a5a; 
-            --font-main: 'Helvetica Neue', Arial, sans-serif;
+            --accent-color: #666; 
+            --font-main: 'Georgia', serif; /* More cinematic/classic feel */
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--bg-color);
@@ -27,128 +21,90 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            text-transform: uppercase;
             letter-spacing: 2px;
         }
 
-        /* --- NAVIGATION --- */
         header {
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
+            padding: 3rem 1rem;
+            text-align: center;
         }
 
+        /* Fixed Logo Logic */
         .logo img {
-            max-width: 300px;
+            max-width: 400px;
+            width: 100%;
             height: auto;
-            display: block;
+            border-radius: 5px;
+            box-shadow: 0 0 30px rgba(255,255,255,0.05);
         }
 
+        nav { margin-top: 2rem; }
         nav ul {
             list-style: none;
             display: flex;
+            justify-content: center;
             gap: 2rem;
         }
 
         nav a {
             color: var(--accent-color);
             text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            transition: 0.3s;
         }
 
-        nav a:hover, nav a.active {
-            color: #fff;
-        }
+        nav a:hover { color: #fff; }
 
-        /* --- ABOUT CONTENT --- */
         main {
             flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 2rem;
-            max-width: 800px;
-            margin: 0 auto;
+            justify-content: center;
             text-align: center;
+            padding: 2rem;
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 1.5rem;
             font-weight: 300;
-            letter-spacing: 4px;
-            color: #fff;
-            margin-bottom: 2rem;
-        }
-
-        .bio-section {
-            margin-bottom: 3rem;
-            line-height: 1.8;
-            color: #b0b0b0;
-            text-transform: none; /* Turn off uppercase for readable paragraphs */
-            letter-spacing: 1px;
-        }
-
-        .bio-section h2 {
             text-transform: uppercase;
-            font-size: 1.2rem;
-            color: #fff;
-            margin-bottom: 1rem;
-            letter-spacing: 3px;
+            color: #888;
         }
 
-        .bio-section p {
-            margin-bottom: 1.5rem;
-        }
-
-        /* --- FOOTER & SOCIALS --- */
-        footer {
-            padding: 2rem;
-            text-align: center;
-        }
-
+        footer { padding: 3rem; }
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 2rem;
         }
 
         .social-links a {
             color: var(--accent-color);
             text-decoration: none;
-            font-size: 0.8rem;
-            transition: color 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.7rem;
         }
 
-        .social-links a:hover {
-            color: #fff;
-        }
+        .social-links a:hover { color: #fff; }
 
-        /* --- MOBILE RESPONSIVENESS --- */
         @media (max-width: 600px) {
-            nav ul {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-            h1 {
-                font-size: 2rem;
-            }
+            nav ul { gap: 1rem; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <a href="index.html" class="logo">
-            <img src="logo.png" alt="ERIMITIS">
-        </a>
+        <div class="logo">
+            <img src="logo.jpg" alt="ERIMITIS">
+        </div>
+        
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="about.html">About</a></li>
                 <li><a href="music.html">Music</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -156,29 +112,14 @@
     </header>
 
     <main>
-        <h1>Origins</h1>
-
-        <div class="bio-section">
-            <h2>The Vision</h2>
-            <p>[Insert your story here. Make it dark, dramatic, and honest. Talk about the genesis of ERIMITIS and what drives the sound.]</p>
-        </div>
-
-        <div class="bio-section">
-            <h2>Influences & Identity</h2>
-            <p>[List your primary musical and aesthetic influences here. What atmosphere are you trying to create for the listener?]</p>
-        </div>
-
-        <div class="bio-section">
-            <h2>Current Status</h2>
-            <p>[Keep it real: Mention that the band is currently forming, writing material, and preparing for the first chapter. Fans appreciate the raw honesty of being there from day one.]</p>
-        </div>
+        <h1>Seeking: Bassist · Vocalist · Drummer</h1>
     </main>
 
     <footer>
         <div class="social-links">
-            <a href="https://instagram.com/yourlink" target="_blank">Instagram</a>
-            <a href="https://facebook.com/yourlink" target="_blank">Facebook</a>
-            <a href="https://youtube.com/yourlink" target="_blank">YouTube</a>
+            <a href="https://instagram.com/erimitisband" target="_blank">Instagram</a>
+            <a href="https://tiktok.com/@erimitisband" target="_blank">TikTok</a>
+            <a href="mailto:erimitisband@gmail.com">Email</a>
         </div>
     </footer>
 
