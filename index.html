@@ -31,12 +31,6 @@
     background:linear-gradient(180deg,rgba(2,2,10,0.97) 0%,transparent 100%);
     transition:padding 0.3s;
   }
-  .nav-logo {
-    font-family:var(--font-d); font-size:0.62rem; letter-spacing:6px;
-    color:var(--steel); text-decoration:none; text-transform:uppercase;
-    transition:opacity 0.3s;
-  }
-  .nav-logo:hover { opacity:0.6; }
   .nav-links { list-style:none; display:flex; gap:2.8rem; }
   .nav-links a {
     font-family:var(--font-d); font-size:0.56rem; letter-spacing:3px;
@@ -52,38 +46,6 @@
   .nav-links a:hover::after, .nav-links a.active::after { width:100%; }
   .nav-links a.active { color:var(--steel); }
 
-  /* HAMBURGER */
-  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:6px; }
-  .hamburger span { display:block; width:22px; height:1px; background:var(--gray); transition:all 0.3s; }
-
-  /* MOBILE OVERLAY */
-  .mobile-menu {
-    display:none; position:fixed; inset:0; z-index:300;
-    background:rgba(2,2,10,0.98);
-    flex-direction:column; align-items:center; justify-content:center; gap:3rem;
-    backdrop-filter:blur(8px);
-  }
-  .mobile-menu.open { display:flex; }
-  .mobile-menu a {
-    font-family:var(--font-d); font-size:1.1rem; letter-spacing:7px;
-    color:var(--gray); text-decoration:none; text-transform:uppercase;
-    transition:color 0.3s; position:relative; padding-bottom:6px;
-  }
-  .mobile-menu a::after {
-    content:''; position:absolute; bottom:0; left:50%;
-    width:0; height:1px; background:var(--steel);
-    transition:all 0.4s; transform:translateX(-50%);
-  }
-  .mobile-menu a:hover { color:var(--steel); }
-  .mobile-menu a:hover::after { width:100%; }
-  .mobile-close {
-    position:absolute; top:1.8rem; right:2rem;
-    font-family:var(--font-d); font-size:0.55rem; letter-spacing:3px;
-    color:var(--gray); cursor:pointer; text-transform:uppercase;
-    background:none; border:none; transition:color 0.3s;
-  }
-  .mobile-close:hover { color:var(--white); }
-
   /* HERO */
   .hero {
     position:relative; min-height:100vh;
@@ -93,18 +55,15 @@
     overflow:hidden; z-index:1;
   }
 
-  /* Ghost hermit background */
   .hero-bg {
     position:fixed; inset:0;
     background:url('https://erimitisband.github.io/logo.jpg') center 25% / 65% no-repeat;
     opacity:0.15; filter:blur(0.5px) brightness(1.3);
     animation:drift 25s ease-in-out infinite alternate;
-    z-index:0;
-    will-change:transform;
+    z-index:0; will-change:transform;
   }
   @keyframes drift { from { transform:scale(1) translateY(0); } to { transform:scale(1.05) translateY(-14px); } }
 
-  /* Vignette */
   .hero-vignette {
     position:absolute; inset:0; z-index:1;
     background:radial-gradient(ellipse 80% 80% at 50% 40%, transparent 25%, rgba(2,2,10,0.65) 65%, rgba(2,2,10,0.98) 100%);
@@ -115,8 +74,7 @@
     display:flex; flex-direction:column;
     align-items:center; justify-content:center;
     text-align:center;
-    max-width:680px; width:100%;
-    margin:0 auto;
+    max-width:680px; width:100%; margin:0 auto;
   }
 
   .eyebrow {
@@ -151,40 +109,34 @@
     opacity:0; animation:fadeUp 1.4s ease 1.2s forwards;
   }
 
-  /* Three nav cards */
-  .nav-cards {
-    display:grid; grid-template-columns:repeat(3,1fr);
-    gap:1px; width:100%; max-width:520px;
+  /* MOBILE NAV CARDS — stacked, full width */
+  .mobile-nav-cards {
+    display:none;
+    width:100%;
     opacity:0; animation:fadeUp 1.4s ease 1.5s forwards;
-    margin-bottom:2.5rem;
   }
-
-  .nav-card {
-    display:flex; flex-direction:column; align-items:center;
-    justify-content:center; gap:0.35rem;
-    padding:1.3rem 0.8rem;
+  .mobile-nav-cards a {
+    display:flex; align-items:center; justify-content:center;
+    width:100%; padding:1.3rem 1rem;
     border:1px solid #0d0d16;
+    border-bottom:none;
     background:rgba(255,255,255,0.012);
     text-decoration:none;
     position:relative; overflow:hidden;
-    transition:border-color 0.4s, transform 0.3s;
+    transition:border-color 0.4s;
   }
-  .nav-card::before {
+  .mobile-nav-cards a:last-child { border-bottom:1px solid #0d0d16; }
+  .mobile-nav-cards a::before {
     content:''; position:absolute; inset:0;
     background:linear-gradient(135deg, var(--steel-dim), transparent 60%);
     opacity:0; transition:opacity 0.4s;
   }
-  .nav-card:hover { border-color:rgba(140,180,214,0.22); transform:translateY(-3px); }
-  .nav-card:hover::before { opacity:1; }
-  .nc-label {
+  .mobile-nav-cards a:hover { border-color:rgba(140,180,214,0.22); }
+  .mobile-nav-cards a:hover::before { opacity:1; }
+  .mnc-label {
     font-family:var(--font-d); font-size:0.55rem; letter-spacing:4px;
     color:var(--steel); text-transform:uppercase; position:relative; z-index:1;
   }
-  .nc-sub {
-    font-family:var(--font-b); font-style:italic; font-size:0.82rem;
-    color:var(--gray); position:relative; z-index:1; transition:color 0.3s;
-  }
-  .nav-card:hover .nc-sub { color:var(--white); }
 
   .influences {
     font-family:var(--font-d); font-size:0.46rem; letter-spacing:4px;
@@ -201,8 +153,7 @@
   .soc { display:flex; justify-content:center; gap:2.5rem; margin-bottom:0.8rem; }
   .soc a {
     font-family:var(--font-d); font-size:0.52rem; letter-spacing:3px;
-    color:#96781E; text-decoration:none; text-transform:uppercase;
-    transition:color 0.3s;
+    color:#96781E; text-decoration:none; text-transform:uppercase; transition:color 0.3s;
   }
   .soc a:hover { color:var(--steel); }
   .copy { font-family:var(--font-d); font-size:0.46rem; letter-spacing:3px; color:#6B5418; text-transform:uppercase; }
@@ -210,53 +161,16 @@
   @keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
   @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
-  /* Mobile nav cards */
-  .mobile-nav-cards {
-    display:none;
-    width:100%;
-    margin-top:2.5rem;
-    opacity:0; animation:fadeUp 1.4s ease 1.5s forwards;
-  }
-  .mobile-nav-cards a {
-    display:flex; flex-direction:column; align-items:center;
-    justify-content:center; gap:0.35rem;
-    padding:1.2rem 1rem;
-    border:1px solid #0d0d16;
-    background:rgba(255,255,255,0.012);
-    text-decoration:none; width:100%; margin-bottom:2px;
-    position:relative; overflow:hidden;
-    transition:border-color 0.4s;
-  }
-  .mobile-nav-cards a::before {
-    content:''; position:absolute; inset:0;
-    background:linear-gradient(135deg, var(--steel-dim), transparent 60%);
-    opacity:0; transition:opacity 0.4s;
-  }
-  .mobile-nav-cards a:hover { border-color:rgba(140,180,214,0.22); }
-  .mobile-nav-cards a:hover::before { opacity:1; }
-  .mnc-label {
-    font-family:var(--font-d); font-size:0.55rem; letter-spacing:4px;
-    color:var(--steel); text-transform:uppercase; position:relative; z-index:1;
-  }
-  .mnc-sub {
-    font-family:var(--font-b); font-style:italic; font-size:0.82rem;
-    color:#B8952A; position:relative; z-index:1;
-  }
-
-  /* ── MOBILE ── */
+  /* TABLET + MOBILE */
   @media (max-width:768px) {
     nav { padding:1.3rem 1.5rem; justify-content:center; }
     .nav-links { display:none; }
-    .hamburger { display:none; }
-    .mobile-nav-cards { display:block; }
-
     .hero { padding:6rem 1.5rem 4rem; }
     .hero-bg { background-size:120%; background-position:center 20%; }
-
     h1 { font-size:clamp(2.8rem, 18vw, 5rem); letter-spacing:0.15em; }
-    .tagline { font-size:1rem; margin-bottom:0; }
-
+    .tagline { font-size:1rem; margin-bottom:2.5rem; }
     .v-rule { height:35px; }
+    .mobile-nav-cards { display:flex; flex-direction:column; }
   }
 
   @media (max-width:380px) {
@@ -268,14 +182,6 @@
 <body>
 
 <canvas id="stars"></canvas>
-
-<div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-close" onclick="closeMobile()">&#x2715; Close</button>
-  <a href="index.html" onclick="closeMobile()">Home</a>
-  <a href="about.html" onclick="closeMobile()">About</a>
-  <a href="music.html" onclick="closeMobile()">Music</a>
-  <a href="contact.html" onclick="closeMobile()">Contact</a>
-</div>
 
 <nav>
   <ul class="nav-links">
@@ -296,18 +202,10 @@
     <p class="tagline">Drawing from every decade of music since the 1960s — raw power, emotional depth, and guitar-driven storytelling woven into something that belongs to now.</p>
 
     <div class="mobile-nav-cards">
-      <a href="about.html">
-        <span class="mnc-label">About</span>
-        <span class="mnc-sub">The Story</span>
-      </a>
-      <a href="music.html">
-        <span class="mnc-label">Music</span>
-        <span class="mnc-sub">Coming Soon</span>
-      </a>
-      <a href="contact.html">
-        <span class="mnc-label">Contact</span>
-        <span class="mnc-sub">Get In Touch</span>
-      </a>
+      <a href="index.html"><span class="mnc-label">Home</span></a>
+      <a href="about.html"><span class="mnc-label">About</span></a>
+      <a href="music.html"><span class="mnc-label">Music</span></a>
+      <a href="contact.html"><span class="mnc-label">Contact</span></a>
     </div>
 
   </div>
@@ -347,10 +245,6 @@
   }
   requestAnimationFrame(draw);
 
-  function openMobile() { document.getElementById('mobileMenu').classList.add('open'); document.body.style.overflow='hidden'; }
-  function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); document.body.style.overflow=''; }
-
-  // Parallax
   const heroBg = document.querySelector('.hero-bg');
   window.addEventListener('scroll', () => {
     heroBg.style.transform = `translateY(${window.pageYOffset * 0.4}px)`;
