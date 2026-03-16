@@ -7,29 +7,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Crimson+Text&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #02020a; --steel: #5B9FD4; --gray: #B8952A; --white: #f0ede8; }
-        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; }
+        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; overflow-x: hidden; }
 
-        .hero-bg { position: fixed; top: 0; left: 0; width: 115%; height: 115%; background: url('logo.jpg') center/cover no-repeat; opacity: 0.15; z-index: -2; animation: drift 20s infinite alternate linear; }
+        .hero-bg { position: fixed; top: 0; left: 0; width: 115%; height: 115%; background: url('logo.jpg') center/cover no-repeat; opacity: 0.15; z-index: -2; animation: drift 30s infinite alternate linear; }
         @keyframes drift { from { transform: translate(0, 0); } to { transform: translate(-3%, -3%); } }
         #starCanvas { position: fixed; top: 0; left: 0; z-index: -1; }
 
-        /* Desktop Nav - RESTORED */
         nav { text-align: center; padding: 40px 0; display: block; }
-        nav a { font-family: 'Cinzel', serif; color: var(--gray); text-decoration: none; margin: 0 20px; font-size: 1.2rem; transition: 0.3s; }
+        nav a { font-family: 'Cinzel', serif; color: var(--gray); text-decoration: none; margin: 0 20px; font-size: 1.2rem; transition: 0.3s; position: relative; }
+        nav a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -5px; left: 50%; background: var(--steel); transition: 0.3s; transform: translateX(-50%); }
         nav a:hover, nav a.active { color: var(--steel); }
+        nav a:hover::after, nav a.active::after { width: 100%; }
 
-        /* Mobile Nav - STACKED CARDS */
         .mobile-nav { display: none; flex-direction: column; width: 100%; }
         .nav-card { width: 100%; padding: 40px 0; text-align: center; border-bottom: 1px solid rgba(91, 159, 212, 0.1); color: var(--steel); font-family: 'Cinzel', serif; text-decoration: none; font-size: 1.5rem; }
 
         .content { max-width: 800px; margin: 0 auto; padding: 60px 20px; text-align: center; }
-        h1 { font-family: 'Cinzel', serif; font-size: 3.5rem; color: var(--white); }
-        p { font-size: 1.2rem; line-height: 1.8; color: var(--white); }
+        h1 { font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 10vw, 4rem); margin-bottom: 2rem; }
+        p { font-size: clamp(1.1rem, 4vw, 1.4rem); line-height: 1.8; opacity: 0.9; }
 
         @media (max-width: 768px) {
             nav { display: none; }
             .mobile-nav { display: flex; }
-            h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
