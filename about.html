@@ -1,55 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | Erimitis</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Crimson+Text&display=swap" rel="stylesheet">
-    <style>
-        :root { --bg: #02020a; --steel: #5B9FD4; --gray: #B8952A; --white: #f0ede8; --glass: rgba(255, 255, 255, 0.03); }
-        @keyframes fadeInPage { from { opacity: 0; } to { opacity: 1; } }
-        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; animation: fadeInPage 1.5s ease; overflow-x: hidden; }
-
-        .hero-bg { position: fixed; top: 0; left: 0; width: 115%; height: 115%; background: url('logo.jpg') center/cover no-repeat; opacity: 0.12; z-index: -2; animation: drift 40s infinite alternate linear; }
-        @keyframes drift { from { transform: translate(0, 0); } to { transform: translate(-3%, -3%); } }
-        #starCanvas { position: fixed; top: 0; left: 0; z-index: -1; }
-
-        nav { text-align: center; padding: 50px 0; }
-        nav a { font-family: 'Cinzel', serif; color: var(--gray); text-decoration: none; margin: 0 25px; font-size: 1.1rem; transition: 0.4s; position: relative; letter-spacing: 2px; }
-        nav a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -8px; left: 50%; background: var(--steel); transition: 0.4s; transform: translateX(-50%); }
-        nav a:hover, nav a.active { color: var(--steel); }
-        nav a:hover::after, nav a.active::after { width: 100%; }
-
-        .mobile-nav { display: none; flex-direction: column; width: 100%; }
-        .nav-card { width: 100%; padding: 45px 0; text-align: center; border-bottom: 1px solid rgba(91, 159, 212, 0.1); color: var(--steel); font-family: 'Cinzel', serif; text-decoration: none; font-size: 1.4rem; background: var(--glass); }
-
-        .content { 
-            max-width: 800px; margin: 40px auto; padding: 80px 40px; 
-            background: var(--glass); border: 1px solid rgba(255,255,255,0.05);
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 4px;
-            text-align: center;
-        }
-        
-        h1 { font-family: 'Cinzel', serif; font-size: 3.5rem; margin-bottom: 2.5rem; letter-spacing: 0.6rem; }
-        p { font-size: 1.3rem; line-height: 2; opacity: 0.85; max-width: 600px; margin: 0 auto; }
-
-        @media (max-width: 768px) {
-            nav { display: none; }
-            .mobile-nav { display: flex; }
-            .content { width: 90%; margin: 20px auto; padding: 50px 20px; border-radius: 0; }
-            h1 { font-size: 2.5rem; }
-        }
-    </style>
-</head>
 <body>
     <div class="hero-bg"></div>
     <canvas id="starCanvas"></canvas>
 
+    <h1>ERIMITIS</h1>
+
+    <div class="content-wrap">
+        <p>Erimitis is a music project focused on atmosphere and sound. We create music that explores the space between light and shadow, designed to be felt as much as heard.</p>
+        <p>Our sound is shaped by deep, atmospheric layers and the raw energy of our influences, ranging from the classic melodies of <span class="gold-leaf" style="font-size:1.1rem">Iron Maiden</span> to the expansive depths of modern ambient music.</p>
+    </div>
+
     <div class="mobile-nav">
-        <a href="index.html" class="nav-card">HOME</a>
-        <a href="about.html" class="nav-card">ABOUT</a>
-        <a href="music.html" class="nav-card">MUSIC</a>
-        <a href="contact.html" class="nav-card">CONTACT</a>
+        <a href="index.html" class="nav-block">HOME</a>
+        <a href="about.html" class="nav-block" style="color:var(--steel)">ABOUT</a>
+        <a href="music.html" class="nav-block">MUSIC</a>
+        <a href="contact.html" class="nav-block">CONTACT</a>
     </div>
 
     <nav>
@@ -58,25 +22,5 @@
         <a href="music.html">MUSIC</a>
         <a href="contact.html">CONTACT</a>
     </nav>
-
-    <div class="content">
-        <h1>ABOUT</h1>
-        <p>Erimitis is a music project focused on atmosphere and sound. We create music that explores the space between light and shadow, designed to be felt as much as heard.</p>
-    </div>
-
-    <script>
-        const canvas = document.getElementById('starCanvas');
-        const ctx = canvas.getContext('2d');
-        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        window.onresize = resize; resize();
-        let stars = [];
-        for(let i=0; i<150; i++) stars.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*1.2, o: Math.random() });
-        function draw() {
-            ctx.clearRect(0,0,canvas.width, canvas.height);
-            stars.forEach(s => { ctx.fillStyle = `rgba(140, 180, 214, ${s.o})`; ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2); ctx.fill(); });
-            requestAnimationFrame(draw);
-        }
-        draw();
-    </script>
+    <script> /* [Include Star Script from Index] */ </script>
 </body>
-</html>
