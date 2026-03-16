@@ -8,42 +8,77 @@
 <link href="https://fonts.googleapis.com" rel="stylesheet">
 <style>
   :root{
-    --bg:#02020a;--steel:#5B9FD4;--white:#f0ede8;--gold-dim:#96781E;
-    --font-d:'Cinzel',serif;--font-b:'Crimson Text',serif;
+    --bg:#02020a;--steel:#5B9FD4;--steel-dim:rgba(91,159,212,0.15);
+    --white:#f0ede8;--gold:#B8952A;--gold-dim:#96781E;--silver:#B8B8B4;
+    --font-d:'Cinzel',Georgia,serif;--font-b:'Crimson Text',Georgia,serif;
   }
-  body{background:var(--bg);color:var(--white);font-family:var(--font-b);min-height:100vh;margin:0;display:flex;flex-direction:column;}
-  nav{position:fixed;top:0;width:100%;z-index:200;padding:1.6rem;display:flex;justify-content:center;background:rgba(2,2,10,0.97);}
-  .nav-links{list-style:none;display:flex;gap:2.8rem;padding:0;}
-  .nav-links a{font-family:var(--font-d);font-size:0.56rem;letter-spacing:3px;color:var(--gold-dim);text-decoration:none;text-transform:uppercase;}
-  main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:7rem 2rem;text-align:center;}
-  .waveform-wrap{position:relative;width:100%;max-width:500px;height:120px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--white);font-family:var(--font-b);min-height:100vh;overflow-x:hidden;display:flex;flex-direction:column;}
+  #stars{position:fixed;inset:0;z-index:0;pointer-events:none;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.6rem 3.5rem;display:flex;justify-content:center;align-items:center;background:linear-gradient(180deg,rgba(2,2,10,0.97) 0%,transparent 100%);}
+  .nav-links{list-style:none;display:flex;gap:2.8rem;}
+  .nav-links a{font-family:var(--font-d);font-size:0.56rem;letter-spacing:3px;color:var(--gold-dim);text-decoration:none;text-transform:uppercase;position:relative;padding-bottom:4px;transition:color 0.3s;}
+  .nav-links a::after{content:'';position:absolute;bottom:0;left:50%;width:0;height:1px;background:var(--steel);transition:all 0.4s;transform:translateX(-50%);}
+  .nav-links a:hover{color:var(--white);}
+  .nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+  .nav-links a.active{color:var(--steel);}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;}
+  .hamburger span{display:block;width:22px;height:1px;background:var(--gold-dim);transition:all 0.3s;}
+  .mobile-menu{display:none;position:fixed;inset:0;z-index:300;background:rgba(2,2,10,0.98);flex-direction:column;align-items:center;justify-content:center;gap:3rem;backdrop-filter:blur(8px);}
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{font-family:var(--font-d);font-size:1.1rem;letter-spacing:7px;color:var(--gold-dim);text-decoration:none;text-transform:uppercase;transition:color 0.3s;}
+  .mobile-menu a:hover{color:var(--steel);}
+  .mobile-close{position:absolute;top:1.8rem;right:2rem;font-family:var(--font-d);font-size:0.55rem;letter-spacing:3px;color:var(--gold-dim);cursor:pointer;text-transform:uppercase;background:none;border:none;transition:color 0.3s;}
+  .mobile-close:hover{color:var(--white);}
+  main{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:7rem 2rem 4rem;text-align:center;overflow:hidden;}
+  .main-bg{position:fixed;inset:0;background:url('https://erimitisband.github.io') center 30% / 55% no-repeat;opacity:0.12;filter:blur(0.5px) brightness(1.3);animation:drift 25s ease-in-out infinite alternate;z-index:0;will-change:transform;}
+  .main-vignette{position:fixed;inset:0;z-index:1;background:radial-gradient(ellipse 80% 80% at 50% 40%,transparent 25%,rgba(2,2,10,0.7) 65%,rgba(2,2,10,0.98) 100%);pointer-events:none;}
+  @keyframes drift{from{transform:scale(1);}to{transform:scale(1.05) translateY(-12px);}}
+  .content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;max-width:600px;width:100%;}
+  .eyebrow{font-family:var(--font-d);font-size:0.52rem;letter-spacing:7px;color:var(--steel);text-transform:uppercase;margin-bottom:3rem;}
+  .waveform-wrap{position:relative;display:flex;align-items:center;justify-content:center;width:100%;max-width:500px;height:120px;margin-bottom:0.8rem;cursor:pointer;}
   #waveCanvas{position:absolute;inset:0;width:100%;height:100%;border-bottom:1px solid rgba(91,159,212,0.12);}
-  .play-btn{z-index:2;width:56px;height:56px;border-radius:50%;border:1px solid rgba(91,159,212,0.35);background:rgba(91,159,212,0.06);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+  .play-btn{position:relative;z-index:2;width:56px;height:56px;border-radius:50%;border:1px solid rgba(91,159,212,0.35);background:rgba(91,159,212,0.06);display:flex;align-items:center;justify-content:center;transition:all 0.3s;backdrop-filter:blur(4px);}
   .play-btn svg{width:18px;height:18px;fill:var(--steel);margin-left:3px;}
-  .audio-label{font-family:var(--font-d);font-size:0.46rem;letter-spacing:4px;color:rgba(91,159,212,0.45);text-transform:uppercase;margin-top:2.5rem;}
+  .audio-label{font-family:var(--font-d);font-size:0.46rem;letter-spacing:4px;color:rgba(91,159,212,0.45);text-transform:uppercase;margin-bottom:2.5rem;}
+  .h-rule{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--steel),transparent);margin:0 auto 1.8rem;}
+  .headline{font-family:var(--font-b);font-style:italic;font-size:clamp(1.4rem,3.5vw,2.2rem);color:var(--white);margin-bottom:0.8rem;line-height:1.5;}
+  .subline{font-family:var(--font-b);font-size:clamp(0.95rem,2vw,1.1rem);color:var(--silver);line-height:2;margin-bottom:1rem;max-width:460px;}
+  @media(max-width:768px){nav{padding:1.3rem 1.5rem;}.nav-links{display:none;}.hamburger{display:flex;}}
 </style>
 </head>
 <body>
 
-<!-- THE FIXED AUDIO ENGINE -->
+<canvas id="stars"></canvas>
+
+<!-- AUDIO ENGINE - Direct Stream Link -->
 <audio id="myAudio" preload="auto">
-  <!-- 1. The 'raw=1' version (Best for Safari/Mac) -->
-  <source src="https://www.dropbox.com" type="audio/mp4">
-  <!-- 2. The 'dl=1' version (Fallback) -->
   <source src="https://www.dropbox.com" type="audio/mp4">
 </audio>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMobile()">✕ Close</button>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="music.html">Music</a>
+  <a href="contact.html">Contact</a>
+</div>
 
 <nav>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About</a></li>
-    <li><a href="music.html" style="color:var(--steel)">Music</a></li>
+    <li><a href="music.html" class="active">Music</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
+  <div class="hamburger" onclick="openMobile()"><span></span><span></span><span></span></div>
 </nav>
 
 <main>
+  <div class="main-bg"></div>
+  <div class="main-vignette"></div>
   <div class="content">
+    <p class="eyebrow">Music</p>
     <div class="waveform-wrap" onclick="toggleAudio()">
       <canvas id="waveCanvas"></canvas>
       <div class="play-btn">
@@ -51,6 +86,9 @@
       </div>
     </div>
     <p class="audio-label" id="audioLabel">Click to Play Preview</p>
+    <div class="h-rule"></div>
+    <p class="headline">New Release Coming Soon</p>
+    <p class="subline">Experimental sounds from the depths of the void.</p>
   </div>
 </main>
 
@@ -61,10 +99,10 @@
 
   function toggleAudio() {
     if (audio.paused) {
-      // Force reload if first attempt fails
-      audio.play().catch(() => {
-          audio.load();
-          audio.play();
+      audio.play().catch(e => {
+        // If it fails initially, force a reload and try again
+        audio.load();
+        audio.play();
       });
       audioLabel.innerText = "Now Playing";
       playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
@@ -75,7 +113,10 @@
     }
   }
 
-  // Waveform Graphic
+  function openMobile() { document.getElementById('mobileMenu').classList.add('open'); }
+  function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
+
+  // Static Waveform
   const canvas = document.getElementById('waveCanvas');
   const ctx = canvas.getContext('2d');
   canvas.width = 500; canvas.height = 120;
@@ -89,4 +130,3 @@
 </script>
 </body>
 </html>
-
