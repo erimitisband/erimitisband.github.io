@@ -6,41 +6,66 @@
     <title>Music | Erimitis</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Crimson+Text&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #02020a; --steel: #5B9FD4; --gray: #B8952A; --white: #f0ede8; }
-        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; overflow-x: hidden; }
+        :root { --bg: #02020a; --steel: #5B9FD4; --gray: #B8952A; --white: #f0ede8; --glass: rgba(255, 255, 255, 0.03); }
+        
+        /* Fade In Animation */
+        @keyframes fadeInPage { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; overflow-x: hidden; animation: fadeInPage 1.2s ease-out; }
 
         /* Background Effects */
-        .hero-bg { position: fixed; top: 0; left: 0; width: 115%; height: 115%; background: url('logo.jpg') center/cover no-repeat; opacity: 0.15; z-index: -2; animation: drift 30s infinite alternate linear; }
+        .hero-bg { position: fixed; top: 0; left: 0; width: 115%; height: 115%; background: url('logo.jpg') center/cover no-repeat; opacity: 0.12; z-index: -2; animation: drift 40s infinite alternate linear; }
         @keyframes drift { from { transform: translate(0, 0); } to { transform: translate(-3%, -3%); } }
-        .vignette { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 30%, rgba(0,0,0,0.9) 100%); z-index: -1; pointer-events: none; }
+        .vignette { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.9) 100%); z-index: -1; pointer-events: none; }
         #starCanvas { position: fixed; top: 0; left: 0; z-index: -1; }
 
-        /* Navigation - Desktop */
-        nav { text-align: center; padding: 40px 0; display: block; }
-        nav a { font-family: 'Cinzel', serif; color: var(--gray); text-decoration: none; margin: 0 20px; font-size: 1.2rem; transition: 0.3s; position: relative; }
-        nav a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -5px; left: 50%; background: var(--steel); transition: 0.3s; transform: translateX(-50%); }
-        nav a:hover, nav a.active { color: var(--steel); }
+        /* Navigation */
+        nav { text-align: center; padding: 50px 0; }
+        nav a { font-family: 'Cinzel', serif; color: var(--gray); text-decoration: none; margin: 0 25px; font-size: 1.1rem; transition: 0.4s; position: relative; letter-spacing: 2px; }
+        nav a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -8px; left: 50%; background: var(--steel); transition: 0.4s; transform: translateX(-50%); }
+        nav a:hover, nav a.active { color: var(--steel); text-shadow: 0 0 15px rgba(91, 159, 212, 0.5); }
         nav a:hover::after, nav a.active::after { width: 100%; }
 
-        /* Navigation - Mobile Cards */
         .mobile-nav { display: none; flex-direction: column; width: 100%; }
-        .nav-card { width: 100%; padding: 40px 0; text-align: center; border-bottom: 1px solid rgba(91, 159, 212, 0.1); color: var(--steel); font-family: 'Cinzel', serif; text-decoration: none; font-size: 1.5rem; }
+        .nav-card { width: 100%; padding: 45px 0; text-align: center; border-bottom: 1px solid rgba(91, 159, 212, 0.1); color: var(--steel); font-family: 'Cinzel', serif; text-decoration: none; font-size: 1.4rem; background: var(--glass); }
 
-        /* Music Player */
-        .container { max-width: 800px; margin: 0 auto; text-align: center; padding: 20px; }
-        h1 { font-family: 'Cinzel', serif; font-size: clamp(2rem, 8vw, 3.5rem); letter-spacing: 0.5rem; margin-bottom: 2rem; }
-        #waveform { width: 100%; height: 200px; background: rgba(255,255,255,0.02); margin-bottom: 20px; }
-        .controls { display: flex; flex-direction: column; align-items: center; gap: 20px; }
-        .btns { display: flex; gap: 15px; }
-        button { background: transparent; border: 1px solid var(--gray); color: var(--gray); padding: 10px 30px; font-family: 'Cinzel', serif; cursor: pointer; transition: 0.3s; }
-        button:hover { border-color: var(--steel); color: var(--steel); }
-        .slider-row { width: 100%; display: flex; align-items: center; gap: 15px; justify-content: center; max-width: 500px; }
-        input[type=range] { flex-grow: 1; accent-color: var(--steel); cursor: pointer; }
-        #time { font-family: 'Crimson Text', serif; color: var(--steel); min-width: 100px; }
+        /* Glassmorphism Player */
+        .container { 
+            max-width: 800px; margin: 20px auto; text-align: center; padding: 40px; 
+            background: var(--glass); border: 1px solid rgba(255,255,255,0.05);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 4px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        
+        h1 { font-family: 'Cinzel', serif; font-size: clamp(2rem, 8vw, 3rem); letter-spacing: 0.8rem; margin-bottom: 2rem; color: var(--white); }
+        #waveform { width: 100%; height: 180px; margin-bottom: 30px; filter: drop-shadow(0 0 10px rgba(91, 159, 212, 0.3)); }
+        
+        .controls { display: flex; flex-direction: column; align-items: center; gap: 25px; }
+        .btns { display: flex; gap: 20px; }
+        
+        button { 
+            background: transparent; border: 1px solid var(--gray); color: var(--gray); 
+            padding: 12px 40px; font-family: 'Cinzel', serif; cursor: pointer; transition: 0.4s; 
+            letter-spacing: 2px; font-size: 0.9rem;
+        }
+        button:hover { border-color: var(--steel); color: var(--steel); box-shadow: 0 0 20px rgba(91, 159, 212, 0.2); }
+        
+        /* Pro Range Sliders */
+        .slider-row { width: 100%; display: flex; align-items: center; gap: 20px; justify-content: center; max-width: 600px; }
+        input[type=range] { 
+            -webkit-appearance: none; flex-grow: 1; height: 2px; background: rgba(184, 149, 42, 0.2); outline: none; transition: 0.3s;
+        }
+        input[type=range]::-webkit-slider-thumb { 
+            -webkit-appearance: none; width: 12px; height: 12px; background: var(--steel); border-radius: 50%; cursor: pointer; box-shadow: 0 0 10px var(--steel);
+        }
+
+        #time { font-family: 'Crimson Text', serif; color: var(--steel); font-size: 1rem; min-width: 90px; }
+        .label-tag { font-family: 'Cinzel', serif; font-size: 0.6rem; color: var(--gray); letter-spacing: 2px; }
 
         @media (max-width: 768px) {
             nav { display: none; }
             .mobile-nav { display: flex; }
+            .container { width: 90%; padding: 20px; border-radius: 0; border-left: none; border-right: none; }
         }
     </style>
 </head>
@@ -72,11 +97,12 @@
                 <button id="muteBtn">MUTE</button>
             </div>
             <div class="slider-row">
+                <span class="label-tag">SEEK</span>
                 <input type="range" id="seek" value="0">
                 <div id="time">0:00 / 0:00</div>
             </div>
             <div class="slider-row">
-                <span style="font-family:Cinzel; font-size:0.7rem; color:var(--gray)">VOLUME</span>
+                <span class="label-tag">VOLUME</span>
                 <input type="range" id="volume" min="0" max="1" step="0.01" value="0.8">
             </div>
         </div>
@@ -85,22 +111,22 @@
     <audio id="track" src="https://erimitisband.github.io/preview.mp3" crossorigin="anonymous"></audio>
 
     <script>
-        // Stars
         const sCanvas = document.getElementById('starCanvas');
         const sCtx = sCanvas.getContext('2d');
         let stars = [];
         function resize() { sCanvas.width = window.innerWidth; sCanvas.height = window.innerHeight; }
         window.onresize = resize; resize();
-        for(let i=0; i<200; i++) stars.push({ x: Math.random()*sCanvas.width, y: Math.random()*sCanvas.height, r: Math.random()*1.5 });
+        for(let i=0; i<150; i++) stars.push({ x: Math.random()*sCanvas.width, y: Math.random()*sCanvas.height, r: Math.random()*1.2, o: Math.random() });
         function drawStars() {
             sCtx.clearRect(0,0,sCanvas.width, sCanvas.height);
-            sCtx.fillStyle = "rgba(140, 180, 214, 0.6)";
-            stars.forEach(s => { sCtx.beginPath(); sCtx.arc(s.x, s.y, s.r, 0, Math.PI*2); sCtx.fill(); });
+            stars.forEach(s => {
+                sCtx.fillStyle = `rgba(140, 180, 214, ${s.o})`;
+                sCtx.beginPath(); sCtx.arc(s.x, s.y, s.r, 0, Math.PI*2); sCtx.fill();
+            });
             requestAnimationFrame(drawStars);
         }
         drawStars();
 
-        // Audio
         const audio = document.getElementById('track');
         const wCanvas = document.getElementById('waveform');
         const wCtx = wCanvas.getContext('2d');
@@ -136,11 +162,16 @@
             wCanvas.width = wCanvas.offsetWidth;
             wCanvas.height = wCanvas.offsetHeight;
             wCtx.clearRect(0,0,wCanvas.width, wCanvas.height);
-            wCtx.fillStyle = "#5B9FD4";
+            
+            const gradient = wCtx.createLinearGradient(0, 0, 0, wCanvas.height);
+            gradient.addColorStop(0, '#5B9FD4');
+            gradient.addColorStop(1, 'rgba(91, 159, 212, 0.1)');
+            wCtx.fillStyle = gradient;
+
             const barWidth = (wCanvas.width / data.length) * 2;
             data.forEach((v, i) => {
                 const h = (v/255) * wCanvas.height;
-                wCtx.fillRect(i * (barWidth + 2), wCanvas.height - h, barWidth, h);
+                wCtx.fillRect(i * (barWidth + 4), wCanvas.height - h, barWidth, h);
             });
         }
 
