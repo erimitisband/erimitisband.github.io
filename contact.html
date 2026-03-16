@@ -7,57 +7,45 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Crimson+Text&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #02020a; --steel: #5B9FD4; --gray: #B8952A; --white: #f0ede8; }
-        body { 
-            margin: 0; background: var(--bg); color: var(--white); 
-            font-family: 'Crimson Text', serif; overflow: hidden;
-        }
+        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; width: 100%; }
 
-        /* Hero Background */
-        .hero-bg {
-            position: fixed; top: 0; left: 0; width: 110%; height: 110%;
-            background: url('logo.jpg') center/cover no-repeat;
-            opacity: 0.15; z-index: -2;
-            animation: drift 20s infinite alternate linear;
-        }
-        @keyframes drift { from { transform: translate(0,0); } to { transform: translate(-2%,-2%); } }
-
-        /* Stars Canvas */
+        .hero-bg { position: fixed; top: 0; left: 0; width: 115%; height: 115%; background: url('logo.jpg') center/cover no-repeat; opacity: 0.15; z-index: -2; animation: drift 20s infinite alternate linear; }
+        @keyframes drift { from { transform: translate(0, 0); } to { transform: translate(-3%, -3%); } }
         #starCanvas { position: fixed; top: 0; left: 0; z-index: -1; }
 
-        nav { text-align: center; padding: 40px 0; }
-        nav a {
-            font-family: 'Cinzel', serif; color: var(--gray);
-            text-decoration: none; margin: 0 20px; transition: 0.3s;
-        }
+        nav { text-align: center; padding: 40px 0; display: block; }
+        nav a { font-family: 'Cinzel', serif; color: var(--gray); text-decoration: none; margin: 0 2vw; font-size: 1.2rem; transition: 0.3s; }
         nav a:hover, nav a.active { color: var(--steel); }
 
-        .contact-box {
-            max-width: 500px; margin: 100px auto; padding: 20px;
-        }
-        .row {
-            display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 1px solid rgba(184, 149, 42, 0.3);
-            padding: 20px 0; transition: 0.3s;
-        }
-        .row:hover { border-bottom-color: var(--steel); }
-        .row:hover span { color: var(--steel); }
+        .mobile-nav { display: none; flex-direction: column; width: 100%; }
+        .nav-card { width: 100%; padding: 5vh 0; text-align: center; border-bottom: 1px solid rgba(91, 159, 212, 0.1); color: var(--steel); font-family: 'Cinzel', serif; text-decoration: none; font-size: 5vw; }
+
+        .contact-box { max-width: 600px; margin: 0 auto; padding: 5vh 5vw; }
+        h1 { text-align: center; font-family: 'Cinzel', serif; font-size: clamp(2rem, 8vw, 4rem); margin-bottom: 3rem; }
         
-        .label { font-family: 'Cinzel', serif; color: var(--gray); letter-spacing: 2px; }
-        .val { text-decoration: none; color: var(--white); font-style: italic; }
+        .row { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(184, 149, 42, 0.3); padding: 25px 0; transition: 0.3s; text-decoration: none; }
+        .row:hover { border-bottom-color: var(--steel); }
+        
+        .label { font-family: 'Cinzel', serif; color: var(--gray); font-size: clamp(0.9rem, 3vw, 1.2rem); letter-spacing: 2px; transition: 0.3s; }
+        .val { color: var(--white); font-style: italic; font-size: clamp(0.9rem, 3.5vw, 1.3rem); }
+        .row:hover .label { color: var(--steel); }
 
         @media (max-width: 768px) {
             nav { display: none; }
-            .mobile-nav { display: flex; flex-direction: column; }
-            .nav-card { 
-                padding: 40px; text-align: center; border-bottom: 1px solid rgba(91,159,212,0.2);
-                color: var(--steel); font-family: 'Cinzel', serif; text-decoration: none;
-            }
+            .mobile-nav { display: flex; }
         }
     </style>
 </head>
 <body>
     <div class="hero-bg"></div>
     <canvas id="starCanvas"></canvas>
+
+    <div class="mobile-nav">
+        <a href="index.html" class="nav-card">HOME</a>
+        <a href="about.html" class="nav-card">ABOUT</a>
+        <a href="music.html" class="nav-card">MUSIC</a>
+        <a href="contact.html" class="nav-card" style="background: rgba(91,159,212,0.05)">CONTACT</a>
+    </div>
 
     <nav>
         <a href="index.html">HOME</a>
@@ -66,26 +54,20 @@
         <a href="contact.html" class="active">CONTACT</a>
     </nav>
 
-    <div class="mobile-nav">
-        <a href="index.html" class="nav-card">HOME</a>
-        <a href="about.html" class="nav-card">ABOUT</a>
-        <a href="music.html" class="nav-card">MUSIC</a>
-        <a href="contact.html" class="nav-card">CONTACT</a>
-    </div>
-
     <div class="contact-box">
-        <div class="row">
+        <h1>CONTACT</h1>
+        <a href="mailto:erimitisband@gmail.com" class="row">
             <span class="label">EMAIL</span>
-            <a href="mailto:erimitisband@gmail.com" class="val">erimitisband@gmail.com</a>
-        </div>
-        <div class="row">
+            <span class="val">erimitisband@gmail.com</span>
+        </a>
+        <a href="https://instagram.com/erimitis_band" target="_blank" class="row">
             <span class="label">INSTAGRAM</span>
-            <a href="https://instagram.com/erimitis_band" target="_blank" class="val">@erimitis_band</a>
-        </div>
-        <div class="row">
+            <span class="val">@erimitis_band</span>
+        </a>
+        <a href="https://tiktok.com/@erimitisband" target="_blank" class="row">
             <span class="label">TIKTOK</span>
-            <a href="https://tiktok.com/@erimitisband" target="_blank" class="val">@erimitisband</a>
-        </div>
+            <span class="val">@erimitisband</span>
+        </a>
     </div>
 
     <script>
@@ -97,7 +79,7 @@
         for(let i=0; i<200; i++) stars.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*1.5 });
         function draw() {
             ctx.clearRect(0,0,canvas.width, canvas.height);
-            ctx.fillStyle = "rgba(140, 180, 214, 0.8)";
+            ctx.fillStyle = "rgba(140, 180, 214, 0.6)";
             stars.forEach(s => { ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2); ctx.fill(); });
             requestAnimationFrame(draw);
         }
