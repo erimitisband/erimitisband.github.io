@@ -8,170 +8,244 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #050505;
-    --text: #e0ddd8;
+    --bg: #02020a;
     --steel: #8CB4D6;
-    --gray: #aaa;
-    --dim: #444;
+    --steel-glow: rgba(140,180,214,0.12);
+    --white: #f0ede8;
+    --gray: #888880;
+    --dim: #333;
     --font-display: 'Cinzel', Georgia, serif;
     --font-body: 'Crimson Text', Georgia, serif;
   }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; overflow-x: hidden; }
+
   body {
     background-color: var(--bg);
-    color: var(--text);
+    color: var(--white);
     font-family: var(--font-body);
-    display: flex;
-    flex-direction: column;
     min-height: 100vh;
-    letter-spacing: 1px;
   }
-  header { padding: 2.5rem 1rem 1rem; text-align: center; }
-  .logo img { max-width: 280px; width: 100%; height: auto; display: block; margin: 0 auto; }
-  nav { margin-top: 1.5rem; }
-  nav ul { list-style: none; display: flex; justify-content: center; gap: 2.5rem; }
+
+  #stars {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(2,2,10,0.95) 0%, transparent 100%);
+    backdrop-filter: blur(2px);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 5px;
+    color: var(--steel);
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  nav ul { list-style: none; display: flex; gap: 2.5rem; }
   nav a {
-    color: var(--dim);
+    color: var(--gray);
     text-decoration: none;
     text-transform: uppercase;
     font-family: var(--font-display);
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     letter-spacing: 3px;
     transition: color 0.3s ease;
+    position: relative;
   }
-  nav a:hover, nav a.active { color: var(--steel); }
- 
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--steel);
+    transition: width 0.3s ease;
+  }
+  nav a:hover { color: var(--white); }
+  nav a:hover::after, nav a.active::after { width: 100%; }
+  nav a.active { color: var(--steel); }
+
+  /* ── MAIN ── */
   main {
-    flex: 1;
-    max-width: 680px;
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
     margin: 0 auto;
-    padding: 4rem 1.5rem;
-    text-align: center;
+    padding: 10rem 2rem 6rem;
   }
-  h2 {
+
+  .page-label {
     font-family: var(--font-display);
-    font-size: 0.75rem;
-    letter-spacing: 5px;
+    font-size: 0.55rem;
+    letter-spacing: 6px;
     text-transform: uppercase;
     color: var(--steel);
-    margin-bottom: 2.5rem;
+    margin-bottom: 1rem;
     opacity: 0;
     animation: fadeUp 1s ease 0.2s forwards;
   }
-  p {
-    font-size: 1.15rem;
-    color: var(--gray);
-    line-height: 1.9;
-    margin-bottom: 1.8rem;
+
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    color: var(--white);
+    margin-bottom: 1rem;
     opacity: 0;
     animation: fadeUp 1s ease 0.4s forwards;
+    line-height: 1.2;
   }
-  p:nth-child(3) { animation-delay: 0.6s; }
-  p:nth-child(4) { animation-delay: 0.8s; }
- 
-  .influences {
-    margin: 2.5rem auto;
-    border-top: 1px solid #1a1a1a;
-    border-bottom: 1px solid #1a1a1a;
-    padding: 2rem 0;
+
+  .divider-line {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--steel), transparent);
+    margin-bottom: 2.5rem;
     opacity: 0;
-    animation: fadeUp 1s ease 1s forwards;
+    animation: fadeIn 1s ease 0.6s forwards;
   }
-  .influences-label {
+
+  .body-text {
+    font-size: 1.15rem;
+    color: var(--gray);
+    line-height: 2;
+    margin-bottom: 1.8rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.7s forwards;
+  }
+
+  .body-text.delay2 { animation-delay: 0.9s; }
+  .body-text.delay3 { animation-delay: 1.1s; }
+
+  /* Influences block */
+  .block {
+    margin-top: 3.5rem;
+    border-left: 1px solid rgba(140,180,214,0.2);
+    padding-left: 2rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.3s forwards;
+  }
+
+  .block-label {
     font-family: var(--font-display);
-    font-size: 0.65rem;
-    letter-spacing: 4px;
+    font-size: 0.55rem;
+    letter-spacing: 5px;
     text-transform: uppercase;
-    color: var(--dim);
-    margin-bottom: 1rem;
+    color: var(--steel);
+    margin-bottom: 1.2rem;
   }
-  .influences-list {
+
+  .influences-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 0.8rem;
+  }
+
+  .influence-item {
     font-family: var(--font-body);
     font-style: italic;
     font-size: 1.05rem;
-    color: var(--gray);
-    line-height: 2;
+    color: #666;
+    transition: color 0.3s ease;
+    cursor: default;
   }
- 
-  .seeking {
-    margin-top: 2.5rem;
-    opacity: 0;
-    animation: fadeUp 1s ease 1.2s forwards;
+
+  .influence-item:hover { color: var(--steel); }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid #0d0d0d;
+    margin-top: 4rem;
   }
-  .seeking-label {
-    font-family: var(--font-display);
-    font-size: 0.65rem;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--steel);
-    margin-bottom: 1rem;
-  }
-  .seeking-roles {
-    font-family: var(--font-display);
-    font-size: 0.7rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--dim);
-  }
- 
-  footer { padding: 2rem 1rem; text-align: center; border-top: 1px solid #111; }
-  .social-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem; }
+
+  .social-links { display: flex; justify-content: center; gap: 2.5rem; margin-bottom: 1rem; }
   .social-links a {
     color: var(--dim);
     text-decoration: none;
     font-family: var(--font-display);
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     letter-spacing: 3px;
     text-transform: uppercase;
     transition: color 0.3s ease;
   }
   .social-links a:hover { color: var(--steel); }
-  .copyright { font-size: 0.75rem; color: #333; font-family: var(--font-display); letter-spacing: 2px; text-transform: uppercase; }
- 
+  .copyright { font-family: var(--font-display); font-size: 0.55rem; letter-spacing: 3px; color: #222; text-transform: uppercase; }
+
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
+    from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
   @media (max-width: 600px) {
+    nav { padding: 1.2rem 1.5rem; }
     nav ul { gap: 1.2rem; }
+    main { padding: 8rem 1.5rem 4rem; }
   }
 </style>
 </head>
 <body>
-<header>
-  <a href="index.html" class="logo">
-    <img src="logo.jpg" alt="ERIMITIS" onerror="this.src='logo.png'">
-  </a>
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html" class="active">About</a></li>
-      <li><a href="music.html">Music</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
-</header>
- 
-<main>
-  <h2>The Story</h2>
- 
-  <p>Erimitis is a Melbourne music project built for those who still believe music should mean something.</p>
- 
-  <p>Drawing from every decade since the 1960s — the atmosphere of Floyd, the riff and thunder of Zeppelin, the melody and soul of The Beatles, the storytelling of Dire Straits, the iron will of Maiden, the darkness of Sabbath - Erimitis is not a tribute to the past, it is something that belongs to now.</p>
- 
-  <p>The foundation is in place. The vision is clear. The right people are being found.</p>
- 
-  <div class="influences">
-    <p class="influences-label">Drawn From</p>
-    <p class="influences-list">
-      Pink Floyd &nbsp;·&nbsp; Led Zeppelin &nbsp;·&nbsp; The Beatles<br>
-      Dire Straits &nbsp;·&nbsp; Iron Maiden &nbsp;·&nbsp; Black Sabbath
-    </p>
-  </div>
- 
 
+<canvas id="stars"></canvas>
+
+<nav>
+  <a href="index.html" class="nav-logo">Erimitis</a>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="music.html">Music</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+  <p class="page-label">The Story</p>
+  <h1>The Hermit's Call</h1>
+  <div class="divider-line"></div>
+
+  <p class="body-text">Erimitis is a Melbourne music project built for those who still believe music should mean something.</p>
+
+  <p class="body-text delay2">Drawing from every decade since the 1960s — the atmosphere of Floyd, the riff and thunder of Zeppelin, the melody and soul of The Beatles, the storytelling of Dire Straits, the iron will of Maiden, the darkness of Sabbath — Erimitis is not a tribute to the past. It is something that belongs to now.</p>
+
+  <p class="body-text delay3">The foundation is in place. The vision is clear. The right people are being found.</p>
+
+  <div class="block">
+    <p class="block-label">Drawn From</p>
+    <div class="influences-grid">
+      <span class="influence-item">Pink Floyd</span>
+      <span class="influence-item">Led Zeppelin</span>
+      <span class="influence-item">The Beatles</span>
+      <span class="influence-item">Dire Straits</span>
+      <span class="influence-item">Iron Maiden</span>
+      <span class="influence-item">Black Sabbath</span>
+    </div>
+  </div>
 </main>
- 
+
 <footer>
   <div class="social-links">
     <a href="https://instagram.com/erimitisband" target="_blank">Instagram</a>
@@ -180,5 +254,31 @@
   </div>
   <p class="copyright">&copy; 2026 Erimitis</p>
 </footer>
+
+<script>
+  const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  const stars = Array.from({ length: 180 }, () => ({
+    x: Math.random(), y: Math.random(),
+    r: Math.random() * 1.2 + 0.2,
+    a: Math.random(), speed: Math.random() * 0.004 + 0.001,
+    phase: Math.random() * Math.PI * 2
+  }));
+  function draw(t) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      const alpha = s.a * (0.4 + 0.6 * Math.sin(t * s.speed + s.phase));
+      ctx.beginPath();
+      ctx.arc(s.x * canvas.width, s.y * canvas.height, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(140,180,214,${alpha})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+</script>
 </body>
 </html>
