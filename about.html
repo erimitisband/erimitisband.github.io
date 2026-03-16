@@ -9,18 +9,16 @@
 <style>
   :root {
     --bg:#02020a; --steel:#5B9FD4; --steel-dim:rgba(91,159,212,0.15);
-    --white:#f0ede8; --gray:#B8952A;
+    --white:#f0ede8; --gray:#B8952A; --gold:#B8952A; --gold-dim:#96781E; --silver:#B8B8B4;
     --font-d:'Cinzel',Georgia,serif; --font-b:'Crimson Text',Georgia,serif;
   }
   *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
   body{background:var(--bg);color:var(--white);font-family:var(--font-b);min-height:100vh;overflow-x:hidden;}
   #stars{position:fixed;inset:0;z-index:0;pointer-events:none;}
 
-  nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.6rem 3.5rem;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(180deg,rgba(2,2,10,0.97) 0%,transparent 100%);}
-  .nav-logo{font-family:var(--font-d);font-size:0.62rem;letter-spacing:6px;color:var(--steel);text-decoration:none;text-transform:uppercase;transition:opacity 0.3s;}
-  .nav-logo:hover{opacity:0.6;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.6rem 3.5rem;display:flex;justify-content:center;align-items:center;background:linear-gradient(180deg,rgba(2,2,10,0.97) 0%,transparent 100%);}
   .nav-links{list-style:none;display:flex;gap:2.8rem;}
-  .nav-links a{font-family:var(--font-d);font-size:0.56rem;letter-spacing:3px;color:var(--gray);text-decoration:none;text-transform:uppercase;position:relative;padding-bottom:4px;transition:color 0.3s;}
+  .nav-links a{font-family:var(--font-d);font-size:0.56rem;letter-spacing:3px;color:#96781E;text-decoration:none;text-transform:uppercase;position:relative;padding-bottom:4px;transition:color 0.3s;}
   .nav-links a::after{content:'';position:absolute;bottom:0;left:50%;width:0;height:1px;background:var(--steel);transition:all 0.4s;transform:translateX(-50%);}
   .nav-links a:hover{color:var(--white);}
   .nav-links a:hover::after,.nav-links a.active::after{width:100%;}
@@ -29,9 +27,9 @@
   .hamburger span{display:block;width:22px;height:1px;background:var(--gray);transition:all 0.3s;}
   .mobile-menu{display:none;position:fixed;inset:0;z-index:300;background:rgba(2,2,10,0.98);flex-direction:column;align-items:center;justify-content:center;gap:3rem;backdrop-filter:blur(8px);}
   .mobile-menu.open{display:flex;}
-  .mobile-menu a{font-family:var(--font-d);font-size:1.1rem;letter-spacing:7px;color:var(--gray);text-decoration:none;text-transform:uppercase;transition:color 0.3s;}
+  .mobile-menu a{font-family:var(--font-d);font-size:1.1rem;letter-spacing:7px;color:#96781E;text-decoration:none;text-transform:uppercase;transition:color 0.3s;}
   .mobile-menu a:hover{color:var(--steel);}
-  .mobile-close{position:absolute;top:1.8rem;right:2rem;font-family:var(--font-d);font-size:0.55rem;letter-spacing:3px;color:var(--gray);cursor:pointer;text-transform:uppercase;background:none;border:none;transition:color 0.3s;}
+  .mobile-close{position:absolute;top:1.8rem;right:2rem;font-family:var(--font-d);font-size:0.55rem;letter-spacing:3px;color:#96781E;cursor:pointer;text-transform:uppercase;background:none;border:none;transition:color 0.3s;}
   .mobile-close:hover{color:var(--white);}
 
   /* PAGE HERO */
@@ -44,8 +42,8 @@
   }
   .page-hero-bg {
     position:absolute; inset:0;
-    background:url('logo.jpg') center 20% / 50% no-repeat;
-    opacity:0.04; filter:blur(3px);
+    background:url('https://erimitisband.github.io/logo.jpg') center 20% / 50% no-repeat;
+    opacity:0.1; filter:blur(0.5px) brightness(1.3);
     animation:drift 25s ease-in-out infinite alternate;
   }
   @keyframes drift{from{transform:scale(1) translateY(0);}to{transform:scale(1.05) translateY(-12px);}}
@@ -64,7 +62,7 @@
   .text-block{margin-bottom:2rem;opacity:0;animation:fadeUp 1.2s ease 0.7s forwards;}
   .text-block.d2{animation-delay:0.9s;}
   .text-block.d3{animation-delay:1.1s;}
-  .text-block p{font-size:clamp(1rem,2vw,1.18rem);color:var(--gray);line-height:2.1;}
+  .text-block p{font-size:clamp(1rem,2vw,1.18rem);color:var(--gold);line-height:2.1;}
 
   .quote-block{
     margin:3rem 0;
@@ -102,9 +100,9 @@
 
   footer{position:relative;z-index:2;padding:2rem 1.5rem;text-align:center;border-top:1px solid #080810;}
   .soc{display:flex;justify-content:center;gap:2.5rem;margin-bottom:0.8rem;}
-  .soc a{font-family:var(--font-d);font-size:0.52rem;letter-spacing:3px;color:#1e1e26;text-decoration:none;text-transform:uppercase;transition:color 0.3s;}
+  .soc a{font-family:var(--font-d);font-size:0.52rem;letter-spacing:3px;color:var(--gold-dim);text-decoration:none;text-transform:uppercase;transition:color 0.3s;}
   .soc a:hover{color:var(--steel);}
-  .copy{font-family:var(--font-d);font-size:0.46rem;letter-spacing:3px;color:#111118;text-transform:uppercase;}
+  .copy{font-family:var(--font-d);font-size:0.46rem;letter-spacing:3px;color:#6B5418;text-transform:uppercase;}
 
   @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
   @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
@@ -130,7 +128,6 @@
   <a href="contact.html" onclick="closeMobile()">Contact</a>
 </div>
 <nav>
-  <a href="index.html" class="nav-logo">Erimitis</a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html" class="active">About</a></li>
@@ -155,7 +152,7 @@
     <p>Erimitis is a Melbourne music project built for those who still believe music should mean something.</p>
   </div>
   <div class="text-block d2">
-    <p>Drawing from every decade since the 1960s: the atmosphere of Floyd, the riff and thunder of Zeppelin, the melody and soul of The Beatles, the storytelling of Dire Straits, the iron will of Maiden, the darkness of Sabbath, the electric soul of Hendrix, the blues of Clapton, the swagger of The Rolling Stones and the voltage of AC/DC — Erimitis is not a tribute to the past. It is something that belongs to now.</p>
+    <p>Drawing from every decade since the 1960s — the atmosphere of Floyd, the riff and thunder of Zeppelin, the melody and soul of The Beatles, the storytelling of Dire Straits, the iron will of Maiden, the darkness of Sabbath, the electric soul of Hendrix, the blues of Clapton, the swagger of The Rolling Stones, the voltage of AC/DC — Erimitis is not a tribute to the past. It is something that belongs to now.</p>
   </div>
 
   <div class="quote-block">
