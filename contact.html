@@ -1,51 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact | ERIMITIS</title>
-    <style>
-        /* Shared Styles */
-        :root { --bg-color: #070707; --text-color: #e0e0e0; --accent-color: #5a5a5a; --font-main: 'Helvetica Neue', Arial, sans-serif; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-main); display: flex; flex-direction: column; min-height: 100vh; text-transform: uppercase; letter-spacing: 2px; }
-        header { padding: 2rem; display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
-        .logo img { max-width: 300px; height: auto; display: block; }
-        nav ul { list-style: none; display: flex; gap: 2rem; }
-        nav a { color: var(--accent-color); text-decoration: none; font-size: 0.9rem; }
-        nav a:hover, nav a.active { color: #fff; }
-
-        /* Contact Specific */
-        main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; text-align: center; }
-        .contact-card { max-width: 500px; }
-        h1 { font-size: 2.5rem; margin-bottom: 2rem; color: #fff; }
-        .email-link { font-size: 1.2rem; color: #fff; text-decoration: none; border-bottom: 1px solid var(--accent-color); padding-bottom: 5px; transition: all 0.3s; }
-        .email-link:hover { border-bottom: 1px solid #fff; }
-        p { margin-top: 2rem; text-transform: none; color: #888; font-size: 0.9rem; }
-
-        footer { padding: 2rem; text-align: center; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | ERIMITIS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050505;
+    --text: #e0ddd8;
+    --steel: #8CB4D6;
+    --gray: #aaa;
+    --dim: #444;
+    --font-display: 'Cinzel', Georgia, serif;
+    --font-body: 'Crimson Text', Georgia, serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    letter-spacing: 1px;
+  }
+  header { padding: 2.5rem 1rem 1rem; text-align: center; }
+  .logo img { max-width: 280px; width: 100%; height: auto; display: block; margin: 0 auto; }
+  nav { margin-top: 1.5rem; }
+  nav ul { list-style: none; display: flex; justify-content: center; gap: 2.5rem; }
+  nav a {
+    color: var(--dim);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    transition: color 0.3s ease;
+  }
+  nav a:hover, nav a.active { color: var(--steel); }
+ 
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 1.5rem;
+    text-align: center;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.2s forwards;
+  }
+  .contact-block {
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.4s forwards;
+  }
+  .contact-label {
+    font-family: var(--font-display);
+    font-size: 0.6rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 0.8rem;
+  }
+  .contact-link {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid #222;
+    padding-bottom: 3px;
+    transition: all 0.3s ease;
+  }
+  .contact-link:hover {
+    color: var(--steel);
+    border-bottom-color: var(--steel);
+  }
+ 
+  .divider {
+    width: 1px;
+    height: 40px;
+    background: #1a1a1a;
+    margin: 0 auto 3rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.5s forwards;
+  }
+ 
+  .musicians {
+    max-width: 500px;
+    border: 1px solid #1a1a1a;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.6s forwards;
+  }
+  .musicians-label {
+    font-family: var(--font-display);
+    font-size: 0.6rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin-bottom: 1rem;
+  }
+  .musicians p {
+    font-size: 1rem;
+    color: var(--dim);
+    line-height: 1.9;
+  }
+ 
+  .socials {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.8s forwards;
+  }
+  .socials a {
+    color: var(--dim);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+  .socials a:hover { color: var(--steel); }
+ 
+  footer { padding: 2rem 1rem; text-align: center; border-top: 1px solid #111; }
+  .social-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem; }
+  .social-links a {
+    color: var(--dim);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+  .social-links a:hover { color: var(--steel); }
+  .copyright { font-size: 0.75rem; color: #333; font-family: var(--font-display); letter-spacing: 2px; text-transform: uppercase; }
+ 
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @media (max-width: 600px) {
+    nav ul { gap: 1.2rem; }
+    .socials { flex-direction: column; align-items: center; gap: 1rem; }
+  }
+</style>
 </head>
 <body>
-    <header>
-        <a href="index.html" class="logo"><img src="logo.png" alt="ERIMITIS"></a>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="music.html">Music</a></li>
-                <li><a href="contact.html" class="active">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <div class="contact-card">
-            <h1>Get in touch</h1>
-            <a href="mailto:erimitisband@gmail.com" class="email-link">ERIMITISBAND@GMAIL.COM</a>
-            <p>For bookings, musician enquiries, or press: contact us via email or DM via Instagram.</p>
-        </div>
-    </main>
-    <footer>
-        </footer>
+<header>
+  <a href="index.html" class="logo">
+    <img src="logo.jpg" alt="ERIMITIS" onerror="this.src='logo.png'">
+  </a>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="music.html">Music</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+ 
+<main>
+  <h1>Contact</h1>
+ 
+  <div class="contact-block">
+    <p class="contact-label">Email</p>
+    <a href="mailto:erimitisband@gmail.com" class="contact-link">erimitisband@gmail.com</a>
+  </div>
+ 
+  <div class="divider"></div>
+ 
+  <div class="musicians">
+    <p class="musicians-label">Musicians</p>
+    <p>Seeking a vocalist, drummer, bassist and lead guitarist based in Melbourne. Send your audio samples and a little about yourself to the email above or DM via Instagram.</p>
+  </div>
+ 
+  <div class="socials">
+    <a href="https://instagram.com/erimitisband" target="_blank">Instagram</a>
+    <a href="https://tiktok.com/@erimitisband" target="_blank">TikTok</a>
+  </div>
+</main>
+ 
+<footer>
+  <div class="social-links">
+    <a href="https://instagram.com/erimitisband" target="_blank">Instagram</a>
+    <a href="https://tiktok.com/@erimitisband" target="_blank">TikTok</a>
+    <a href="mailto:erimitisband@gmail.com">Email</a>
+  </div>
+  <p class="copyright">&copy; 2026 Erimitis</p>
+</footer>
 </body>
 </html>
