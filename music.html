@@ -7,41 +7,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Crimson+Text&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #02020a; --steel: #5B9FD4; --gray: #B8952A; --white: #f0ede8; }
-        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; width: 100%; min-height: 100vh; overflow-x: hidden; }
+        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; overflow-x: hidden; }
 
-        /* Background & Stars */
+        /* Hero Background with Drift & Stars */
         .hero-bg { position: fixed; top: 0; left: 0; width: 115%; height: 115%; background: url('logo.jpg') center/cover no-repeat; opacity: 0.15; z-index: -2; animation: drift 20s infinite alternate linear; }
         @keyframes drift { from { transform: translate(0, 0); } to { transform: translate(-3%, -3%); } }
         .vignette { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 30%, rgba(0,0,0,0.9) 100%); z-index: -1; pointer-events: none; }
         #starCanvas { position: fixed; top: 0; left: 0; z-index: -1; }
 
-        /* Navigation */
-        nav { text-align: center; padding: 40px 0; }
-        nav a { font-family: 'Cinzel', serif; color: var(--gray); text-decoration: none; margin: 0 2vw; font-size: 1.2rem; transition: 0.3s; }
+        /* Navigation - RESTORED DESKTOP LAYOUT */
+        nav { text-align: center; padding: 40px 0; display: block; }
+        nav a { font-family: 'Cinzel', serif; color: var(--gray); text-decoration: none; margin: 0 20px; font-size: 1.2rem; transition: 0.3s; position: relative; }
         nav a:hover, nav a.active { color: var(--steel); }
-        .mobile-nav { display: none; flex-direction: column; width: 100%; }
-        .nav-card { width: 100%; padding: 5vh 0; text-align: center; border-bottom: 1px solid rgba(91, 159, 212, 0.1); color: var(--steel); font-family: 'Cinzel', serif; text-decoration: none; font-size: 5vw; }
 
-        /* Music Player UI */
-        .container { max-width: 90%; margin: 0 auto; text-align: center; padding: 20px; }
-        h1 { font-family: 'Cinzel', serif; font-size: clamp(2rem, 8vw, 4rem); letter-spacing: 0.5rem; margin-bottom: 2rem; }
-        #waveform { width: 100%; height: 25vh; background: rgba(255,255,255,0.02); border-radius: 8px; margin-bottom: 20px; }
-        
+        /* Mobile/Tablet Nav (≤768px) - 4 STACKED CARDS */
+        .mobile-nav { display: none; flex-direction: column; width: 100%; }
+        .nav-card { width: 100%; padding: 40px 0; text-align: center; border-bottom: 1px solid rgba(91, 159, 212, 0.1); color: var(--steel); font-family: 'Cinzel', serif; text-decoration: none; font-size: 1.5rem; }
+
+        /* Player UI */
+        .container { max-width: 800px; margin: 0 auto; text-align: center; padding: 20px; }
+        h1 { font-family: 'Cinzel', serif; font-size: 3rem; letter-spacing: 0.5rem; margin-bottom: 2rem; }
+        #waveform { width: 100%; height: 200px; background: rgba(255,255,255,0.02); margin-bottom: 20px; }
         .controls { display: flex; flex-direction: column; align-items: center; gap: 20px; }
-        .main-btns { display: flex; gap: 10px; }
-        
+        .main-btns { display: flex; gap: 15px; }
         button { background: transparent; border: 1px solid var(--gray); color: var(--gray); padding: 10px 30px; font-family: 'Cinzel', serif; cursor: pointer; transition: 0.3s; }
         button:hover { border-color: var(--steel); color: var(--steel); }
-        
-        .slider-group { width: 80%; display: flex; align-items: center; gap: 15px; flex-wrap: wrap; justify-content: center; }
-        .slider-group label { font-family: 'Cinzel', serif; color: var(--gray); font-size: 0.8rem; }
-        
-        input[type=range] { flex-grow: 1; min-width: 150px; accent-color: var(--steel); cursor: pointer; }
-        #time { font-family: 'Crimson Text', serif; font-size: 1.1rem; color: var(--steel); }
+        .slider-group { width: 100%; display: flex; align-items: center; gap: 15px; justify-content: center; }
+        input[type=range] { width: 60%; accent-color: var(--steel); cursor: pointer; }
 
         @media (max-width: 768px) {
             nav { display: none; }
             .mobile-nav { display: flex; }
+            h1 { font-size: 2rem; }
         }
     </style>
 </head>
@@ -53,7 +50,7 @@
     <div class="mobile-nav">
         <a href="index.html" class="nav-card">HOME</a>
         <a href="about.html" class="nav-card">ABOUT</a>
-        <a href="music.html" class="nav-card" style="background: rgba(91,159,212,0.05)">MUSIC</a>
+        <a href="music.html" class="nav-card">MUSIC</a>
         <a href="contact.html" class="nav-card">CONTACT</a>
     </div>
 
@@ -72,15 +69,12 @@
                 <button id="playBtn">PLAY</button>
                 <button id="muteBtn">MUTE</button>
             </div>
-            
             <div class="slider-group">
-                <label>SEEK</label>
                 <input type="range" id="seek" value="0">
                 <div id="time">0:00 / 0:00</div>
             </div>
-
             <div class="slider-group">
-                <label>VOLUME</label>
+                <span style="font-family: Cinzel; color: var(--gray); font-size: 0.7rem;">VOL</span>
                 <input type="range" id="volume" min="0" max="1" step="0.01" value="0.8">
             </div>
         </div>
@@ -89,7 +83,6 @@
     <audio id="track" src="https://erimitisband.github.io/preview.mp3" crossorigin="anonymous"></audio>
 
     <script>
-        // Stars
         const sCanvas = document.getElementById('starCanvas');
         const sCtx = sCanvas.getContext('2d');
         let stars = [];
@@ -104,7 +97,6 @@
         }
         drawStars();
 
-        // Music Logic
         const audio = document.getElementById('track');
         const wCanvas = document.getElementById('waveform');
         const wCtx = wCanvas.getContext('2d');
@@ -113,34 +105,24 @@
         const seek = document.getElementById('seek');
         const volume = document.getElementById('volume');
         const timeDisplay = document.getElementById('time');
-
         let audioCtx, analyser, source, data;
 
-        function initAudio() {
-            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            analyser = audioCtx.createAnalyser();
-            source = audioCtx.createMediaElementSource(audio);
-            source.connect(analyser);
-            analyser.connect(audioCtx.destination);
-            analyser.fftSize = 128;
-            data = new Uint8Array(analyser.frequencyBinCount);
-        }
-
         playBtn.onclick = () => {
-            if (!audioCtx) initAudio();
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            if (audio.paused) {
-                audio.play(); playBtn.innerText = "PAUSE"; renderWave();
-            } else {
-                audio.pause(); playBtn.innerText = "PLAY";
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioCtx.createAnalyser();
+                source = audioCtx.createMediaElementSource(audio);
+                source.connect(analyser);
+                analyser.connect(audioCtx.destination);
+                analyser.fftSize = 128;
+                data = new Uint8Array(analyser.frequencyBinCount);
             }
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            if (audio.paused) { audio.play(); playBtn.innerText = "PAUSE"; renderWave(); } 
+            else { audio.pause(); playBtn.innerText = "PLAY"; }
         };
 
-        muteBtn.onclick = () => {
-            audio.muted = !audio.muted;
-            muteBtn.innerText = audio.muted ? "UNMUTE" : "MUTE";
-        };
-
+        muteBtn.onclick = () => { audio.muted = !audio.muted; muteBtn.innerText = audio.muted ? "UNMUTE" : "MUTE"; };
         volume.oninput = () => { audio.volume = volume.value; };
 
         function renderWave() {
@@ -157,7 +139,6 @@
                 wCtx.fillRect(i * (barWidth + 2), wCanvas.height - h, barWidth, h);
             });
         }
-
         audio.ontimeupdate = () => {
             seek.value = (audio.currentTime / audio.duration) * 100 || 0;
             let cur = Math.floor(audio.currentTime);
