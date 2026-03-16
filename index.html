@@ -1,254 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ERIMITIS | Official</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #02020a;
-    --steel: #5B9FD4;
-    --steel-dim: rgba(91,159,212,0.15);
-    --white: #f0ede8;
-    --gray: #B8952A;
-    --font-d: 'Cinzel', Georgia, serif;
-    --font-b: 'Crimson Text', Georgia, serif;
-  }
-  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-  html { scroll-behavior:smooth; }
-  body { background:var(--bg); color:var(--white); font-family:var(--font-b); min-height:100vh; overflow-x:hidden; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erimitis | Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Crimson+Text&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #02020a; --steel: #5B9FD4; --gray: #B8952A; --white: #f0ede8; }
+        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; overflow-x: hidden; height: 100%; }
 
-  /* STARS */
-  #stars { position:fixed; inset:0; z-index:0; pointer-events:none; }
+        /* Background Effects */
+        .hero-bg { position: fixed; top: 0; left: 0; width: 115%; height: 115%; background: url('logo.jpg') center/cover no-repeat; opacity: 0.15; z-index: -2; animation: drift 30s infinite alternate linear; }
+        @keyframes drift { from { transform: translate(0, 0); } to { transform: translate(-3%, -3%); } }
+        .vignette { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 30%, rgba(0,0,0,0.9) 100%); z-index: -1; pointer-events: none; }
+        #starCanvas { position: fixed; top: 0; left: 0; z-index: -1; }
 
-  /* NAV */
-  nav {
-    position:fixed; top:0; left:0; right:0; z-index:200;
-    padding:1.6rem 3.5rem;
-    display:flex; justify-content:center; align-items:center;
-    background:linear-gradient(180deg,rgba(2,2,10,0.97) 0%,transparent 100%);
-    transition:padding 0.3s;
-  }
-  .nav-links { list-style:none; display:flex; gap:2.8rem; }
-  .nav-links a {
-    font-family:var(--font-d); font-size:0.56rem; letter-spacing:3px;
-    color:var(--gray); text-decoration:none; text-transform:uppercase;
-    position:relative; padding-bottom:4px; transition:color 0.3s;
-  }
-  .nav-links a::after {
-    content:''; position:absolute; bottom:0; left:50%;
-    width:0; height:1px; background:var(--steel);
-    transition:all 0.4s ease; transform:translateX(-50%);
-  }
-  .nav-links a:hover { color:var(--white); }
-  .nav-links a:hover::after, .nav-links a.active::after { width:100%; }
-  .nav-links a.active { color:var(--steel); }
+        /* Navigation - Desktop */
+        nav { text-align: center; padding: 40px 0; display: block; }
+        nav a { font-family: 'Cinzel', serif; color: var(--gray); text-decoration: none; margin: 0 20px; font-size: 1.2rem; transition: 0.3s; position: relative; }
+        nav a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -5px; left: 50%; background: var(--steel); transition: 0.3s; transform: translateX(-50%); }
+        nav a:hover, nav a.active { color: var(--steel); }
+        nav a:hover::after, nav a.active::after { width: 100%; }
 
-  /* HERO */
-  .hero {
-    position:relative; min-height:100vh;
-    display:flex; flex-direction:column;
-    align-items:center; justify-content:center;
-    padding:7rem 2rem 5rem; text-align:center;
-    overflow:hidden; z-index:1;
-  }
+        /* Navigation - Mobile Cards */
+        .mobile-nav { display: none; flex-direction: column; width: 100%; }
+        .nav-card { width: 100%; padding: 40px 0; text-align: center; border-bottom: 1px solid rgba(91, 159, 212, 0.1); color: var(--steel); font-family: 'Cinzel', serif; text-decoration: none; font-size: 1.5rem; }
 
-  .hero-bg {
-    position:fixed; inset:0;
-    background:url('https://erimitisband.github.io/logo.jpg') center 25% / 65% no-repeat;
-    opacity:0.15; filter:blur(0.5px) brightness(1.3);
-    animation:drift 25s ease-in-out infinite alternate;
-    z-index:0; will-change:transform;
-  }
-  @keyframes drift { from { transform:scale(1) translateY(0); } to { transform:scale(1.05) translateY(-14px); } }
+        /* Hero Content */
+        .hero-content { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            height: 60vh; 
+            text-align: center; 
+        }
+        
+        .main-logo {
+            width: clamp(200px, 50vw, 400px);
+            filter: drop-shadow(0 0 20px rgba(91, 159, 212, 0.2));
+            margin-bottom: 20px;
+        }
 
-  .hero-vignette {
-    position:absolute; inset:0; z-index:1;
-    background:radial-gradient(ellipse 80% 80% at 50% 40%, transparent 25%, rgba(2,2,10,0.65) 65%, rgba(2,2,10,0.98) 100%);
-  }
+        h1 { font-family: 'Cinzel', serif; font-size: clamp(2rem, 8vw, 4rem); letter-spacing: 1rem; margin: 0; color: var(--white); }
 
-  .hero-content {
-    position:relative; z-index:2;
-    display:flex; flex-direction:column;
-    align-items:center; justify-content:center;
-    text-align:center;
-    max-width:680px; width:100%; margin:0 auto;
-  }
-
-  .eyebrow {
-    font-family:var(--font-d); font-size:0.52rem; letter-spacing:7px;
-    color:var(--steel); text-transform:uppercase;
-    margin-bottom:1.6rem;
-    opacity:0; animation:fadeUp 1.4s ease 0.3s forwards;
-  }
-
-  h1 {
-    font-family:var(--font-d); font-weight:900;
-    font-size:clamp(3.2rem, 14vw, 9rem);
-    letter-spacing:0.28em; line-height:1;
-    color:var(--white);
-    text-shadow:0 0 100px rgba(140,180,214,0.08);
-    margin-bottom:1.8rem;
-    opacity:0; animation:fadeUp 1.6s ease 0.6s forwards;
-  }
-
-  .v-rule {
-    width:1px; height:55px;
-    background:linear-gradient(180deg,transparent,var(--steel),transparent);
-    margin:0 auto 1.8rem;
-    opacity:0; animation:fadeIn 1.4s ease 1s forwards;
-  }
-
-  .tagline {
-    font-family:var(--font-b); font-style:italic;
-    font-size:clamp(0.95rem, 2.2vw, 1.15rem);
-    color:#B8952A; line-height:2.1;
-    max-width:500px; margin-bottom:3.5rem;
-    opacity:0; animation:fadeUp 1.4s ease 1.2s forwards;
-  }
-
-  /* MOBILE NAV CARDS — stacked, full width */
-  .mobile-nav-cards {
-    display:none;
-    width:100%;
-    opacity:0; animation:fadeUp 1.4s ease 1.5s forwards;
-  }
-  .mobile-nav-cards a {
-    display:flex; align-items:center; justify-content:center;
-    width:100%; padding:1.3rem 1rem;
-    border:1px solid #0d0d16;
-    border-bottom:none;
-    background:rgba(255,255,255,0.012);
-    text-decoration:none;
-    position:relative; overflow:hidden;
-    transition:border-color 0.4s;
-  }
-  .mobile-nav-cards a:last-child { border-bottom:1px solid #0d0d16; }
-  .mobile-nav-cards a::before {
-    content:''; position:absolute; inset:0;
-    background:linear-gradient(135deg, var(--steel-dim), transparent 60%);
-    opacity:0; transition:opacity 0.4s;
-  }
-  .mobile-nav-cards a:hover { border-color:rgba(140,180,214,0.22); }
-  .mobile-nav-cards a:hover::before { opacity:1; }
-  .mnc-label {
-    font-family:var(--font-d); font-size:0.55rem; letter-spacing:4px;
-    color:var(--steel); text-transform:uppercase; position:relative; z-index:1;
-  }
-
-  .influences {
-    font-family:var(--font-d); font-size:0.46rem; letter-spacing:4px;
-    color:#1e1e26; text-transform:uppercase;
-    opacity:0; animation:fadeIn 2s ease 2s forwards;
-  }
-
-  /* FOOTER */
-  footer {
-    position:relative; z-index:2;
-    padding:2rem 1.5rem; text-align:center;
-    border-top:1px solid #080810;
-  }
-  .soc { display:flex; justify-content:center; gap:2.5rem; margin-bottom:0.8rem; }
-  .soc a {
-    font-family:var(--font-d); font-size:0.52rem; letter-spacing:3px;
-    color:#96781E; text-decoration:none; text-transform:uppercase; transition:color 0.3s;
-  }
-  .soc a:hover { color:var(--steel); }
-  .copy { font-family:var(--font-d); font-size:0.46rem; letter-spacing:3px; color:#6B5418; text-transform:uppercase; }
-
-  @keyframes fadeUp { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
-  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-
-  /* TABLET + MOBILE */
-  @media (max-width:768px) {
-    nav { padding:1.3rem 1.5rem; justify-content:center; }
-    .nav-links { display:none; }
-    .hero { padding:6rem 1.5rem 4rem; }
-    .hero-bg { background-size:120%; background-position:center 20%; }
-    h1 { font-size:clamp(2.8rem, 18vw, 5rem); letter-spacing:0.15em; }
-    .tagline { font-size:1rem; margin-bottom:2.5rem; }
-    .v-rule { height:35px; }
-    .mobile-nav-cards { display:flex; flex-direction:column; }
-  }
-
-  @media (max-width:380px) {
-    h1 { font-size:2.6rem; }
-    .eyebrow { letter-spacing:4px; }
-  }
-</style>
+        @media (max-width: 768px) {
+            nav { display: none; }
+            .mobile-nav { display: flex; }
+            .hero-content { height: 40vh; }
+        }
+    </style>
 </head>
 <body>
+    <div class="hero-bg"></div>
+    <div class="vignette"></div>
+    <canvas id="starCanvas"></canvas>
 
-<canvas id="stars"></canvas>
-
-<nav>
-  <ul class="nav-links">
-    <li><a href="index.html" class="active">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="music.html">Music</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-</nav>
-
-<div class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-vignette"></div>
-  <div class="hero-content">
-    <p class="eyebrow">Melbourne &nbsp;·&nbsp; Est. 2026</p>
-    <h1>ERIMITIS</h1>
-    <div class="v-rule"></div>
-    <p class="tagline">Drawing from every decade of music since the 1960s — raw power, emotional depth, and guitar-driven storytelling woven into something that belongs to now.</p>
-
-    <div class="mobile-nav-cards">
-      <a href="index.html"><span class="mnc-label">Home</span></a>
-      <a href="about.html"><span class="mnc-label">About</span></a>
-      <a href="music.html"><span class="mnc-label">Music</span></a>
-      <a href="contact.html"><span class="mnc-label">Contact</span></a>
+    <div class="mobile-nav">
+        <a href="index.html" class="nav-card">HOME</a>
+        <a href="about.html" class="nav-card">ABOUT</a>
+        <a href="music.html" class="nav-card">MUSIC</a>
+        <a href="contact.html" class="nav-card">CONTACT</a>
     </div>
 
-  </div>
-</div>
+    <nav>
+        <a href="index.html" class="active">HOME</a>
+        <a href="about.html">ABOUT</a>
+        <a href="music.html">MUSIC</a>
+        <a href="contact.html">CONTACT</a>
+    </nav>
 
-<footer>
-  <div class="soc">
-    <a href="https://instagram.com/erimitisband" target="_blank">Instagram</a>
-    <a href="https://tiktok.com/@erimitisband" target="_blank">TikTok</a>
-    <a href="mailto:erimitisband@gmail.com">Email</a>
-  </div>
-  <p class="copy">&copy; 2026 Erimitis &nbsp;·&nbsp; Melbourne</p>
-</footer>
+    <div class="hero-content">
+        <h1>ERIMITIS</h1>
+    </div>
 
-<script>
-  const canvas = document.getElementById('stars');
-  const ctx = canvas.getContext('2d');
-  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-  resize(); window.addEventListener('resize', resize);
-  const stars = Array.from({length:200}, () => ({
-    x:Math.random(), y:Math.random(),
-    r:Math.random()*1.3+0.15,
-    a:Math.random()*0.65+0.1,
-    speed:Math.random()*0.003+0.0006,
-    phase:Math.random()*Math.PI*2
-  }));
-  function draw(t) {
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    stars.forEach(s => {
-      const alpha = s.a*(0.25+0.75*Math.sin(t*s.speed+s.phase));
-      ctx.beginPath();
-      ctx.arc(s.x*canvas.width, s.y*canvas.height, s.r, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(140,180,214,${alpha})`;
-      ctx.fill();
-    });
-    requestAnimationFrame(draw);
-  }
-  requestAnimationFrame(draw);
-
-  const heroBg = document.querySelector('.hero-bg');
-  window.addEventListener('scroll', () => {
-    heroBg.style.transform = `translateY(${window.pageYOffset * 0.4}px)`;
-  });
-</script>
+    <script>
+        // Stars Logic
+        const sCanvas = document.getElementById('starCanvas');
+        const sCtx = sCanvas.getContext('2d');
+        let stars = [];
+        function resize() { sCanvas.width = window.innerWidth; sCanvas.height = window.innerHeight; }
+        window.onresize = resize; resize();
+        for(let i=0; i<200; i++) stars.push({ x: Math.random()*sCanvas.width, y: Math.random()*sCanvas.height, r: Math.random()*1.5 });
+        function drawStars() {
+            sCtx.clearRect(0,0,sCanvas.width, sCanvas.height);
+            sCtx.fillStyle = "rgba(140, 180, 214, 0.6)";
+            stars.forEach(s => { sCtx.beginPath(); sCtx.arc(s.x, s.y, s.r, 0, Math.PI*2); sCtx.fill(); });
+            requestAnimationFrame(drawStars);
+        }
+        drawStars();
+    </script>
 </body>
 </html>
