@@ -1,127 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ERIMITIS | Official</title>
-    <style>
-        :root {
-            --bg-color: #050505;
-            --text-color: #e0e0e0;
-            --accent-color: #666; 
-            --font-main: 'Georgia', serif; /* More cinematic/classic feel */
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ERIMITIS | Official</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #050505;
+    --text: #e0ddd8;
+    --steel: #8CB4D6;
+    --gray: #888;
+    --dim: #444;
+    --font-display: 'Cinzel', Georgia, serif;
+    --font-body: 'Crimson Text', Georgia, serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    letter-spacing: 1px;
+  }
+  header {
+    padding: 2.5rem 1rem 1rem;
+    text-align: center;
+  }
+  .logo img {
+    max-width: 380px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  nav { margin-top: 1.5rem; }
+  nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+  }
+  nav a {
+    color: var(--dim);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    transition: color 0.3s ease;
+  }
+  nav a:hover, nav a.active { color: var(--steel); }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 1.5rem;
+    text-align: center;
+  }
+  .tagline {
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--gray);
+    max-width: 560px;
+    line-height: 1.9;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 1.2s ease 0.3s forwards;
+  }
+  .origin {
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    letter-spacing: 4px;
+    color: var(--dim);
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 1.2s ease 0.6s forwards;
+  }
+  .status {
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    color: var(--steel);
+    text-transform: uppercase;
+    border: 1px solid #1a1a1a;
+    padding: 0.8rem 2rem;
+    opacity: 0;
+    animation: fadeUp 1.2s ease 0.9s forwards;
+  }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-main);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            letter-spacing: 2px;
-        }
+  footer {
+    padding: 2rem 1rem;
+    text-align: center;
+    border-top: 1px solid #111;
+  }
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+  }
+  .social-links a {
+    color: var(--dim);
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+  .social-links a:hover { color: var(--steel); }
+  .copyright {
+    font-size: 0.75rem;
+    color: #333;
+    font-family: var(--font-display);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
 
-        header {
-            padding: 3rem 1rem;
-            text-align: center;
-        }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-        /* Fixed Logo Logic */
-        .logo img {
-            max-width: 400px;
-            width: 100%;
-            height: auto;
-            border-radius: 5px;
-            box-shadow: 0 0 30px rgba(255,255,255,0.05);
-        }
-
-        nav { margin-top: 2rem; }
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            transition: 0.3s;
-        }
-
-        nav a:hover { color: #fff; }
-
-        main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        h1 {
-            font-size: 1.5rem;
-            font-weight: 300;
-            text-transform: uppercase;
-            color: #888;
-        }
-
-        footer { padding: 3rem; }
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-        }
-
-        .social-links a {
-            color: var(--accent-color);
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 0.7rem;
-        }
-
-        .social-links a:hover { color: #fff; }
-
-        @media (max-width: 600px) {
-            nav ul { gap: 1rem; }
-        }
-    </style>
+  @media (max-width: 600px) {
+    nav ul { gap: 1.2rem; }
+    .logo img { max-width: 280px; }
+  }
+</style>
 </head>
 <body>
+<header>
+  <a href="index.html" class="logo">
+    <img src="logo.jpg" alt="ERIMITIS" onerror="this.src='logo.png'">
+  </a>
+  <nav>
+    <ul>
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="music.html">Music</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
 
-    <header>
-        <div class="logo">
-            <img src="logo.jpg" alt="ERIMITIS">
-        </div>
-        
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="music.html">Music</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+<main>
+  <p class="tagline">Drawing from every decade of music since the 1960s —<br>raw power, emotional depth, and guitar-driven storytelling<br>woven into something that belongs to now.</p>
+  <p class="origin">Melbourne &nbsp;·&nbsp; Est. 2026</p>
+  <span class="status">Music Coming</span>
+</main>
 
-    <main>
-        <h1>Seeking: Bassist · Vocalist · Drummer</h1>
-    </main>
-
-    <footer>
-        <div class="social-links">
-            <a href="https://instagram.com/erimitisband" target="_blank">Instagram</a>
-            <a href="https://tiktok.com/@erimitisband" target="_blank">TikTok</a>
-            <a href="mailto:erimitisband@gmail.com">Email</a>
-        </div>
-    </footer>
-
+<footer>
+  <div class="social-links">
+    <a href="https://instagram.com/erimitisband" target="_blank">Instagram</a>
+    <a href="https://tiktok.com/@erimitisband" target="_blank">TikTok</a>
+    <a href="mailto:erimitisband@gmail.com">Email</a>
+  </div>
+  <p class="copyright">&copy; 2026 Erimitis</p>
+</footer>
 </body>
 </html>
