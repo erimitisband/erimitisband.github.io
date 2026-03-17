@@ -1,33 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERIMITIS | Contact</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Crimson+Text&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
-    <div class="hero-bg"></div>
-    <canvas id="starCanvas"></canvas>
-
-    <h1>ERIMITIS</h1>
-
-    <div class="content-wrap" style="justify-content: flex-start; padding-top: 0;">
-        <div class="gold-leaf" style="font-size: 1.5rem; margin-bottom: 20px;">CONTACT</div>
-        <a href="mailto:erimitisband@gmail.com" style="text-decoration:none; display:flex; justify-content:space-between; padding:20px 0; border-bottom:1px solid rgba(184,149,42,0.2);">
-            <span class="gold-leaf" style="font-size:0.9rem">Email</span>
-            <span style="color:var(--white); font-style:italic">erimitisband@gmail.com</span>
-        </a>
-        <a href="https://instagram.com/erimitis_band" style="text-decoration:none; display:flex; justify-content:space-between; padding:20px 0; border-bottom:1px solid rgba(184,149,42,0.2);">
-            <span class="gold-leaf" style="font-size:0.9rem">Instagram</span>
-            <span style="color:var(--white); font-style:italic">@erimitis_band</span>
-        </a>
-    </div>
-
-    <div class="mobile-nav">
-        <a href="index.html" class="nav-block">HOME</a>
-        <a href="about.html" class="nav-block">ABOUT</a>
-        <a href="music.html" class="nav-block">MUSIC</a>
-        <a href="contact.html" class="nav-block" style="color:var(--steel)">CONTACT</a>
-    </div>
-
-    <nav>
-        <a href="index.html">HOME</a>
-        <a href="about.html">ABOUT</a>
-        <a href="music.html">MUSIC</a>
-        <a href="contact.html" class="active">CONTACT</a>
+    <nav class="navbar">
+        <img src="logo.jpg" alt="Erimitis" class="logo-img">
+        <div class="menu-toggle"><span></span><span></span><span></span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="music.html">Music</a></li>
+            <li><a href="contact.html" class="active-page">Contact</a></li>
+        </ul>
     </nav>
-    <script> /* [Include Star Script from Index] */ </script>
+    <canvas id="starCanvas"></canvas>
+    <main>
+        <h2>INQUIRIES</h2>
+        <p>Reach out for collaborations or booking.</p>
+        <form style="display: flex; flex-direction: column; gap: 20px; max-width: 450px; margin: 40px auto;">
+            <input type="text" placeholder="Name" style="background: transparent; border: 1px solid var(--steel); color: white; padding: 12px; font-family: 'Crimson Text';">
+            <textarea placeholder="Message" rows="5" style="background: transparent; border: 1px solid var(--steel); color: white; padding: 12px; font-family: 'Crimson Text';"></textarea>
+            <button type="submit" style="background: var(--gold); border: none; padding: 15px; font-family: 'Cinzel'; cursor: pointer; color: var(--bg);">SEND</button>
+        </form>
+    </main>
+    <script src="script.js"></script>
 </body>
+</html>
