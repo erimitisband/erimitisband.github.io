@@ -3,25 +3,15 @@
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ERIMITIS | Home</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Crimson+Text&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Crimson+Text:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <img src="logo.jpg" alt="Erimitis" class="logo-img">
-        <div class="menu-toggle"><span></span><span></span><span></span></div>
-        <ul class="nav-links">
-            <li><a href="index.html" class="active-page">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="music.html">Music</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
+    <img src="logo.jpg" class="bg-logo" id="ghostLogo">
+    <nav class="navbar"><div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+        <ul class="nav-links" id="menu"><li><a href="index.html">HOME</a></li><li><a href="about.html">ABOUT</a></li><li><a href="music.html">MUSIC</a></li><li><a href="contact.html">CONTACT</a></li></ul>
     </nav>
-    <canvas id="starCanvas"></canvas>
-    <main>
-        <h1>ERIMITIS</h1>
-        <p>A sonic exploration of solitude. Atmospheric soundscapes built with vanilla tech.</p>
-    </main>
+    <main><h1>ERIMITIS</h1><div class="sub-gold">Vanquish the Silence</div></main>
     <script src="script.js"></script>
 </body>
 </html>
