@@ -3,24 +3,16 @@
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ERIMITIS | About</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Crimson+Text&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Crimson+Text:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <img src="logo.jpg" alt="Erimitis" class="logo-img">
-        <div class="menu-toggle"><span></span><span></span><span></span></div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html" class="active-page">About</a></li>
-            <li><a href="music.html">Music</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
+    <nav class="navbar"><div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+        <ul class="nav-links" id="menu"><li><a href="index.html">HOME</a></li><li><a href="about.html">ABOUT</a></li><li><a href="music.html">MUSIC</a></li><li><a href="contact.html">CONTACT</a></li></ul>
     </nav>
-    <canvas id="starCanvas"></canvas>
     <main>
-        <h2>THE STORY</h2>
-        <p>Formed in the shadows of the digital age, Erimitis is a project focused on pure atmosphere, using raw HTML, CSS, and JS to craft immersive experiences.</p>
+        <p class="enigma-text">We are the sons of the thunder energy that modern airwaves forgot. Drawing from the deep roots of Zeppelin and the sharp fury of Maiden.</p>
+        <div class="quote-line">"In the heart of the iron woods, where the thunder finds its rest, we built a sanctuary from the noise of the many."</div>
     </main>
     <script src="script.js"></script>
 </body>
