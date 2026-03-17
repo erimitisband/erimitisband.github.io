@@ -1,71 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ERIMITIS | Contact</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Crimson+Text:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-    <style>
-        :root { --bg: #02020a; --steel: #5B9FD4; --white: #ffffff; }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
-
-        .brand-header { position: absolute; top: 0; width: 100%; text-align: center; padding: 10px 0; z-index: 10; }
-        h1 { font-family: 'Cinzel', serif; font-size: clamp(2rem, 8vw, 2.5rem); letter-spacing: 15px; color: var(--steel); margin: 0; }
-
-        .desktop-nav { position: fixed; top: 20px; left: 20px; z-index: 1000; cursor: pointer; padding: 10px; }
-        .hamburger { display: flex; flex-direction: column; gap: 6px; width: 30px; }
-        .hamburger span { width: 100%; height: 2px; background-color: var(--steel); }
-
-        #fullscreenMenu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(2, 2, 10, 0.98); z-index: 2000; flex-direction: column; justify-content: center; align-items: center; }
-        #fullscreenMenu a { color: var(--white); font-family: 'Cinzel', serif; font-size: 2.5rem; letter-spacing: 10px; margin: 20px 0; text-decoration: none; }
-
-        main { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 120px 10% 0; text-align: center; }
-        .label { font-family: 'Cinzel', serif; color: var(--steel); letter-spacing: 4px; font-size: 0.7rem; text-transform: uppercase; margin-bottom: 15px; display: block; }
-        .email { font-size: clamp(1.2rem, 4vw, 2rem); color: var(--white); text-decoration: none; font-family: 'Cinzel', serif; margin-bottom: 50px; display: block; }
-        
-        .social-links { display: flex; flex-direction: column; gap: 20px; }
-        .social-links a { color: var(--white); text-decoration: none; font-family: 'Cinzel', serif; font-size: 1.1rem; letter-spacing: 3px; border: 1px solid rgba(91, 159, 212, 0.3); padding: 10px 30px; }
-
-        footer { position: fixed; bottom: 20px; width: 100%; text-align: center; font-family: 'Cinzel', serif; color: var(--steel); font-size: 0.6rem; letter-spacing: 3px; }
-
-        .mobile-nav-boxes { display: none; width: 100%; padding: 10px; flex-direction: column; gap: 8px; position: fixed; bottom: 0; z-index: 1000; background: var(--bg); }
-        .nav-box { border: 1px solid var(--steel); padding: 18px; text-decoration: none; color: var(--white); font-family: 'Cinzel', serif; text-align: center; font-size: 0.8rem; letter-spacing: 3px; width: 100%; }
-        
-        .mobile-footer { display: none; width: 100%; text-align: center; font-family: 'Cinzel', serif; color: var(--steel); font-size: 0.5rem; letter-spacing: 2px; padding: 15px 0 5px; }
-
-        @media (max-width: 1024px) {
-            .desktop-nav, footer { display: none; }
-            .mobile-nav-boxes, .mobile-footer { display: flex; }
-        }
-    </style>
-</head>
-<body>
-    <div class="desktop-nav" onclick="toggleMenu()"><div class="hamburger"><span></span><span></span><span></span></div></div>
-    <div id="fullscreenMenu">
-        <div style="position: absolute; top: 35px; left: 35px; color: var(--steel); cursor: pointer; font-family: 'Cinzel';" onclick="toggleMenu()">[ CLOSE ]</div>
-        <a href="index.html">HOME</a><a href="about.html">ABOUT</a><a href="music.html">MUSIC</a><a href="contact.html">CONTACT</a>
+<main style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 120px 10% 0; text-align: center;">
+    <div style="margin-bottom: 60px;">
+        <span style="font-family: 'Cinzel'; color: var(--steel); letter-spacing: 4px; font-size: 0.7rem; display: block; margin-bottom: 15px;">Email</span>
+        <a href="mailto:erimitisband@gmail.com" style="font-size: 1.8rem; color: var(--white); text-decoration: none; font-family: 'Cinzel';">erimitisband@gmail.com</a>
     </div>
-
-    <header class="brand-header"><h1>CONTACT</h1></header>
-
-    <main>
-        <div class="group"><span class="label">Email</span><a href="mailto:erimitisband@gmail.com" class="email">erimitisband@gmail.com</a></div>
-        <div class="group"><span class="label">Socials</span><div class="social-links">
-            <a href="https://instagram.com/erimitisband" target="_blank">INSTAGRAM</a>
-            <a href="https://tiktok.com/@erimitisband" target="_blank">TIKTOK</a>
-        </div></div>
-    </main>
-
-    <footer>&copy; 2026 ERIMITIS. ALL RIGHTS RESERVED.</footer>
-
-    <nav class="mobile-nav-boxes">
-        <a href="index.html" class="nav-box">HOME</a>
-        <a href="about.html" class="nav-box">ABOUT</a>
-        <a href="music.html" class="nav-box">MUSIC</a>
-        <a href="contact.html" class="nav-box" style="background: var(--steel); color: var(--bg);">CONTACT</a>
-        <div class="mobile-footer">&copy; 2026 ERIMITIS. ALL RIGHTS RESERVED.</div>
-    </nav>
-
-    <script>function toggleMenu() { const m = document.getElementById('fullscreenMenu'); m.style.display = (m.style.display === 'flex') ? 'none' : 'flex'; }</script>
-</body>
-</html>
+    <div>
+        <span style="font-family: 'Cinzel'; color: var(--steel); letter-spacing: 4px; font-size: 0.7rem; display: block; margin-bottom: 15px;">Socials</span>
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+            <a href="https://instagram.com/erimitisband" target="_blank" style="color: var(--white); text-decoration: none; font-family: 'Cinzel'; font-size: 1.1rem; border: 1px solid rgba(91, 159, 212, 0.3); padding: 10px 40px;">INSTAGRAM</a>
+            <a href="https://tiktok.com/@erimitisband" target="_blank" style="color: var(--white); text-decoration: none; font-family: 'Cinzel'; font-size: 1.1rem; border: 1px solid rgba(91, 159, 212, 0.3); padding: 10px 40px;">TIKTOK</a>
+        </div>
+    </div>
+</main>
