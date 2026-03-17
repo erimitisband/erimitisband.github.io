@@ -29,8 +29,9 @@
         footer { position: fixed; bottom: 20px; width: 100%; text-align: center; font-family: 'Cinzel', serif; color: var(--steel); font-size: 0.6rem; letter-spacing: 3px; }
 
         .mobile-nav-boxes { display: none; width: 100%; padding: 10px; flex-direction: column; gap: 8px; position: fixed; bottom: 0; z-index: 1000; background: var(--bg); }
-        .nav-box { border: 1px solid var(--steel); padding: 18px; text-decoration: none; color: var(--white); font-family: 'Cinzel', serif; text-align: center; font-size: 0.8rem; letter-spacing: 3px; }
-        .mobile-footer { display: none; text-align: center; font-family: 'Cinzel', serif; color: var(--steel); font-size: 0.5rem; letter-spacing: 2px; padding: 10px 0; }
+        .nav-box { border: 1px solid var(--steel); padding: 18px; text-decoration: none; color: var(--white); font-family: 'Cinzel', serif; text-align: center; font-size: 0.8rem; letter-spacing: 3px; width: 100%; }
+        
+        .mobile-footer { display: none; width: 100%; text-align: center; font-family: 'Cinzel', serif; color: var(--steel); font-size: 0.5rem; letter-spacing: 2px; padding: 15px 0 5px; }
 
         @media (max-width: 1024px) {
             .desktop-nav, footer { display: none; }
@@ -41,6 +42,7 @@
 <body>
     <div class="desktop-nav" onclick="toggleMenu()"><div class="hamburger"><span></span><span></span><span></span></div></div>
     <div id="fullscreenMenu">
+        <div style="position: absolute; top: 35px; left: 35px; color: var(--steel); cursor: pointer; font-family: 'Cinzel';" onclick="toggleMenu()">[ CLOSE ]</div>
         <a href="index.html">HOME</a><a href="about.html">ABOUT</a><a href="music.html">MUSIC</a><a href="contact.html">CONTACT</a>
     </div>
 
