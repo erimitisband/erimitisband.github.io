@@ -9,30 +9,29 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
 
-        .brand-header { position: absolute; top: 0; width: 100%; text-align: center; padding: 15px 0; z-index: 10; }
+        /* ABSOLUTE TOP TITLE */
+        .brand-header { position: absolute; top: 0; width: 100%; text-align: center; padding: 20px 0; z-index: 10; }
         h1 { font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 10vw, 5rem); letter-spacing: 20px; color: var(--steel); margin: 0; }
 
-        #ghostLogo { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; max-width: 600px; opacity: 0.25; z-index: -1; pointer-events: none; }
+        /* STATIONARY BUT LIVING HERMIT */
+        #ghostLogo { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; max-width: 600px; opacity: 0.2; z-index: -1; animation: breathe 8s ease-in-out infinite; }
+        @keyframes breathe { 0%, 100% { transform: translate(-50%, -50%) scale(1); } 50% { transform: translate(-50%, -50%) scale(1.03); } }
 
-        .desktop-nav { position: fixed; top: 25px; left: 25px; z-index: 1000; cursor: pointer; padding: 10px; }
+        /* NAV LOGIC */
+        .desktop-nav { position: fixed; top: 30px; left: 30px; z-index: 1000; cursor: pointer; padding: 10px; }
         .hamburger { display: flex; flex-direction: column; gap: 7px; width: 30px; }
         .hamburger span { width: 100%; height: 2px; background-color: var(--steel); }
-
         #fullscreenMenu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(2, 2, 10, 0.98); z-index: 2000; flex-direction: column; justify-content: center; align-items: center; }
-        #fullscreenMenu a { color: var(--white); font-family: 'Cinzel', serif; font-size: 2.5rem; letter-spacing: 12px; margin: 25px 0; text-decoration: none; }
+        #fullscreenMenu a { color: var(--white); font-family: 'Cinzel', serif; font-size: 2.5rem; letter-spacing: 12px; margin: 25px 0; text-decoration: none; transition: 0.3s; }
+        #fullscreenMenu a:hover { color: var(--steel); }
 
-        footer { position: fixed; bottom: 20px; width: 100%; text-align: center; font-family: 'Cinzel', serif; color: var(--steel); font-size: 0.6rem; letter-spacing: 4px; }
+        /* FOOTERS */
+        .pc-footer { position: fixed; bottom: 25px; width: 100%; text-align: center; font-family: 'Cinzel', serif; color: var(--steel); font-size: 0.65rem; letter-spacing: 4px; }
+        .mobile-nav-boxes { display: none; width: 100%; padding: 10px; flex-direction: column; gap: 10px; position: fixed; bottom: 0; z-index: 1000; background: linear-gradient(transparent, var(--bg) 15%); }
+        .nav-box { border: 1px solid var(--steel); padding: 22px; text-decoration: none; color: var(--white); font-family: 'Cinzel', serif; text-align: center; font-size: 0.9rem; letter-spacing: 4px; background: rgba(2, 2, 10, 0.9); }
+        .mobile-footer { width: 100%; text-align: center; font-family: 'Cinzel', serif; color: var(--steel); font-size: 0.55rem; letter-spacing: 3px; padding: 15px 0 10px; }
 
-        /* MOBILE STACK WITH CENTERED FOOTER */
-        .mobile-nav-boxes { display: none; width: 100%; padding: 10px; flex-direction: column; gap: 10px; position: fixed; bottom: 0; z-index: 1000; background: var(--bg); }
-        .nav-box { border: 1px solid var(--steel); padding: 22px; text-decoration: none; color: var(--white); font-family: 'Cinzel', serif; text-align: center; font-size: 0.9rem; letter-spacing: 4px; width: 100%; }
-        
-        .mobile-footer { display: none; width: 100%; text-align: center; font-family: 'Cinzel', serif; color: var(--steel); font-size: 0.5rem; letter-spacing: 3px; padding: 15px 0 5px; }
-
-        @media (max-width: 1024px) {
-            .desktop-nav, footer { display: none; }
-            .mobile-nav-boxes, .mobile-footer { display: flex; }
-        }
+        @media (max-width: 1024px) { .desktop-nav, .pc-footer { display: none; } .mobile-nav-boxes { display: flex; } }
     </style>
 </head>
 <body>
@@ -43,9 +42,9 @@
     </div>
 
     <header class="brand-header"><h1>ERIMITIS</h1></header>
-    <img src="logo.jpg" id="ghostLogo">
+    <img src="logo.jpg" id="ghostLogo" alt="Hermit">
 
-    <footer>&copy; 2026 ERIMITIS. ALL RIGHTS RESERVED.</footer>
+    <div class="pc-footer">&copy; 2026 ERIMITIS. ALL RIGHTS RESERVED.</div>
 
     <nav class="mobile-nav-boxes">
         <a href="index.html" class="nav-box" style="background: var(--steel); color: var(--bg);">HOME</a>
