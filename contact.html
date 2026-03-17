@@ -1,72 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ERIMITIS | Contact</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Crimson+Text:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-    <style>
-        :root { --bg: #02020a; --steel: #5B9FD4; --white: #ffffff; }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: var(--bg); color: var(--white); height: 100vh; width: 100vw; overflow: hidden; font-family: 'Crimson Text', serif; display: flex; flex-direction: column; }
-
-        .brand-header { position: absolute; top: 0; width: 100%; text-align: center; padding: 25px 0; z-index: 10; }
-        h1 { font-family: 'Cinzel', serif; font-size: clamp(2rem, 8vw, 2.5rem); letter-spacing: 15px; color: var(--steel); margin: 0; }
-
-        /* PC NAVIGATION */
-        @media (min-width: 1025px) {
-            .desktop-nav { position: fixed; top: 35px; left: 35px; z-index: 1000; cursor: pointer; }
-            .hamburger { display: flex; flex-direction: column; gap: 8px; width: 35px; }
-            .hamburger span { width: 100%; height: 2px; background-color: var(--steel); }
-            .pc-footer { position: fixed; bottom: 25px; width: 100%; text-align: center; font-family: 'Cinzel', serif; color: var(--steel); font-size: 0.6rem; letter-spacing: 4px; }
-            .mobile-nav-stack { display: none; }
-        }
-
-        /* MOBILE NAVIGATION */
-        @media (max-width: 1024px) {
-            .desktop-nav, .pc-footer { display: none; }
-            .mobile-nav-stack { position: fixed; bottom: 0; width: 100%; padding: 15px; display: flex; flex-direction: column; gap: 10px; background: var(--bg); }
-            .nav-box { border: 1px solid var(--steel); padding: 20px; text-decoration: none; color: var(--white); font-family: 'Cinzel', serif; text-align: center; font-size: 0.8rem; letter-spacing: 3px; }
-            .mobile-copyright { text-align: center; font-family: 'Cinzel', serif; color: var(--steel); font-size: 0.55rem; padding: 10px 0; letter-spacing: 2px; }
-        }
-
-        /* CONTACT CONTENT */
-        main { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding-bottom: 150px; }
-        .label { font-family: 'Cinzel', serif; color: var(--steel); letter-spacing: 4px; font-size: 0.7rem; margin-bottom: 10px; display: block; }
-        .email { font-size: clamp(1.2rem, 5vw, 2rem); color: var(--white); text-decoration: none; font-family: 'Cinzel', serif; margin-bottom: 40px; display: block; }
-        .socials { display: flex; flex-direction: column; gap: 15px; }
-        .social-link { color: var(--white); text-decoration: none; font-family: 'Cinzel', serif; font-size: 1rem; border: 1px solid rgba(91, 159, 212, 0.3); padding: 12px 40px; letter-spacing: 2px; transition: 0.3s; }
-        .social-link:hover { border-color: var(--steel); color: var(--steel); }
-
-        #fullscreenMenu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(2, 2, 10, 0.98); z-index: 2000; flex-direction: column; justify-content: center; align-items: center; }
-        #fullscreenMenu a { color: var(--white); font-family: 'Cinzel', serif; font-size: 2rem; letter-spacing: 10px; margin: 20px 0; text-decoration: none; }
-    </style>
-</head>
-<body>
-    <div class="desktop-nav" onclick="toggleMenu()"><div class="hamburger"><span></span><span></span><span></span></div></div>
-    <div id="fullscreenMenu">
-        <a href="index.html">HOME</a><a href="about.html">ABOUT</a><a href="music.html">MUSIC</a><a href="contact.html">CONTACT</a>
+<main style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding-bottom: 150px;">
+    <div style="margin-bottom: 80px;">
+        <span style="font-family: 'Cinzel'; color: var(--steel); letter-spacing: 6px; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 20px; display: block;">Transmission</span>
+        <a href="mailto:erimitisband@gmail.com" style="font-size: clamp(1.5rem, 6vw, 2.5rem); color: var(--white); text-decoration: none; font-family: 'Cinzel'; letter-spacing: 2px; transition: 0.3s;">erimitisband@gmail.com</a>
     </div>
-
-    <header class="brand-header"><h1>CONTACT</h1></header>
-
-    <main>
-        <div><span class="label">Direct</span><a href="mailto:erimitisband@gmail.com" class="email">erimitisband@gmail.com</a></div>
-        <div><span class="label">Echoes</span>
-            <div class="socials">
-                <a href="https://instagram.com/erimitisband" class="social-link" target="_blank">INSTAGRAM</a>
-                <a href="https://tiktok.com/@erimitisband" class="social-link" target="_blank">TIKTOK</a>
-            </div>
-        </div>
-    </main>
-
-    <div class="pc-footer">&copy; 2026 ERIMITIS. ALL RIGHTS RESERVED.</div>
-
-    <nav class="mobile-nav-stack">
-        <a href="index.html" class="nav-box">HOME</a><a href="about.html" class="nav-box">ABOUT</a><a href="music.html" class="nav-box">MUSIC</a>
-        <a href="contact.html" class="nav-box" style="background: var(--steel); color: var(--bg);">CONTACT</a>
-        <div class="mobile-copyright">&copy; 2026 ERIMITIS. ALL RIGHTS RESERVED.</div>
-    </nav>
-
-    <script>function toggleMenu() { const m = document.getElementById('fullscreenMenu'); m.style.display = (m.style.display === 'flex') ? 'none' : 'flex'; }</script>
-</body>
-</html>
+    <div class="socials-pc" style="display: flex; gap: 40px;">
+        <a href="https://instagram.com" target="_blank" style="color: var(--white); text-decoration: none; font-family: 'Cinzel'; letter-spacing: 4px; font-size: 0.9rem; border-bottom: 1px solid transparent; transition: 0.3s;" onmouseover="this.style.borderColor='var(--steel)'" onmouseout="this.style.borderColor='transparent'">INSTAGRAM</a>
+        <a href="https://tiktok.com" target="_blank" style="color: var(--white); text-decoration: none; font-family: 'Cinzel'; letter-spacing: 4px; font-size: 0.9rem; border-bottom: 1px solid transparent; transition: 0.3s;" onmouseover="this.style.borderColor='var(--steel)'" onmouseout="this.style.borderColor='transparent'">TIKTOK</a>
+    </div>
+</main>
