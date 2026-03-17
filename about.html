@@ -9,13 +9,12 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; overflow-x: hidden; }
         
-        .navbar { width: 100%; padding: 40px 50px; position: fixed; top: 0; z-index: 1000; display: flex; flex-direction: column; align-items: center; background: var(--bg); }
-        .hamburger { display: flex; flex-direction: column; gap: 10px; cursor: pointer; width: 35px; position: absolute; left: 50px; top: 45px; }
+        .navbar { width: 100%; padding: 40px 50px; position: fixed; top: 0; z-index: 1000; display: flex; align-items: center; background: var(--bg); }
+        .hamburger { display: flex; flex-direction: column; gap: 10px; cursor: pointer; width: 35px; position: absolute; left: 50px; }
         .hamburger span { width: 100%; height: 1px; background-color: var(--gold); }
         
-        .brand-center { text-align: center; }
-        h1 { font-family: 'Cinzel', serif; font-size: clamp(2rem, 6vw, 4rem); letter-spacing: 15px; text-transform: uppercase; margin: 0; }
-        .page-title { font-family: 'Cinzel', serif; color: var(--steel); font-size: 0.8rem; letter-spacing: 8px; text-transform: uppercase; margin-top: 5px; }
+        .brand-center { width: 100%; text-align: center; }
+        h1 { font-family: 'Cinzel', serif; font-size: clamp(2.2rem, 8vw, 4.5rem); letter-spacing: 15px; color: var(--white); text-transform: uppercase; margin: 0; }
 
         #menu { display: none; list-style: none; text-align: center; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(2, 2, 10, 0.98); padding-top: 25vh; z-index: 2000; }
         #menu li { margin: 30px 0; }
@@ -25,11 +24,11 @@
         @media (max-width: 1023px) {
             .hamburger { display: none; }
             .navbar { padding: 25px; position: relative; }
-            .nav-list-mobile { display: flex; justify-content: center; gap: 20px; list-style: none; margin-top: 20px; position: relative; z-index: 100; }
+            .nav-list-mobile { display: flex; justify-content: center; gap: 20px; background: rgba(70, 130, 180, 0.08); border: 1px solid rgba(70, 130, 180, 0.2); padding: 15px; margin: 20px auto 0; width: 90%; list-style: none; position: relative; z-index: 100; }
             .nav-list-mobile a { color: var(--gold); text-decoration: none; font-family: 'Cinzel'; font-size: 0.75rem; letter-spacing: 1.5px; }
         }
 
-        main { padding: 220px 15% 100px; text-align: center; }
+        main { padding: 180px 15% 100px; text-align: center; }
         .enigma-long { font-size: clamp(1.2rem, 3vw, 1.8rem); color: var(--steel); font-style: italic; line-height: 1.8; max-width: 1000px; margin: 0 auto; }
         .gold-line { color: var(--gold); font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 4px; margin-top: 60px; border-top: 1px solid rgba(70, 130, 180, 0.3); padding-top: 40px; display: inline-block; }
     </style>
@@ -37,19 +36,48 @@
 <body>
     <nav class="navbar">
         <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
-        <div class="brand-center">
-            <h1>ERIMITIS</h1>
-            <div class="page-title">ABOUT</div>
-        </div>
+        <div class="brand-center"><h1>ABOUT</h1></div>
     </nav>
-    <ul class="nav-list-mobile"><li><a href="index.html">HOME</a></li><li><a href="about.html">ABOUT</a></li><li><a href="music.html">MUSIC</a></li><li><a href="contact.html">CONTACT</a></li></ul>
-    <main><p class="enigma-long">We exist in the friction between the heavy and the ethereal. It is the blues-drenched soul of <strong>Hendrix</strong> and <strong>Clapton</strong> meeting the calculated thunder of <strong>Maiden</strong> and <strong>AC/DC</strong>. We carry the melodic ghosts of <strong>The Beatles</strong>, the sprawling psychedelic architecture of <strong>Floyd</strong>, and the raw, prehistoric weight of <strong>Zeppelin</strong>. Erimitis is not a single sound; it is the electric alchemy of the masters, reborn in the silence of the iron woods.</p><div class="gold-line">ONE FREQUENCY. MANY GHOSTS.</div></main>
-    <div id="menu"><div style="position: absolute; top: 45px; left: 50px; color: var(--gold); cursor: pointer; font-family: 'Cinzel';" onclick="toggleMenu()">[ CLOSE ]</div><ul style="list-style: none;"><li><a href="index.html">HOME</a></li><li><a href="about.html">ABOUT</a></li><li><a href="music.html">MUSIC</a></li><li><a href="contact.html">CONTACT</a></li></ul></div>
+
+    <ul class="nav-list-mobile">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="about.html">ABOUT</a></li>
+        <li><a href="music.html">MUSIC</a></li>
+        <li><a href="contact.html">CONTACT</a></li>
+    </ul>
+
+    <main>
+        <p class="enigma-long">
+            We exist in the friction between the heavy and the ethereal. It is the blues-drenched soul of <strong>Hendrix</strong> and <strong>Clapton</strong> meeting the calculated thunder of <strong>Maiden</strong> and <strong>AC/DC</strong>. We carry the melodic ghosts of <strong>The Beatles</strong>, the sprawling psychedelic architecture of <strong>Floyd</strong>, and the raw, prehistoric weight of <strong>Zeppelin</strong>. Erimitis is not a single sound; it is the electric alchemy of the masters, reborn in the silence of the iron woods.
+        </p>
+        <div class="gold-line">ONE FREQUENCY. MANY GHOSTS.</div>
+    </main>
+
+    <div id="menu">
+        <div style="position: absolute; top: 45px; left: 50px; color: var(--gold); cursor: pointer; font-family: 'Cinzel';" onclick="toggleMenu()">[ CLOSE ]</div>
+        <ul style="list-style: none;">
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="music.html">MUSIC</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+    </div>
+
     <script>
         function toggleMenu() {
-            const menu = document.getElementById('menu'); const links = document.querySelectorAll('#menu a'); const isVisible = menu.style.display === 'block';
+            const menu = document.getElementById('menu');
+            const links = document.querySelectorAll('#menu a');
+            const isVisible = menu.style.display === 'block';
             menu.style.display = isVisible ? 'none' : 'block';
-            if (!isVisible) { setTimeout(() => { links.forEach((link, i) => { setTimeout(() => { link.style.opacity = '1'; }, i * 100); }); }, 50); } else { links.forEach(link => link.style.opacity = '0'); }
+            if (!isVisible) {
+                setTimeout(() => {
+                    links.forEach((link, i) => {
+                        setTimeout(() => { link.style.opacity = '1'; }, i * 100);
+                    });
+                }, 50);
+            } else {
+                links.forEach(link => link.style.opacity = '0');
+            }
         }
     </script>
 </body>
