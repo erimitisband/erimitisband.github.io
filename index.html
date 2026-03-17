@@ -1,75 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Erimitis | Home</title>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERIMITIS | Home</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Crimson+Text&display=swap" rel="stylesheet">
-    <style>
-        :root { --bg: #02020a; --steel: #5B9FD4; --gray: #B8952A; --white: #f0ede8; }
-        body, html { margin: 0; padding: 0; background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; overflow-x: hidden; height: 100%; }
-        
-        /* Background & Stars */
-        .hero-bg { position: fixed; top: 0; left: 0; width: 115%; height: 115%; background: url('logo.jpg') center/cover no-repeat; opacity: 0.15; z-index: -2; animation: drift 40s infinite alternate linear; }
-        @keyframes drift { from { transform: translate(0, 0); } to { transform: translate(-3%, -3%); } }
-        #starCanvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
-
-        /* Shared Typography */
-        h1 { font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 12vw, 5rem); letter-spacing: 0.8rem; text-align: center; margin: 0; padding: 40px 0; }
-        .gold-leaf { font-family: 'Cinzel', serif; color: var(--gray); letter-spacing: 3px; text-transform: uppercase; }
-
-        /* Desktop Navigation (Top-Center) */
-        nav { text-align: center; padding: 20px 0; display: block; }
-        nav a { font-family: 'Cinzel', serif; color: var(--gray); text-decoration: none; margin: 0 20px; font-size: 1.1rem; transition: 0.3s; position: relative; }
-        nav a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -5px; left: 50%; background: var(--steel); transition: 0.3s; transform: translateX(-50%); }
-        nav a:hover, nav a.active { color: var(--steel); }
-        nav a:hover::after, nav a.active::after { width: 100%; }
-
-        /* Mobile Navigation (Stacked Underneath Content) */
-        .mobile-nav { display: none; flex-direction: column; align-items: center; width: 100%; padding: 40px 0; }
-        .nav-block { width: 85%; padding: 18px 0; text-align: center; border-bottom: 1px solid rgba(184, 149, 42, 0.2); color: var(--gray); font-family: 'Cinzel', serif; text-decoration: none; font-size: 1rem; letter-spacing: 2px; transition: 0.3s; }
-        .nav-block:hover { color: var(--steel); border-bottom-color: var(--steel); }
-
-        /* Content Areas */
-        .content-wrap { max-width: 800px; margin: 0 auto; padding: 20px; text-align: center; min-height: 40vh; display: flex; flex-direction: column; justify-content: center; }
-        p { font-size: 1.25rem; line-height: 1.8; opacity: 0.9; margin-bottom: 20px; }
-
-        @media (max-width: 768px) {
-            nav { display: none; }
-            .mobile-nav { display: flex; }
-            h1 { padding: 60px 0 20px 0; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="hero-bg"></div>
-    <canvas id="starCanvas"></canvas>
-
-    <div class="content-wrap">
-        <h1>ERIMITIS</h1>
-    </div>
-
-    <div class="mobile-nav">
-        <a href="index.html" class="nav-block" style="color:var(--steel)">HOME</a>
-        <a href="about.html" class="nav-block">ABOUT</a>
-        <a href="music.html" class="nav-block">MUSIC</a>
-        <a href="contact.html" class="nav-block">CONTACT</a>
-    </div>
-
-    <nav>
-        <a href="index.html" class="active">HOME</a>
-        <a href="about.html">ABOUT</a>
-        <a href="music.html">MUSIC</a>
-        <a href="contact.html">CONTACT</a>
+    <nav class="navbar">
+        <img src="logo.jpg" alt="Erimitis" class="logo-img">
+        <div class="menu-toggle"><span></span><span></span><span></span></div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active-page">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="music.html">Music</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
     </nav>
-
-    <script>
-        const canvas = document.getElementById('starCanvas'); const ctx = canvas.getContext('2d');
-        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        window.onresize = resize; resize();
-        let stars = []; for(let i=0; i<150; i++) stars.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*1.3 });
-        function draw() { ctx.clearRect(0,0,canvas.width, canvas.height); ctx.fillStyle = "rgba(140, 180, 214, 0.5)"; stars.forEach(s => { ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2); ctx.fill(); }); requestAnimationFrame(draw); }
-        draw();
-    </script>
+    <canvas id="starCanvas"></canvas>
+    <main>
+        <h1>ERIMITIS</h1>
+        <p>A sonic exploration of solitude. Atmospheric soundscapes built with vanilla tech.</p>
+    </main>
+    <script src="script.js"></script>
 </body>
 </html>
