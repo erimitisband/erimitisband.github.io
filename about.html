@@ -9,27 +9,27 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
 
-        /* Absolute Top Title */
         .brand-header { position: absolute; top: 0; width: 100%; text-align: center; padding-top: 20px; z-index: 10; }
         h1 { font-family: 'Cinzel', serif; font-size: clamp(2rem, 8vw, 2.5rem); letter-spacing: 15px; color: var(--steel); }
 
-        /* PC Navigation */
         .desktop-nav { position: fixed; top: 30px; left: 40px; z-index: 1000; }
         .hamburger { display: flex; flex-direction: column; gap: 8px; cursor: pointer; width: 30px; }
         .hamburger span { width: 100%; height: 2px; background-color: var(--steel); }
 
-        /* Fullscreen Menu */
         #fullscreenMenu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(2, 2, 10, 0.98); z-index: 2000; flex-direction: column; justify-content: center; align-items: center; }
         #fullscreenMenu a { color: var(--white); font-family: 'Cinzel', serif; font-size: 2.5rem; letter-spacing: 10px; text-decoration: underline; text-decoration-color: var(--steel); margin: 25px 0; }
 
-        /* Content Area */
-        main { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 100px 15% 0; text-align: center; }
-        .about-text { font-size: clamp(1.1rem, 3vw, 1.5rem); color: var(--steel); font-style: italic; line-height: 1.8; max-width: 800px; letter-spacing: 1px; }
+        /* Main Content */
+        main { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 120px 15% 60px; text-align: center; }
+        .about-text { font-size: clamp(1.1rem, 3vw, 1.4rem); color: var(--steel); font-style: italic; line-height: 1.8; max-width: 800px; letter-spacing: 1px; margin-bottom: 50px; }
         
-        /* Footer */
+        /* Influences Section */
+        .influences-container { max-width: 600px; border-top: 1px solid rgba(91, 159, 212, 0.3); padding-top: 30px; }
+        .inf-title { font-family: 'Cinzel', serif; font-size: 0.9rem; color: var(--steel); letter-spacing: 5px; margin-bottom: 20px; opacity: 0.8; }
+        .inf-list { font-size: 1.1rem; line-height: 2; letter-spacing: 2px; text-transform: uppercase; opacity: 0.9; }
+
         footer { padding: 40px 0; text-align: center; font-family: 'Cinzel', serif; color: var(--steel); font-size: 0.6rem; letter-spacing: 3px; }
 
-        /* Mobile Vertical Stack */
         .mobile-nav-boxes { display: none; width: 100%; padding: 10px; flex-direction: column; gap: 10px; position: fixed; bottom: 0; z-index: 1000; background: linear-gradient(transparent, var(--bg) 20%); }
         .nav-box { border: 1px solid var(--steel); padding: 20px; text-decoration: none; color: var(--white); font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 4px; text-align: center; background: rgba(2, 2, 10, 0.95); width: 100%; }
 
@@ -37,7 +37,7 @@
             .desktop-nav { display: none !important; }
             .mobile-nav-boxes { display: flex !important; }
             footer { padding-bottom: 320px; }
-            .brand-header { padding-top: 15px; }
+            main { padding-top: 100px; }
         }
     </style>
 </head>
@@ -56,6 +56,13 @@
             We exist in the friction between the heavy and the ethereal. <br>
             A collective shadow reborn in the silence of the iron woods.
         </p>
+
+        <div class="influences-container">
+            <h2 class="inf-title">INFLUENCES</h2>
+            <p class="inf-list">
+                Ulver / Mgła / Wardruna / Amenra / Dead Can Dance
+            </p>
+        </div>
     </main>
     
     <footer>&copy; 2026 ERIMITIS. ALL RIGHTS RESERVED.</footer>
