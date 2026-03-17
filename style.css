@@ -1,0 +1,110 @@
+:root {
+  --bg: #02020a;
+  --steel: #5B9FD4;
+  --gold: #B8952A;
+  --text: #f0f0f0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Crimson Text', serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Star Background */
+#starCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* NAVIGATION AREA */
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px 10px;
+  border-bottom: 1px solid rgba(91, 159, 212, 0.2);
+  background: var(--bg);
+}
+
+.logo {
+  font-family: 'Cinzel', serif;
+  color: var(--gold);
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  letter-spacing: 4px;
+}
+
+/* Mobile/Tablet: Buttons are visible */
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  gap: 12px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text);
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  padding: 10px 15px;
+  border: 1px solid var(--steel);
+  transition: 0.3s;
+}
+
+.nav-links a.active-page {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.menu-toggle { display: none; }
+
+/* Computer: Hidden Hamburger Menu */
+@media (min-width: 1024px) {
+  .navbar {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 5%;
+    height: 90px;
+  }
+
+  .logo { margin-bottom: 0; }
+
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+  }
+
+  .menu-toggle span { width: 30px; height: 1px; background-color: var(--gold); }
+
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 0; right: 0;
+    width: 300px; height: 100vh;
+    background: rgba(2, 2, 10, 0.98);
+    flex-direction: column;
+    padding-top: 100px;
+    border-left: 1px solid var(--steel);
+    z-index: 100;
+  }
+
+  .nav-links.active { display: flex; }
+  .nav-links a { border: none; font-size: 1.6rem; width: 100%; text-align: center; }
+}
+
+/* Page Spacing */
+main { padding: 60px 10%; text-align: center; }
+h1, h2 { font-family: 'Cinzel', serif; color: var(--gold); font-size: 3rem; margin-bottom: 20px; }
+p { font-size: 1.2rem; line-height: 1.6; }
