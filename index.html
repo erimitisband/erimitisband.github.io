@@ -4,10 +4,30 @@
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ERIMITIS | Home</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Crimson+Text:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root { --bg: #02020a; --steel: #4682B4; --gold: #D4AF37; --white: #ffffff; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; overflow-x: hidden; line-height: 1.8; min-height: 150vh; }
+        #ghostLogo { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; max-width: 550px; opacity: 0.12; z-index: -1; pointer-events: none; }
+        .navbar { width: 100%; padding: 45px 20px; position: sticky; top: 0; z-index: 1000; display: flex; justify-content: center; }
+        .hamburger { display: flex; flex-direction: column; gap: 9px; cursor: pointer; z-index: 1001; }
+        .hamburger span { width: 38px; height: 1px; background-color: var(--gold); transition: 0.4s; }
+        .nav-links { display: none; list-style: none; text-align: center; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(2, 2, 10, 0.98); padding-top: 20vh; }
+        .nav-links li { margin: 35px 0; }
+        .nav-links a { text-decoration: underline; text-decoration-color: var(--steel); text-underline-offset: 12px; color: var(--white); font-family: 'Cinzel', serif; font-size: 2.8rem; letter-spacing: 7px; opacity: 0; transition: opacity 0.6s ease; }
+        @media (max-width: 1023px) {
+            .hamburger { display: none; }
+            .nav-links { display: flex; position: relative; top: 0; height: auto; width: 90%; flex-direction: row; justify-content: space-evenly; background: rgba(70, 130, 180, 0.1); border: 1px solid rgba(70, 130, 180, 0.3); padding: 18px; margin: 0 auto; }
+            .nav-links li { margin: 0; }
+            .nav-links a { opacity: 1; font-size: 0.85rem; text-decoration: none; color: var(--gold); letter-spacing: 2px; }
+        }
+        .hero { height: 75vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        h1 { font-family: 'Cinzel', serif; font-size: clamp(3.5rem, 12vw, 8rem); letter-spacing: 18px; color: var(--white); text-transform: uppercase; }
+        .sub-gold { color: var(--gold); font-family: 'Cinzel', serif; font-size: 1.2rem; letter-spacing: 6px; margin-top: 10px; }
+    </style>
 </head>
 <body>
-    <img src="logo.jpg" class="bg-logo" id="ghostLogo">
+    <img src="logo.jpg" id="ghostLogo">
     <nav class="navbar">
         <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
         <ul class="nav-links" id="menu">
@@ -17,10 +37,25 @@
             <li><a href="contact.html">CONTACT</a></li>
         </ul>
     </nav>
-    <main>
+    <main class="hero">
         <h1>ERIMITIS</h1>
-        <div class="sub-gold">The Thunder Returns</div>
+        <div class="sub-gold">The New Era of Thunder</div>
     </main>
-    <script src="script.js"></script>
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            const links = document.querySelectorAll('.nav-links a');
+            const isVisible = menu.style.display === 'block';
+            menu.style.display = isVisible ? 'none' : 'block';
+            setTimeout(() => {
+                links.forEach((link, i) => { setTimeout(() => { link.style.opacity = isVisible ? '0' : '1'; }, i * 120); });
+            }, 50);
+        }
+        window.addEventListener('scroll', () => {
+            const logo = document.getElementById('ghostLogo');
+            let offset = window.pageYOffset;
+            logo.style.transform = `translate(-50%, calc(-50% + ${offset * 0.12}px))`;
+        });
+    </script>
 </body>
 </html>
