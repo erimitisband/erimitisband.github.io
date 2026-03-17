@@ -5,65 +5,70 @@
     <title>ERIMITIS | Home</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Crimson+Text:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #02020a; --steel: #4682B4; --gold: #D4AF37; --white: #ffffff; }
+        :root { --bg: #02020a; --steel: #5B9FD4; --gold: #B8952A; --white: #ffffff; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
-        
-        #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--bg); display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 1.5s ease; }
-        #preloader.fade-out { opacity: 0; pointer-events: none; }
-        .loader-e { font-family: 'Cinzel', serif; font-size: 5rem; color: var(--gold); letter-spacing: 10px; animation: pulse 2s infinite ease-in-out; }
-        @keyframes pulse { 0%, 100% { opacity: 0.4; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1); } }
+        body { background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; min-height: 150vh; overflow-x: hidden; }
 
-        /* Navigation */
-        .desktop-nav { display: flex; align-items: center; padding: 30px 40px; position: fixed; top: 0; width: 100%; z-index: 1000; }
-        .hamburger { display: flex; flex-direction: column; gap: 8px; cursor: pointer; width: 30px; z-index: 2001; }
-        .hamburger span { width: 100%; height: 1px; background-color: var(--gold); }
-        
-        .mobile-nav-boxes { display: none; width: 100%; padding: 15px; gap: 10px; position: fixed; bottom: 0; z-index: 1000; background: linear-gradient(transparent, var(--bg) 30%); flex-wrap: wrap; justify-content: center; }
-        .nav-box { border: 1px solid var(--gold); padding: 15px; text-decoration: none; color: var(--white); font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 2px; flex: 1 1 45%; text-align: center; background: rgba(2, 2, 10, 0.95); }
+        /* Titles at the VERY top */
+        .brand-header { position: absolute; top: 0; width: 100%; text-align: center; padding-top: 20px; z-index: 10; }
+        h1 { font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 10vw, 5rem); letter-spacing: 20px; color: var(--steel); }
+
+        /* The Moving Hermit (Parallax) */
+        #ghostLogo { 
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+            width: 85%; max-width: 650px; opacity: 0.3; z-index: -1; pointer-events: none; 
+            transition: transform 0.1s ease-out; 
+        }
+
+        /* PC Hamburger (Steel) */
+        .desktop-nav { position: fixed; top: 30px; left: 40px; z-index: 1000; }
+        .hamburger { display: flex; flex-direction: column; gap: 8px; cursor: pointer; width: 30px; }
+        .hamburger span { width: 100%; height: 2px; background-color: var(--steel); }
+
+        /* Mobile Vertical Boxes */
+        .mobile-nav-boxes { display: none; width: 100%; padding: 10px; flex-direction: column; gap: 10px; position: fixed; bottom: 0; z-index: 1000; background: linear-gradient(transparent, var(--bg) 20%); }
+        .nav-box { border: 1px solid var(--steel); padding: 20px; text-decoration: none; color: var(--white); font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 4px; text-align: center; background: rgba(2, 2, 10, 0.9); width: 100%; }
 
         @media (max-width: 1024px) {
             .desktop-nav { display: none !important; }
             .mobile-nav-boxes { display: flex !important; }
-            footer { padding-bottom: 140px; }
-            .brand-header { margin-top: 40px !important; }
+            footer { padding-bottom: 300px; } /* Space for vertical stack */
         }
 
         #fullscreenMenu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(2, 2, 10, 0.98); z-index: 2000; flex-direction: column; justify-content: center; align-items: center; }
-        #fullscreenMenu a { color: var(--white); font-family: 'Cinzel', serif; font-size: 2.5rem; letter-spacing: 10px; text-decoration: underline; text-underline-offset: 15px; margin: 25px 0; }
+        #fullscreenMenu a { color: var(--white); font-family: 'Cinzel', serif; font-size: 2.5rem; letter-spacing: 10px; text-decoration: underline; text-decoration-color: var(--steel); margin: 25px 0; }
 
-        /* Title at Top */
-        .brand-header { margin-top: 100px; text-align: center; width: 100%; }
-        h1 { font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 10vw, 5rem); letter-spacing: 20px; color: var(--white); }
-        
-        #ghostLogo { position: fixed; top: 55%; left: 50%; transform: translate(-50%, -50%); width: 85%; max-width: 600px; opacity: 0.15; z-index: -1; pointer-events: none; }
-        main { flex: 1; }
-        footer { padding: 40px 0; text-align: center; font-family: 'Cinzel', serif; color: var(--gold); font-size: 0.6rem; letter-spacing: 3px; }
+        footer { position: absolute; bottom: 20px; width: 100%; text-align: center; font-family: 'Cinzel', serif; color: var(--steel); font-size: 0.6rem; letter-spacing: 3px; }
     </style>
 </head>
 <body>
-    <div id="preloader"><div class="loader-e">E</div></div>
     <nav class="desktop-nav"><div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div></nav>
     <div id="fullscreenMenu">
-        <div style="position: absolute; top: 35px; left: 40px; color: var(--gold); cursor: pointer; font-family: 'Cinzel';" onclick="toggleMenu()">[ CLOSE ]</div>
+        <div style="position: absolute; top: 35px; left: 40px; color: var(--steel); cursor: pointer; font-family: 'Cinzel';" onclick="toggleMenu()">[ CLOSE ]</div>
         <a href="index.html">HOME</a><a href="about.html">ABOUT</a><a href="music.html">MUSIC</a><a href="contact.html">CONTACT</a>
     </div>
 
-    <div class="brand-header"><h1>ERIMITIS</h1></div>
+    <header class="brand-header"><h1>ERIMITIS</h1></header>
     <img src="logo.jpg" id="ghostLogo">
-    <main></main>
+
     <footer>&copy; 2026 ERIMITIS. ALL RIGHTS RESERVED.</footer>
 
     <nav class="mobile-nav-boxes">
-        <a href="index.html" class="nav-box" style="background: var(--gold); color: var(--bg);">HOME</a>
+        <a href="index.html" class="nav-box" style="background: var(--steel); color: var(--bg);">HOME</a>
         <a href="about.html" class="nav-box">ABOUT</a>
         <a href="music.html" class="nav-box">MUSIC</a>
         <a href="contact.html" class="nav-box">CONTACT</a>
     </nav>
 
     <script>
-        window.addEventListener('load', () => { setTimeout(() => { document.getElementById('preloader').classList.add('fade-out'); }, 2000); });
         function toggleMenu() { const m = document.getElementById('fullscreenMenu'); m.style.display = (m.style.display === 'flex') ? 'none' : 'flex'; }
+        
+        // The Movement Logic
+        window.addEventListener('scroll', () => {
+            const scroll = window.pageYOffset;
+            const logo = document.getElementById('ghostLogo');
+            logo.style.transform = `translate(-50%, calc(-50% + ${scroll * 0.5}px)) rotate(${scroll * 0.02}deg)`;
+        });
     </script>
 </body>
 </html>
