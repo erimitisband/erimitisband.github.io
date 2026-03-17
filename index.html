@@ -15,24 +15,28 @@
         .loader-e { font-family: 'Cinzel', serif; font-size: 5rem; color: var(--gold); letter-spacing: 10px; animation: pulse 2s infinite ease-in-out; }
         @keyframes pulse { 0%, 100% { opacity: 0.4; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1); } }
 
-        /* --- DESKTOP NAVIGATION (Hamburger) --- */
+        /* PC NAVIGATION: Hamburger Only */
         .desktop-nav { display: flex; align-items: center; padding: 40px 50px; position: fixed; top: 0; width: 100%; z-index: 1000; }
         .hamburger { display: flex; flex-direction: column; gap: 10px; cursor: pointer; width: 35px; z-index: 2001; }
         .hamburger span { width: 100%; height: 1px; background-color: var(--gold); }
         
-        #fullscreenMenu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(2, 2, 10, 0.98); z-index: 2000; flex-direction: column; justify-content: center; align-items: center; }
-        #fullscreenMenu a { color: var(--white); font-family: 'Cinzel', serif; font-size: 2.5rem; letter-spacing: 10px; text-decoration: underline; text-decoration-color: var(--steel); text-underline-offset: 15px; margin: 25px 0; transition: 0.3s; }
-        #fullscreenMenu a:hover { color: var(--gold); }
-
-        /* --- MOBILE NAVIGATION (Boxes) --- */
+        /* MOBILE NAVIGATION: Boxes Only */
         .mobile-nav-boxes { display: none; width: 100%; padding: 20px; justify-content: center; gap: 8px; flex-wrap: wrap; position: fixed; top: 0; z-index: 1000; background: var(--bg); }
         .nav-box { border: 1px solid var(--gold); padding: 10px 15px; text-decoration: none; color: var(--white); font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 2px; }
 
-        /* --- RESPONSIVE LOGIC --- */
+        /* THE SWITCH: PC vs PHONE */
         @media (max-width: 1024px) {
-            .desktop-nav { display: none; }
-            .mobile-nav-boxes { display: flex; }
+            .desktop-nav { display: none !important; } /* Hide Hamburger on Phone */
+            .mobile-nav-boxes { display: flex !important; } /* Show Boxes on Phone */
         }
+        @media (min-width: 1025px) {
+            .mobile-nav-boxes { display: none !important; } /* Hide Boxes on PC */
+        }
+
+        /* Fullscreen Menu for PC */
+        #fullscreenMenu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(2, 2, 10, 0.98); z-index: 2000; flex-direction: column; justify-content: center; align-items: center; }
+        #fullscreenMenu a { color: var(--white); font-family: 'Cinzel', serif; font-size: 2.5rem; letter-spacing: 10px; text-decoration: underline; text-decoration-color: var(--steel); text-underline-offset: 15px; margin: 25px 0; transition: 0.3s; }
+        #fullscreenMenu a:hover { color: var(--gold); }
 
         .brand-header { margin-top: 200px; text-align: center; }
         h1 { font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 10vw, 5rem); letter-spacing: 20px; }
@@ -45,10 +49,7 @@
 <body>
     <div id="preloader"><div class="loader-e">E</div></div>
 
-    <nav class="desktop-nav">
-        <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
-    </nav>
-
+    <nav class="desktop-nav"><div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div></nav>
     <nav class="mobile-nav-boxes">
         <a href="index.html" class="nav-box" style="background: var(--gold); color: var(--bg);">HOME</a>
         <a href="about.html" class="nav-box">ABOUT</a>
@@ -58,10 +59,7 @@
 
     <div id="fullscreenMenu">
         <div style="position: absolute; top: 45px; left: 50px; color: var(--gold); cursor: pointer; font-family: 'Cinzel';" onclick="toggleMenu()">[ CLOSE ]</div>
-        <a href="index.html">HOME</a>
-        <a href="about.html">ABOUT</a>
-        <a href="music.html">MUSIC</a>
-        <a href="contact.html">CONTACT</a>
+        <a href="index.html">HOME</a><a href="about.html">ABOUT</a><a href="music.html">MUSIC</a><a href="contact.html">CONTACT</a>
     </div>
 
     <div class="brand-header"><h1>ERIMITIS</h1></div>
@@ -71,11 +69,7 @@
 
     <script>
         window.addEventListener('load', () => { setTimeout(() => { document.getElementById('preloader').classList.add('fade-out'); }, 2000); });
-        
-        function toggleMenu() {
-            const m = document.getElementById('fullscreenMenu');
-            m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
-        }
+        function toggleMenu() { const m = document.getElementById('fullscreenMenu'); m.style.display = (m.style.display === 'flex') ? 'none' : 'flex'; }
     </script>
 </body>
 </html>
