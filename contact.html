@@ -7,29 +7,44 @@
     <style>
         :root { --bg: #02020a; --steel: #4682B4; --gold: #D4AF37; --white: #ffffff; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; display: flex; flex-direction: column; min-height: 100vh; }
+        body { background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
         
-        .nav-container { width: 100%; padding: 20px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; position: fixed; top: 0; z-index: 1000; background: var(--bg); }
-        .nav-box { border: 1px solid var(--gold); padding: 10px 20px; text-decoration: none; color: var(--white); font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 2px; }
+        .desktop-nav { display: flex; align-items: center; padding: 40px 50px; position: fixed; top: 0; width: 100%; z-index: 1000; background: var(--bg); }
+        .hamburger { display: flex; flex-direction: column; gap: 10px; cursor: pointer; width: 35px; z-index: 2001; }
+        .hamburger span { width: 100%; height: 1px; background-color: var(--gold); }
         
-        .page-title { margin-top: 120px; text-align: center; }
-        h1 { font-family: 'Cinzel', serif; font-size: 2.5rem; letter-spacing: 15px; }
+        #fullscreenMenu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(2, 2, 10, 0.98); z-index: 2000; flex-direction: column; justify-content: center; align-items: center; }
+        #fullscreenMenu a { color: var(--white); font-family: 'Cinzel', serif; font-size: 2.5rem; letter-spacing: 10px; text-decoration: underline; text-decoration-color: var(--steel); text-underline-offset: 15px; margin: 25px 0; }
 
+        .mobile-nav-boxes { display: none; width: 100%; padding: 20px; justify-content: center; gap: 8px; flex-wrap: wrap; position: fixed; top: 0; z-index: 1000; background: var(--bg); }
+        .nav-box { border: 1px solid var(--gold); padding: 10px 15px; text-decoration: none; color: var(--white); font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 2px; }
+
+        @media (max-width: 1024px) { .desktop-nav { display: none; } .mobile-nav-boxes { display: flex; } }
+
+        .brand-header { margin-top: 180px; text-align: center; }
+        h1 { font-family: 'Cinzel', serif; font-size: clamp(2rem, 8vw, 2.5rem); letter-spacing: 15px; }
+        
         main { flex: 1; padding: 50px 10%; text-align: center; }
         .enquiry { margin-top: 60px; }
         .label { font-family: 'Cinzel', serif; color: var(--steel); letter-spacing: 3px; font-size: 0.8rem; }
-        .email { display: block; font-size: 1.5rem; color: var(--white); text-decoration: none; margin-top: 10px; font-family: 'Cinzel', serif; }
+        .email { display: block; font-size: 1.5rem; color: var(--white); text-decoration: none; margin-top: 10px; font-family: 'Cinzel', serif; transition: 0.3s; }
+        .email:hover { color: var(--gold); }
         footer { padding: 40px 0; text-align: center; font-family: 'Cinzel', serif; color: var(--gold); font-size: 0.6rem; letter-spacing: 3px; }
     </style>
 </head>
 <body>
-    <nav class="nav-container">
+    <nav class="desktop-nav"><div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div></nav>
+    <nav class="mobile-nav-boxes">
         <a href="index.html" class="nav-box">HOME</a>
         <a href="about.html" class="nav-box">ABOUT</a>
         <a href="music.html" class="nav-box">MUSIC</a>
         <a href="contact.html" class="nav-box" style="background: var(--gold); color: var(--bg);">CONTACT</a>
     </nav>
-    <div class="page-title"><h1>CONTACT</h1></div>
+    <div id="fullscreenMenu">
+        <div style="position: absolute; top: 45px; left: 50px; color: var(--gold); cursor: pointer; font-family: 'Cinzel';" onclick="toggleMenu()">[ CLOSE ]</div>
+        <a href="index.html">HOME</a><a href="about.html">ABOUT</a><a href="music.html">MUSIC</a><a href="contact.html">CONTACT</a>
+    </div>
+    <div class="brand-header"><h1>CONTACT</h1></div>
     <main>
         <div class="enquiry">
             <span class="label">Direct Enquiry</span>
@@ -37,5 +52,6 @@
         </div>
     </main>
     <footer>&copy; 2026 ERIMITIS. ALL RIGHTS RESERVED.</footer>
+    <script>function toggleMenu() { const m = document.getElementById('fullscreenMenu'); m.style.display = (m.style.display === 'flex') ? 'none' : 'flex'; }</script>
 </body>
 </html>
