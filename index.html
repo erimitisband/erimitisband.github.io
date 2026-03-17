@@ -7,22 +7,14 @@
     <style>
         :root { --bg: #02020a; --steel: #5B9FD4; --white: #ffffff; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        /* Vacant body - no scroll needed if the design is static */
-        body { background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; height: 100vh; overflow: hidden; }
+        body { background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
 
         /* ABSOLUTE TOP TITLE */
         .brand-header { position: absolute; top: 0; width: 100%; text-align: center; padding: 15px 0; z-index: 10; }
         h1 { font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 10vw, 5rem); letter-spacing: 20px; color: var(--steel); margin: 0; }
 
-        /* THE STATIONARY HERMIT (Fixed in center) */
-        #ghostLogo { 
-            position: fixed; top: 50%; left: 50%; 
-            transform: translate(-50%, -50%); 
-            width: 80%; max-width: 600px; 
-            opacity: 0.25; z-index: -1; 
-            pointer-events: none; 
-        }
+        /* STATIONARY HERMIT */
+        #ghostLogo { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; max-width: 600px; opacity: 0.25; z-index: -1; pointer-events: none; }
 
         /* PC NAVIGATION */
         .desktop-nav { position: fixed; top: 25px; left: 25px; z-index: 1000; cursor: pointer; padding: 10px; }
@@ -32,36 +24,29 @@
         /* FULLSCREEN MENU */
         #fullscreenMenu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(2, 2, 10, 0.98); z-index: 2000; flex-direction: column; justify-content: center; align-items: center; }
         #fullscreenMenu a { color: var(--white); font-family: 'Cinzel', serif; font-size: 2.5rem; letter-spacing: 12px; margin: 25px 0; text-decoration: none; }
-        #fullscreenMenu a:hover { color: var(--steel); }
 
-        /* FOOTER */
-        footer { position: fixed; bottom: 20px; width: 100%; text-align: center; font-family: 'Cinzel', serif; color: var(--steel); font-size: 0.6rem; letter-spacing: 4px; z-index: 5; }
+        /* PC FOOTER */
+        footer { position: fixed; bottom: 20px; width: 100%; text-align: center; font-family: 'Cinzel', serif; color: var(--steel); font-size: 0.6rem; letter-spacing: 4px; }
 
-        /* MOBILE VERTICAL STACK (Boxes sit strictly underneath each other) */
+        /* MOBILE NAV STACK */
         .mobile-nav-boxes { display: none; width: 100%; padding: 10px; flex-direction: column; gap: 10px; position: fixed; bottom: 0; z-index: 1000; background: var(--bg); }
-        .nav-box { border: 1px solid var(--steel); padding: 22px; text-decoration: none; color: var(--white); font-family: 'Cinzel', serif; text-align: center; font-size: 0.9rem; letter-spacing: 4px; background: rgba(2, 2, 10, 0.95); }
+        .nav-box { border: 1px solid var(--steel); padding: 22px; text-decoration: none; color: var(--white); font-family: 'Cinzel', serif; text-align: center; font-size: 0.9rem; letter-spacing: 4px; }
+        .mobile-footer { display: none; text-align: center; font-family: 'Cinzel', serif; color: var(--steel); font-size: 0.5rem; letter-spacing: 3px; padding: 10px 0; }
 
         @media (max-width: 1024px) {
-            .desktop-nav { display: none; }
-            .mobile-nav-boxes { display: flex; }
-            footer { bottom: 340px; }
+            .desktop-nav, footer { display: none; }
+            .mobile-nav-boxes, .mobile-footer { display: flex; }
         }
     </style>
 </head>
 <body>
-
-    <div class="desktop-nav" onclick="toggleMenu()">
-        <div class="hamburger"><span></span><span></span><span></span></div>
-    </div>
-
+    <div class="desktop-nav" onclick="toggleMenu()"><div class="hamburger"><span></span><span></span><span></span></div></div>
     <div id="fullscreenMenu">
-        <div style="position: absolute; top: 35px; left: 35px; color: var(--steel); cursor: pointer; font-family: 'Cinzel';" onclick="toggleMenu()">[ CLOSE ]</div>
         <a href="index.html">HOME</a><a href="about.html">ABOUT</a><a href="music.html">MUSIC</a><a href="contact.html">CONTACT</a>
     </div>
 
     <header class="brand-header"><h1>ERIMITIS</h1></header>
-
-    <img src="logo.jpg" id="ghostLogo" alt="Hermit Logo">
+    <img src="logo.jpg" id="ghostLogo">
 
     <footer>&copy; 2026 ERIMITIS. ALL RIGHTS RESERVED.</footer>
 
@@ -70,13 +55,9 @@
         <a href="about.html" class="nav-box">ABOUT</a>
         <a href="music.html" class="nav-box">MUSIC</a>
         <a href="contact.html" class="nav-box">CONTACT</a>
+        <div class="mobile-footer">&copy; 2026 ERIMITIS. ALL RIGHTS RESERVED.</div>
     </nav>
 
-    <script>
-        function toggleMenu() { 
-            const m = document.getElementById('fullscreenMenu'); 
-            m.style.display = (m.style.display === 'flex') ? 'none' : 'flex'; 
-        }
-    </script>
+    <script>function toggleMenu() { const m = document.getElementById('fullscreenMenu'); m.style.display = (m.style.display === 'flex') ? 'none' : 'flex'; }</script>
 </body>
 </html>
