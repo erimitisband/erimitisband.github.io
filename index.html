@@ -9,30 +9,45 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; min-height: 150vh; overflow-x: hidden; }
 
-        /* Titles at the VERY top */
+        /* --- LOADING OVERLAY --- */
+        #loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: var(--bg); display: flex; justify-content: center; align-items: center;
+            z-index: 9999; transition: opacity 1s ease-out, visibility 1s;
+        }
+        .loader-content { text-align: center; }
+        .loader-symbol { 
+            font-family: 'Cinzel', serif; font-size: 5rem; color: var(--steel); 
+            letter-spacing: 10px; animation: breathe 2.5s infinite ease-in-out;
+            text-shadow: 0 0 20px rgba(91, 159, 212, 0.4);
+        }
+        @keyframes breathe {
+            0%, 100% { opacity: 0.2; transform: scale(0.95); filter: blur(2px); }
+            50% { opacity: 1; transform: scale(1); filter: blur(0px); }
+        }
+        .loader-hidden { opacity: 0; visibility: hidden; }
+
+        /* --- PAGE LAYOUT --- */
         .brand-header { position: absolute; top: 0; width: 100%; text-align: center; padding-top: 20px; z-index: 10; }
         h1 { font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 10vw, 5rem); letter-spacing: 20px; color: var(--steel); }
 
-        /* The Moving Hermit (Parallax) */
         #ghostLogo { 
             position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
             width: 85%; max-width: 650px; opacity: 0.3; z-index: -1; pointer-events: none; 
             transition: transform 0.1s ease-out; 
         }
 
-        /* PC Hamburger (Steel) */
         .desktop-nav { position: fixed; top: 30px; left: 40px; z-index: 1000; }
         .hamburger { display: flex; flex-direction: column; gap: 8px; cursor: pointer; width: 30px; }
         .hamburger span { width: 100%; height: 2px; background-color: var(--steel); }
 
-        /* Mobile Vertical Boxes */
         .mobile-nav-boxes { display: none; width: 100%; padding: 10px; flex-direction: column; gap: 10px; position: fixed; bottom: 0; z-index: 1000; background: linear-gradient(transparent, var(--bg) 20%); }
         .nav-box { border: 1px solid var(--steel); padding: 20px; text-decoration: none; color: var(--white); font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 4px; text-align: center; background: rgba(2, 2, 10, 0.9); width: 100%; }
 
         @media (max-width: 1024px) {
             .desktop-nav { display: none !important; }
             .mobile-nav-boxes { display: flex !important; }
-            footer { padding-bottom: 300px; } /* Space for vertical stack */
+            footer { padding-bottom: 300px; }
         }
 
         #fullscreenMenu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(2, 2, 10, 0.98); z-index: 2000; flex-direction: column; justify-content: center; align-items: center; }
@@ -42,7 +57,15 @@
     </style>
 </head>
 <body>
+
+    <div id="loader">
+        <div class="loader-content">
+            <div class="loader-symbol">E</div>
+        </div>
+    </div>
+
     <nav class="desktop-nav"><div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div></nav>
+    
     <div id="fullscreenMenu">
         <div style="position: absolute; top: 35px; left: 40px; color: var(--steel); cursor: pointer; font-family: 'Cinzel';" onclick="toggleMenu()">[ CLOSE ]</div>
         <a href="index.html">HOME</a><a href="about.html">ABOUT</a><a href="music.html">MUSIC</a><a href="contact.html">CONTACT</a>
@@ -61,13 +84,28 @@
     </nav>
 
     <script>
-        function toggleMenu() { const m = document.getElementById('fullscreenMenu'); m.style.display = (m.style.display === 'flex') ? 'none' : 'flex'; }
-        
-        // The Movement Logic
+        // Handle Menu
+        function toggleMenu() { 
+            const m = document.getElementById('fullscreenMenu'); 
+            m.style.display = (m.style.display === 'flex') ? 'none' : 'flex'; 
+        }
+
+        // Handle Parallax Movement
         window.addEventListener('scroll', () => {
             const scroll = window.pageYOffset;
             const logo = document.getElementById('ghostLogo');
-            logo.style.transform = `translate(-50%, calc(-50% + ${scroll * 0.5}px)) rotate(${scroll * 0.02}deg)`;
+            if(logo) {
+                logo.style.transform = `translate(-50%, calc(-50% + ${scroll * 0.4}px)) rotate(${scroll * 0.01}deg)`;
+            }
+        });
+
+        // Remove Loader after page load
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            // Small delay so the user actually sees the beautiful animation
+            setTimeout(() => {
+                loader.classList.add('loader-hidden');
+            }, 1500);
         });
     </script>
 </body>
