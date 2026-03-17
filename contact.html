@@ -7,24 +7,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <img src="logo.jpg" alt="Erimitis" class="logo-img">
-        <div class="menu-toggle"><span></span><span></span><span></span></div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="music.html">Music</a></li>
-            <li><a href="contact.html" class="active-page">Contact</a></li>
-        </ul>
+    <nav class="navbar"><div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+        <ul class="nav-links" id="menu"><li><a href="index.html">HOME</a></li><li><a href="about.html">ABOUT</a></li><li><a href="music.html">MUSIC</a></li><li><a href="contact.html">CONTACT</a></li></ul>
     </nav>
-    <canvas id="starCanvas"></canvas>
     <main>
-        <h2>INQUIRIES</h2>
-        <p>Reach out for collaborations or booking.</p>
-        <form style="display: flex; flex-direction: column; gap: 20px; max-width: 450px; margin: 40px auto;">
-            <input type="text" placeholder="Name" style="background: transparent; border: 1px solid var(--steel); color: white; padding: 12px; font-family: 'Crimson Text';">
-            <textarea placeholder="Message" rows="5" style="background: transparent; border: 1px solid var(--steel); color: white; padding: 12px; font-family: 'Crimson Text';"></textarea>
-            <button type="submit" style="background: var(--gold); border: none; padding: 15px; font-family: 'Cinzel'; cursor: pointer; color: var(--bg);">SEND</button>
+        <h2 style="font-family:'Cinzel'; color:var(--gold); letter-spacing:5px; margin-bottom:40px;">INQUIRIES</h2>
+        <form style="max-width:500px; margin:0 auto;">
+            <input type="text" placeholder="NAME">
+            <textarea placeholder="MESSAGE" rows="5"></textarea>
+            <button type="submit">SEND</button>
         </form>
     </main>
     <script src="script.js"></script>
