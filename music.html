@@ -42,6 +42,7 @@
             if (!isVisible) { setTimeout(() => { links.forEach((link, i) => { setTimeout(() => { link.style.opacity = '1'; }, i * 100); }); }, 50); } else { links.forEach(link => link.style.opacity = '0'); }
         }
         const wavesurfer = WaveSurfer.create({ container: '#waveform', waveColor: '#4682B4', progressColor: '#D4AF37', barWidth: 2, barGap: 3, height: 180, responsive: true, cursorColor: 'transparent' });
+        wavesurfer.load('preview.mp3'); 
     </script>
 </body>
 </html>
