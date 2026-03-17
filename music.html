@@ -1,11 +1,59 @@
-<script src="https://unpkg.com/wavesurfer.js@7"></script>
-<main style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 0 10%;">
-    <div id="waveform" style="width: 100%; max-width: 900px; height: 140px; background: rgba(91, 159, 212, 0.03); margin-bottom: 40px; border-radius: 4px;"></div>
-    <button id="playBtn" onclick="playAudio()" style="background: transparent; border: 1px solid var(--steel); color: var(--steel); padding: 18px 60px; font-family: 'Cinzel'; cursor: pointer; letter-spacing: 5px; opacity: 0.4; transition: 0.3s;">SUMMONING...</button>
-</main>
-<script>
-    const wavesurfer = WaveSurfer.create({ container: '#waveform', waveColor: '#2a3b4d', progressColor: '#5B9FD4', cursorColor: 'transparent', barWidth: 3, barGap: 3, height: 140 });
-    wavesurfer.load('preview.mp3');
-    wavesurfer.on('ready', () => { const b = document.getElementById('playBtn'); b.innerText = 'ACTIVATE'; b.style.opacity = '1'; });
-    function playAudio(){ wavesurfer.playPause(); document.getElementById('playBtn').innerText = wavesurfer.isPlaying() ? 'PAUSE' : 'ACTIVATE'; }
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERIMITIS | Music</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Crimson+Text:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/wavesurfer.js@7"></script>
+    <style>
+        :root { --bg: #02020a; --steel: #5B9FD4; --white: #ffffff; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--bg); color: var(--white); height: 100vh; overflow: hidden; font-family: 'Crimson Text', serif; display: flex; flex-direction: column; }
+        .brand-header { position: absolute; top: 0; width: 100%; text-align: center; padding: 25px 0; z-index: 10; }
+        h1 { font-family: 'Cinzel', serif; color: var(--steel); font-size: 2.5rem; letter-spacing: 15px; margin: 0; }
+        #fullscreenMenu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(2, 2, 10, 0.98); z-index: 2000; flex-direction: column; justify-content: center; align-items: center; }
+        #fullscreenMenu a { color: var(--white); font-family: 'Cinzel'; font-size: 2.5rem; letter-spacing: 12px; margin: 25px 0; text-decoration: none; }
+        @media (min-width: 1025px) {
+            .desktop-nav { position: fixed; top: 35px; left: 35px; z-index: 1000; cursor: pointer; }
+            .hamburger { display: flex; flex-direction: column; gap: 8px; width: 35px; }
+            .hamburger span { width: 100%; height: 2px; background-color: var(--steel); }
+            .pc-footer { position: fixed; bottom: 25px; width: 100%; text-align: center; font-family: 'Cinzel'; color: var(--steel); font-size: 0.6rem; letter-spacing: 4px; }
+            .mobile-nav-stack { display: none; }
+        }
+        @media (max-width: 1024px) {
+            .desktop-nav, .pc-footer { display: none; }
+            .mobile-nav-stack { position: fixed; bottom: 0; width: 100%; padding: 15px; display: flex; flex-direction: column; gap: 10px; background: var(--bg); }
+            .nav-box { border: 1px solid var(--steel); padding: 20px; text-decoration: none; color: var(--white); font-family: 'Cinzel'; text-align: center; font-size: 0.8rem; letter-spacing: 3px; }
+            .mobile-copyright { text-align: center; font-family: 'Cinzel'; color: var(--steel); font-size: 0.55rem; padding: 10px 0; letter-spacing: 2px; }
+        }
+        main { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 0 10%; }
+        #waveform { width: 100%; max-width: 900px; height: 128px; background: rgba(91, 159, 212, 0.05); margin-bottom: 40px; }
+        .play-btn { background: transparent; border: 1px solid var(--steel); color: var(--steel); padding: 15px 50px; font-family: 'Cinzel'; cursor: pointer; letter-spacing: 4px; opacity: 0.5; transition: 0.3s; }
+    </style>
+</head>
+<body>
+    <div class="desktop-nav" onclick="toggleMenu()"><div class="hamburger"><span></span><span></span><span></span></div></div>
+    <div id="fullscreenMenu">
+        <a href="index.html">HOME</a><a href="about.html">ABOUT</a><a href="music.html">MUSIC</a><a href="contact.html">CONTACT</a>
+    </div>
+    <header class="brand-header"><h1>MUSIC</h1></header>
+    <main>
+        <div id="waveform"></div>
+        <button id="playBtn" class="play-btn" onclick="playAudio()">SUMMONING...</button>
+    </main>
+    <div class="pc-footer">&copy; 2026 ERIMITIS. ALL RIGHTS RESERVED.</div>
+    <nav class="mobile-nav-stack">
+        <a href="index.html" class="nav-box">HOME</a><a href="about.html" class="nav-box">ABOUT</a>
+        <a href="music.html" class="nav-box" style="background: var(--steel); color: var(--bg);">MUSIC</a>
+        <a href="contact.html" class="nav-box">CONTACT</a>
+        <div class="mobile-copyright">&copy; 2026 ERIMITIS. ALL RIGHTS RESERVED.</div>
+    </nav>
+    <script>
+        const wavesurfer = WaveSurfer.create({ container: '#waveform', waveColor: '#2a3b4d', progressColor: '#5B9FD4', barWidth: 3, height: 128 });
+        wavesurfer.load('preview.mp3');
+        wavesurfer.on('ready', () => { const b = document.getElementById('playBtn'); b.innerText = 'ACTIVATE'; b.style.opacity = '1'; });
+        function playAudio() { wavesurfer.playPause(); document.getElementById('playBtn').innerText = wavesurfer.isPlaying() ? 'PAUSE' : 'ACTIVATE'; }
+        function toggleMenu() { const m = document.getElementById('fullscreenMenu'); m.style.display = (m.style.display === 'flex') ? 'none' : 'flex'; }
+    </script>
+</body>
+</html>
