@@ -1,22 +1,11 @@
-<main style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 140px 10% 0;">
-    <div id="waveform" style="width: 100%; max-width: 800px; height: 128px; margin-bottom: 40px; background: rgba(91, 159, 212, 0.05); border: 1px solid rgba(91, 159, 212, 0.1);"></div>
-    <button id="playBtn" class="play-btn" onclick="playAudio()" style="background: transparent; border: 1px solid var(--steel); color: var(--steel); padding: 15px 50px; font-family: 'Cinzel'; cursor: pointer; opacity: 0.5;">SUMMONING...</button>
+<script src="https://unpkg.com/wavesurfer.js@7"></script>
+<main style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 0 10%;">
+    <div id="waveform" style="width: 100%; max-width: 900px; height: 140px; background: rgba(91, 159, 212, 0.03); margin-bottom: 40px; border-radius: 4px;"></div>
+    <button id="playBtn" onclick="playAudio()" style="background: transparent; border: 1px solid var(--steel); color: var(--steel); padding: 18px 60px; font-family: 'Cinzel'; cursor: pointer; letter-spacing: 5px; opacity: 0.4; transition: 0.3s;">SUMMONING...</button>
 </main>
-
 <script>
-    const wavesurfer = WaveSurfer.create({ container: '#waveform', waveColor: '#334c61', progressColor: '#5B9FD4', barWidth: 2, height: 128 });
+    const wavesurfer = WaveSurfer.create({ container: '#waveform', waveColor: '#2a3b4d', progressColor: '#5B9FD4', cursorColor: 'transparent', barWidth: 3, barGap: 3, height: 140 });
     wavesurfer.load('preview.mp3');
-    
-    wavesurfer.on('ready', () => {
-        const btn = document.getElementById('playBtn');
-        btn.innerText = 'ACTIVATE';
-        btn.style.opacity = '1';
-    });
-
-    wavesurfer.on('error', () => { document.getElementById('playBtn').innerText = 'ERROR: SIGNAL LOST'; });
-
-    function playAudio() {
-        wavesurfer.playPause();
-        document.getElementById('playBtn').innerText = wavesurfer.isPlaying() ? 'PAUSE' : 'ACTIVATE';
-    }
+    wavesurfer.on('ready', () => { const b = document.getElementById('playBtn'); b.innerText = 'ACTIVATE'; b.style.opacity = '1'; });
+    function playAudio(){ wavesurfer.playPause(); document.getElementById('playBtn').innerText = wavesurfer.isPlaying() ? 'PAUSE' : 'ACTIVATE'; }
 </script>
