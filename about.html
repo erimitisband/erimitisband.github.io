@@ -24,24 +24,25 @@
         #fullscreenMenu a:hover { color: var(--steel); }
 
         /* MAIN CONTENT */
-        main { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 140px 15% 60px; text-align: center; }
+        main { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 160px 15% 80px; text-align: center; }
         
-        .about-text { font-size: clamp(1.1rem, 3vw, 1.4rem); color: var(--white); line-height: 1.8; max-width: 850px; letter-spacing: 1px; margin-bottom: 40px; }
+        .about-text { font-size: clamp(1.1rem, 3vw, 1.4rem); color: var(--white); line-height: 1.8; max-width: 850px; letter-spacing: 1px; margin-bottom: 50px; }
         
-        /* INFLUENCES NARRATIVE */
-        .influences-sentence { font-size: 1.1rem; color: var(--steel); font-style: italic; line-height: 1.6; max-width: 700px; border-top: 1px solid rgba(91, 159, 212, 0.2); padding-top: 30px; letter-spacing: 0.5px; }
+        /* THE ENIGMA NARRATIVE */
+        .enigma-influences { font-family: 'Crimson Text', serif; font-size: 1.2rem; color: var(--steel); font-style: italic; line-height: 2; max-width: 750px; border-top: 1px solid rgba(91, 159, 212, 0.2); padding-top: 40px; letter-spacing: 1.5px; }
+        .enigma-influences span { display: block; margin-bottom: 10px; }
 
         /* FOOTER */
         footer { padding: 40px 0; text-align: center; font-family: 'Cinzel', serif; color: var(--steel); font-size: 0.6rem; letter-spacing: 3px; }
 
-        /* MOBILE VERTICAL BOXES */
-        .mobile-nav-boxes { display: none; width: 100%; padding: 10px; flex-direction: column; gap: 8px; position: fixed; bottom: 0; z-index: 1000; background: var(--bg); }
-        .nav-box { border: 1px solid var(--steel); padding: 18px; text-decoration: none; color: var(--white); font-family: 'Cinzel', serif; text-align: center; font-size: 0.8rem; letter-spacing: 3px; background: rgba(2, 2, 10, 0.95); }
+        /* MOBILE VERTICAL STACK */
+        .mobile-nav-boxes { display: none; width: 100%; padding: 10px; flex-direction: column; gap: 10px; position: fixed; bottom: 0; z-index: 1000; background: var(--bg); }
+        .nav-box { border: 1px solid var(--steel); padding: 20px; text-decoration: none; color: var(--white); font-family: 'Cinzel', serif; text-align: center; font-size: 0.9rem; letter-spacing: 4px; background: rgba(2, 2, 10, 0.95); }
 
         @media (max-width: 1024px) {
             .desktop-nav { display: none; }
             .mobile-nav-boxes { display: flex; }
-            footer { padding-bottom: 320px; }
+            footer { padding-bottom: 350px; }
         }
     </style>
 </head>
@@ -57,14 +58,18 @@
 
     <main>
         <p class="about-text">
-            We exist in the friction between the heavy and the ethereal. 
-            A collective shadow reborn in the silence of the iron woods, 
-            weaving together textures of light and immense weight.
+            We exist in the friction between the heavy and the ethereal. <br>
+            A collective shadow reborn in the silence of the iron woods.
         </p>
 
-        <p class="influences-sentence">
-            Our sound is a dialogue between eras, drawing deep inspiration from the melodic mastery of The Beatles, the atmospheric depths of Wardruna, and the raw, rhythmic intensity of Mgła.
-        </p>
+        <div class="enigma-influences">
+            <span>The melody of the beatles,</span>
+            <span>the heavy lead of zepellin,</span>
+            <span>the madness within the floyd,</span>
+            <span>the current of acdc and the fire of van halen,</span>
+            <span>the purple haze of hendrix,</span>
+            <span>the slow hand of clapton and the iron of maiden.</span>
+        </div>
     </main>
     
     <footer>&copy; 2026 ERIMITIS. ALL RIGHTS RESERVED.</footer>
