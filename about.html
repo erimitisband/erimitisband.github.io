@@ -9,43 +9,47 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
 
-        .brand-header { position: absolute; top: 0; width: 100%; text-align: center; padding-top: 20px; z-index: 10; }
-        h1 { font-family: 'Cinzel', serif; font-size: clamp(2rem, 8vw, 2.5rem); letter-spacing: 15px; color: var(--steel); }
+        /* ABSOLUTE TOP TITLE */
+        .brand-header { position: absolute; top: 0; width: 100%; text-align: center; padding: 10px 0; z-index: 10; }
+        h1 { font-family: 'Cinzel', serif; font-size: clamp(2rem, 8vw, 2.5rem); letter-spacing: 15px; color: var(--steel); margin: 0; }
 
-        .desktop-nav { position: fixed; top: 30px; left: 40px; z-index: 1000; }
-        .hamburger { display: flex; flex-direction: column; gap: 8px; cursor: pointer; width: 30px; }
+        /* PC NAVIGATION */
+        .desktop-nav { position: fixed; top: 20px; left: 20px; z-index: 1000; cursor: pointer; padding: 10px; }
+        .hamburger { display: flex; flex-direction: column; gap: 6px; width: 30px; }
         .hamburger span { width: 100%; height: 2px; background-color: var(--steel); }
 
+        /* FULLSCREEN MENU */
         #fullscreenMenu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(2, 2, 10, 0.98); z-index: 2000; flex-direction: column; justify-content: center; align-items: center; }
-        #fullscreenMenu a { color: var(--white); font-family: 'Cinzel', serif; font-size: 2.5rem; letter-spacing: 10px; text-decoration: underline; text-decoration-color: var(--steel); margin: 25px 0; }
+        #fullscreenMenu a { color: var(--white); font-family: 'Cinzel', serif; font-size: 2.5rem; letter-spacing: 10px; margin: 20px 0; text-decoration: none; }
+        #fullscreenMenu a:hover { color: var(--steel); }
 
-        /* Main Content */
-        main { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 120px 15% 60px; text-align: center; }
-        .about-text { font-size: clamp(1.1rem, 3vw, 1.4rem); color: var(--steel); font-style: italic; line-height: 1.8; max-width: 800px; letter-spacing: 1px; margin-bottom: 50px; }
+        /* MAIN CONTENT */
+        main { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 140px 15% 60px; text-align: center; }
         
-        /* Influences Section */
-        .influences-container { max-width: 600px; border-top: 1px solid rgba(91, 159, 212, 0.3); padding-top: 30px; }
-        .inf-title { font-family: 'Cinzel', serif; font-size: 0.9rem; color: var(--steel); letter-spacing: 5px; margin-bottom: 20px; opacity: 0.8; }
-        .inf-list { font-size: 1.1rem; line-height: 2; letter-spacing: 2px; text-transform: uppercase; opacity: 0.9; }
+        .about-text { font-size: clamp(1.1rem, 3vw, 1.4rem); color: var(--white); line-height: 1.8; max-width: 850px; letter-spacing: 1px; margin-bottom: 40px; }
+        
+        /* INFLUENCES NARRATIVE */
+        .influences-sentence { font-size: 1.1rem; color: var(--steel); font-style: italic; line-height: 1.6; max-width: 700px; border-top: 1px solid rgba(91, 159, 212, 0.2); padding-top: 30px; letter-spacing: 0.5px; }
 
+        /* FOOTER */
         footer { padding: 40px 0; text-align: center; font-family: 'Cinzel', serif; color: var(--steel); font-size: 0.6rem; letter-spacing: 3px; }
 
-        .mobile-nav-boxes { display: none; width: 100%; padding: 10px; flex-direction: column; gap: 10px; position: fixed; bottom: 0; z-index: 1000; background: linear-gradient(transparent, var(--bg) 20%); }
-        .nav-box { border: 1px solid var(--steel); padding: 20px; text-decoration: none; color: var(--white); font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 4px; text-align: center; background: rgba(2, 2, 10, 0.95); width: 100%; }
+        /* MOBILE VERTICAL BOXES */
+        .mobile-nav-boxes { display: none; width: 100%; padding: 10px; flex-direction: column; gap: 8px; position: fixed; bottom: 0; z-index: 1000; background: var(--bg); }
+        .nav-box { border: 1px solid var(--steel); padding: 18px; text-decoration: none; color: var(--white); font-family: 'Cinzel', serif; text-align: center; font-size: 0.8rem; letter-spacing: 3px; background: rgba(2, 2, 10, 0.95); }
 
         @media (max-width: 1024px) {
-            .desktop-nav { display: none !important; }
-            .mobile-nav-boxes { display: flex !important; }
+            .desktop-nav { display: none; }
+            .mobile-nav-boxes { display: flex; }
             footer { padding-bottom: 320px; }
-            main { padding-top: 100px; }
         }
     </style>
 </head>
 <body>
-    <nav class="desktop-nav" onclick="toggleMenu()"><div class="hamburger"><span></span><span></span><span></span></div></nav>
+    <div class="desktop-nav" onclick="toggleMenu()"><div class="hamburger"><span></span><span></span><span></span></div></div>
     
     <div id="fullscreenMenu">
-        <div style="position: absolute; top: 35px; left: 40px; color: var(--steel); cursor: pointer; font-family: 'Cinzel';" onclick="toggleMenu()">[ CLOSE ]</div>
+        <div style="position: absolute; top: 30px; left: 30px; color: var(--steel); cursor: pointer; font-family: 'Cinzel';" onclick="toggleMenu()">[ CLOSE ]</div>
         <a href="index.html">HOME</a><a href="about.html">ABOUT</a><a href="music.html">MUSIC</a><a href="contact.html">CONTACT</a>
     </div>
 
@@ -53,16 +57,14 @@
 
     <main>
         <p class="about-text">
-            We exist in the friction between the heavy and the ethereal. <br>
-            A collective shadow reborn in the silence of the iron woods.
+            We exist in the friction between the heavy and the ethereal. 
+            A collective shadow reborn in the silence of the iron woods, 
+            weaving together textures of light and immense weight.
         </p>
 
-        <div class="influences-container">
-            <h2 class="inf-title">INFLUENCES</h2>
-            <p class="inf-list">
-                Ulver / Mgła / Wardruna / Amenra / Dead Can Dance
-            </p>
-        </div>
+        <p class="influences-sentence">
+            Our sound is a dialogue between eras, drawing deep inspiration from the melodic mastery of The Beatles, the atmospheric depths of Wardruna, and the raw, rhythmic intensity of Mgła.
+        </p>
     </main>
     
     <footer>&copy; 2026 ERIMITIS. ALL RIGHTS RESERVED.</footer>
