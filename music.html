@@ -2,26 +2,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ERIMITIS | Music</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
+    <title>ERIMITIS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Crimson+Text:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/wavesurfer.js"></script>
     <style>
-        /* ... Navigation CSS same as Index ... */
-        main { padding: 100px 10%; text-align: center; }
-        #waveform { width: 100%; height: 180px; background: rgba(70, 130, 180, 0.05); margin: 50px 0; border: 1px solid rgba(70, 130, 180, 0.2); }
-        .play-btn { background: transparent; border: 1px solid #D4AF37; color: white; padding: 15px 45px; font-family: 'Cinzel'; cursor: pointer; letter-spacing: 3px; transition: 0.3s; }
-        .play-btn:hover { background: #D4AF37; color: #02020a; }
+        :root { --bg: #02020a; --steel: #4682B4; --gold: #D4AF37; --white: #ffffff; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; overflow-x: hidden; line-height: 1.8; }
+        
+        #ghostLogo { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; max-width: 550px; opacity: 0.08; z-index: -1; pointer-events: none; }
+
+        .navbar { width: 100%; padding: 45px 20px; position: sticky; top: 0; z-index: 1000; display: flex; justify-content: center; }
+        .hamburger { display: flex; flex-direction: column; gap: 9px; cursor: pointer; z-index: 1001; }
+        .hamburger span { width: 38px; height: 1px; background-color: var(--gold); }
+        
+        .nav-links { display: none; list-style: none; text-align: center; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(2, 2, 10, 0.98); padding-top: 20vh; }
+        .nav-links li { margin: 35px 0; }
+        .nav-links a { text-decoration: underline; text-decoration-color: var(--steel); text-underline-offset: 12px; color: var(--white); font-family: 'Cinzel', serif; font-size: 2.8rem; letter-spacing: 7px; opacity: 0; transition: opacity 0.6s ease; }
+
+        @media (max-width: 1023px) {
+            .hamburger { display: none; }
+            .nav-links { display: flex; position: relative; top: 0; height: auto; width: 90%; flex-direction: row; justify-content: space-evenly; background: rgba(70, 130, 180, 0.1); border: 1px solid rgba(70, 130, 180, 0.3); padding: 18px; margin: 0 auto; }
+            .nav-links li { margin: 0; }
+            .nav-links a { opacity: 1; font-size: 0.85rem; text-decoration: none; color: var(--gold); letter-spacing: 2px; }
+        }
+
+        main { padding: 100px 10%; text-align: center; min-height: 80vh; display: flex; flex-direction: column; justify-content: center; }
+        
+        #waveform { width: 100%; max-width: 900px; height: 180px; background: rgba(70, 130, 180, 0.03); margin: 0 auto; border: 1px solid rgba(70, 130, 180, 0.1); }
+        
+        .play-btn { background: transparent; border: 1px solid var(--gold); color: var(--white); padding: 15px 50px; font-family: 'Cinzel', serif; font-size: 0.9rem; letter-spacing: 4px; cursor: pointer; transition: 0.3s; margin-top: 60px; align-self: center; }
+        .play-btn:hover { background: var(--gold); color: var(--bg); }
     </style>
 </head>
-<body style="background:#02020a; color:white;">
+<body>
+    <img src="logo.jpg" id="ghostLogo">
+    <nav class="navbar">
+        <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+        <ul class="nav-links" id="menu">
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="music.html">MUSIC</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+    </nav>
+
     <main>
-        <h2 style="font-family:'Cinzel'; color:#D4AF37; letter-spacing:8px;">THE FREQUENCY</h2>
         <div id="waveform"></div>
-        <button class="play-btn" onclick="wavesurfer.playPause()">PLAY SYNC</button>
+        <button class="play-btn" onclick="wavesurfer.playPause()">ACTIVATE</button>
     </main>
+
     <script>
-        const wavesurfer = WaveSurfer.create({ container: '#waveform', waveColor: '#4682B4', progressColor: '#D4AF37', barWidth: 3, height: 180, responsive: true });
-        // wavesurfer.load('your-song-file.mp3');
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            const links = document.querySelectorAll('.nav-links a');
+            const isVisible = menu.style.display === 'block';
+            menu.style.display = isVisible ? 'none' : 'block';
+            setTimeout(() => {
+                links.forEach((link, i) => { setTimeout(() => { link.style.opacity = isVisible ? '0' : '1'; }, i * 120); });
+            }, 50);
+        }
+
+        const wavesurfer = WaveSurfer.create({
+            container: '#waveform',
+            waveColor: '#4682B4',
+            progressColor: '#D4AF37',
+            barWidth: 2,
+            barGap: 3,
+            height: 180,
+            responsive: true,
+            cursorColor: 'transparent'
+        });
+
+        // Load your music file here:
+        // wavesurfer.load('snippet.mp3'); 
+
+        window.addEventListener('scroll', () => {
+            const logo = document.getElementById('ghostLogo');
+            let offset = window.pageYOffset;
+            logo.style.transform = `translate(-50%, calc(-50% + ${offset * 0.12}px))`;
+        });
     </script>
 </body>
 </html>
