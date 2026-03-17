@@ -7,94 +7,44 @@
     <style>
         :root { --bg: #02020a; --steel: #4682B4; --gold: #D4AF37; --white: #ffffff; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        /* Pre-loader Styles */
-        #preloader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
-            background: var(--bg); display: flex; justify-content: center; align-items: center;
-            z-index: 9999; transition: opacity 1.5s ease;
-        }
-        #preloader.fade-out { opacity: 0; pointer-events: none; }
-        .loader-e {
-            font-family: 'Cinzel', serif; font-size: 5rem; color: var(--gold);
-            letter-spacing: 10px; animation: pulse 2s infinite ease-in-out;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 0.4; transform: scale(0.95); }
-            50% { opacity: 1; transform: scale(1); }
-        }
-
-        /* Standard Styles */
         body { background: var(--bg); color: var(--white); font-family: 'Crimson Text', serif; display: flex; flex-direction: column; min-height: 100vh; }
-        .navbar { width: 100%; padding: 40px 50px; position: fixed; top: 0; z-index: 1000; display: flex; align-items: center; }
-        .hamburger { display: flex; flex-direction: column; gap: 10px; cursor: pointer; width: 35px; position: absolute; left: 50px; z-index: 1001; }
-        .hamburger span { width: 100%; height: 1px; background-color: var(--gold); }
-        .brand-center { width: 100%; text-align: center; }
-        h1 { font-family: 'Cinzel', serif; font-size: clamp(2.2rem, 8vw, 4.5rem); letter-spacing: 20px; color: var(--white); text-transform: uppercase; margin: 0; }
         
-        #ghostLogo { position: fixed; top: 55%; left: 50%; transform: translate(-50%, -50%); width: 85%; max-width: 650px; opacity: 0.3; z-index: -1; pointer-events: none; }
-        main { flex: 1; padding-top: 250px; }
+        /* Pre-loader */
+        #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--bg); display: flex; justify-content: center; align-items: center; z-index: 9999; transition: opacity 1.5s ease; }
+        #preloader.fade-out { opacity: 0; pointer-events: none; }
+        .loader-e { font-family: 'Cinzel', serif; font-size: 5rem; color: var(--gold); letter-spacing: 10px; animation: pulse 2s infinite ease-in-out; }
+        @keyframes pulse { 0%, 100% { opacity: 0.4; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1); } }
+
+        /* Navigation Boxes for Mobile & PC */
+        .nav-container { width: 100%; padding: 20px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; position: fixed; top: 0; z-index: 1000; background: var(--bg); }
+        .nav-box { 
+            border: 1px solid var(--gold); padding: 10px 20px; text-decoration: none; color: var(--white); 
+            font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 2px; transition: 0.3s;
+        }
+        .nav-box:hover { background: var(--gold); color: var(--bg); }
+
+        .brand-header { margin-top: 150px; text-align: center; }
+        h1 { font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 10vw, 5rem); letter-spacing: 20px; color: var(--white); text-transform: uppercase; }
         
-        #menu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: rgba(2, 2, 10, 0.98); padding-top: 25vh; z-index: 2000; text-align: center; }
-        #menu a { display: block; margin: 30px 0; color: var(--white); font-family: 'Cinzel', serif; font-size: 2.2rem; letter-spacing: 8px; text-decoration: underline; text-decoration-color: var(--steel); text-underline-offset: 12px; opacity: 0; transition: 0.4s; }
-        
-        footer { padding: 60px 0 30px; text-align: center; }
-        footer p { font-family: 'Cinzel', serif; color: var(--gold); font-size: 0.7rem; letter-spacing: 3px; }
+        #ghostLogo { position: fixed; top: 55%; left: 50%; transform: translate(-50%, -50%); width: 85%; max-width: 650px; opacity: 0.2; z-index: -1; pointer-events: none; }
+        main { flex: 1; }
+        footer { padding: 40px 0; text-align: center; font-family: 'Cinzel', serif; color: var(--gold); font-size: 0.6rem; letter-spacing: 3px; }
     </style>
 </head>
 <body>
-
-    <div id="preloader">
-        <div class="loader-e">E</div>
-    </div>
-
-    <nav class="navbar">
-        <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
-        <div class="brand-center"><h1>ERIMITIS</h1></div>
+    <div id="preloader"><div class="loader-e">E</div></div>
+    <nav class="nav-container">
+        <a href="index.html" class="nav-box">HOME</a>
+        <a href="about.html" class="nav-box">ABOUT</a>
+        <a href="music.html" class="nav-box">MUSIC</a>
+        <a href="contact.html" class="nav-box">CONTACT</a>
     </nav>
-    
+    <div class="brand-header"><h1>ERIMITIS</h1></div>
     <img src="logo.jpg" id="ghostLogo">
-    
     <main></main>
-    
-    <footer>
-        <p>&copy; 2026 ERIMITIS. ALL RIGHTS RESERVED.</p>
-    </footer>
-
-    <div id="menu">
-        <div style="position: absolute; top: 45px; left: 50px; color: var(--gold); cursor: pointer; font-family: 'Cinzel';" onclick="toggleMenu()">[ CLOSE ]</div>
-        <a href="index.html">HOME</a>
-        <a href="about.html">ABOUT</a>
-        <a href="music.html">MUSIC</a>
-        <a href="contact.html">CONTACT</a>
-    </div>
-
+    <footer>&copy; 2026 ERIMITIS. ALL RIGHTS RESERVED.</footer>
     <script>
-        // Pre-loader Logic
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('preloader');
-            // Allow the pulse animation to play for at least 2 seconds for dramatic effect
-            setTimeout(() => {
-                loader.classList.add('fade-out');
-            }, 2000);
-        });
-
-        // Menu Logic
-        function toggleMenu() {
-            const menu = document.getElementById('menu');
-            const links = document.querySelectorAll('#menu a');
-            const isVisible = menu.style.display === 'block';
-            menu.style.display = isVisible ? 'none' : 'block';
-            if (!isVisible) {
-                setTimeout(() => {
-                    links.forEach((link, i) => {
-                        setTimeout(() => { link.style.opacity = '1'; }, i * 100);
-                    });
-                }, 50);
-            } else {
-                links.forEach(link => link.style.opacity = '0');
-            }
-        }
+        window.addEventListener('load', () => { setTimeout(() => { document.getElementById('preloader').classList.add('fade-out'); }, 2000); });
     </script>
 </body>
 </html>
